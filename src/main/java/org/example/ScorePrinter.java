@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.Objects;
+
+import static org.example.GameScores.*;
 import static org.example.PlayerScore.*;
 
 public class ScorePrinter {
@@ -15,13 +18,13 @@ public class ScorePrinter {
         if(playerBWon(gameScore)){
             return "Player B wins the game";
         }
-        if(DEUCE.equals(gameScore.playerAScore()) && DEUCE.equals(gameScore.playerBScore())){
+        if(Objects.equals(DEUCE, gameScore)){
             return "Deuce";
         }
-        if(ADVANTAGE.equals(gameScore.playerAScore()) && DEUCE.equals(gameScore.playerBScore())){
+        if(Objects.equals(ADVANTAGE_PLAYER_A, gameScore)){
             return "Advantage Player A";
         }
-        if(DEUCE.equals(gameScore.playerAScore()) && ADVANTAGE.equals(gameScore.playerBScore())){
+        if(Objects.equals(ADVANTAGE_PLAYER_B, gameScore)){
             return "Advantage Player B";
         }
         return "Player A : %s / Player B : %s".formatted(

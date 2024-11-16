@@ -3,6 +3,7 @@ package org.example;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.example.GameScores.*;
 import static org.example.PlayerScore.*;
 
 class TennisGameTest {
@@ -15,30 +16,30 @@ class TennisGameTest {
         GameScore gameScore = tennisGame.scorePointForPlayerA();
 
         // THEN
-        assertThat(gameScore).isEqualTo(new GameScore(DEUCE, DEUCE));
+        assertThat(gameScore).isEqualTo(DEUCE);
     }
 
     @Test
     void should_score_advantage_to_playerA_when_deuce_and_playerA_scores() {
         // GIVEN
-        TennisGame tennisGame = new TennisGame(DEUCE, DEUCE);
+        TennisGame tennisGame = new TennisGame(PLAYER_DEUCE, PLAYER_DEUCE);
 
         // WHEN
         GameScore gameScore = tennisGame.scorePointForPlayerA();
 
         // THEN
-        assertThat(gameScore).isEqualTo(new GameScore(ADVANTAGE, DEUCE));
+        assertThat(gameScore).isEqualTo(ADVANTAGE_PLAYER_A);
     }
 
     @Test
     void should_score_advantage_to_playerB_when_deuce_and_playerB_scores() {
         // GIVEN
-        TennisGame tennisGame = new TennisGame(DEUCE, DEUCE);
+        TennisGame tennisGame = new TennisGame(PLAYER_DEUCE, PLAYER_DEUCE);
 
         // WHEN
         GameScore gameScore = tennisGame.scorePointForPlayerB();
 
         // THEN
-        assertThat(gameScore).isEqualTo(new GameScore(DEUCE, ADVANTAGE));
+        assertThat(gameScore).isEqualTo(ADVANTAGE_PLAYER_B);
     }
 }

@@ -23,13 +23,13 @@ public class TennisGame {
         } else if (FIFTEEN.equals(playerAScore)) {
             playerAScore = THIRTY;
         } else if (FORTY.equals(playerBScore)) {
-            playerAScore = DEUCE;
-            playerBScore = DEUCE;
+            playerAScore = PLAYER_DEUCE;
+            playerBScore = PLAYER_DEUCE;
         } else if (THIRTY.equals(playerAScore)) {
             playerAScore = FORTY;
         } else if (FORTY.equals(playerAScore)) {
             playerAScore = WIN;
-        } else if (DEUCE.equals(playerAScore) && DEUCE.equals(playerBScore)) {
+        } else if (PLAYER_DEUCE.equals(playerAScore) && PLAYER_DEUCE.equals(playerBScore)) {
             playerAScore = ADVANTAGE;
         }
         return new GameScore(playerAScore, playerBScore);
@@ -41,13 +41,13 @@ public class TennisGame {
         } else if (FIFTEEN.equals(playerBScore)) {
             playerBScore = THIRTY;
         } else if (FORTY.equals(playerAScore)) {
-            playerAScore = DEUCE;
-            playerBScore = DEUCE;
+            playerAScore = PLAYER_DEUCE;
+            playerBScore = PLAYER_DEUCE;
         } else if (THIRTY.equals(playerBScore)) {
             playerBScore = FORTY;
         } else if (FORTY.equals(playerBScore)) {
             playerBScore = WIN;
-        } else if (DEUCE.equals(playerAScore) && DEUCE.equals(playerBScore)) {
+        } else if (PLAYER_DEUCE.equals(playerAScore) && PLAYER_DEUCE.equals(playerBScore)) {
             playerBScore = ADVANTAGE;
         }
         return new GameScore(playerAScore, playerBScore);
