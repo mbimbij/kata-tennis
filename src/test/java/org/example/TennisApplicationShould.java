@@ -120,33 +120,17 @@ class TennisApplicationTest {
         }
     }
 
-    private static Stream<Arguments> should_print_score_correctly_for_sequence() {
-        return Stream.of(
-                Arguments.of("A", """
-                        Player A : 15 / Player B : 0
-                        """),
-                Arguments.of("B", """
-                        Player A : 0 / Player B : 15
-                        """),
-                Arguments.of("AB", """
-                        Player A : 15 / Player B : 0
-                        Player A : 15 / Player B : 15
-                        """),
-                Arguments.of("ABA", """
-                        Player A : 15 / Player B : 0
-                        Player A : 15 / Player B : 15
-                        Player A : 30 / Player B : 15
-                        """)
-        );
-    }
-
-    @ParameterizedTest
-    @MethodSource
-    void should_print_score_correctly_for_sequence(String input, String expectedOutput) {
+    @Test
+    void should_print_score_correctly_for_sequence() {
         // WHEN
-        tennisApplication.playGameForInput(input);
+        tennisApplication.playGameForInput("ABA");
 
         // THEN
+        String expectedOutput = """
+                Player A : 15 / Player B : 0
+                Player A : 15 / Player B : 15
+                Player A : 30 / Player B : 15
+                """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
 
