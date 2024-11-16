@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.Objects;
-
 import static org.example.GameScores.*;
-import static org.example.PlayerScore.*;
 
 public class ScorePrinter {
     public static void print(GameScore gameScore) {
@@ -12,32 +9,35 @@ public class ScorePrinter {
     }
 
     private static String getFormattedScore(GameScore gameScore) {
-        if(playerAWon(gameScore)){
+        if(gameScore.playerAWon()){
             return "Player A wins the game";
         }
-        if(playerBWon(gameScore)){
+        if(gameScore.playerBWon()){
             return "Player B wins the game";
         }
-        if(Objects.equals(DEUCE, gameScore)){
+        if(gameScore.equals(DEUCE)){
             return "Deuce";
         }
-        if(Objects.equals(ADVANTAGE_PLAYER_A, gameScore)){
+        if(gameScore.equals(ADVANTAGE_PLAYER_A)){
             return "Advantage Player A";
         }
-        if(Objects.equals(ADVANTAGE_PLAYER_B, gameScore)){
+        if(gameScore.equals(ADVANTAGE_PLAYER_B)){
             return "Advantage Player B";
         }
         return "Player A : %s / Player B : %s".formatted(
-                gameScore.playerAScore().getValue(),
-                gameScore.playerBScore().getValue()
+                getStringValue(gameScore.playerAScore()),
+                getStringValue(gameScore.playerBScore())
         );
     }
 
-    private static boolean playerBWon(GameScore gameScore) {
-        return WIN.equals(gameScore.playerBScore());
+    private static String getStringValue(PlayerScore playerScore) {
+        return switch (playerScore){
+            case ZERO -> "0";
+            case FIFTEEN -> "15";
+            case THIRTY -> "30";
+            case FORTY -> "40";
+            default -> throw new IllegalStateException("should not try to get string representation for single player score: " + playerScore);
+        };
     }
 
-    private static boolean playerAWon(GameScore gameScore) {
-        return WIN.equals(gameScore.playerAScore());
-    }
 }
