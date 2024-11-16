@@ -5,7 +5,6 @@ public enum PlayerScore {
     FIFTEEN("15"),
     THIRTY("30"),
     FORTY("40"),
-    PLAYER_DEUCE("DEUCE"),
     ADVANTAGE("ADVANTAGE"),
     WIN("WIN");
 
