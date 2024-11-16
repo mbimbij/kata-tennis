@@ -2,11 +2,11 @@ package org.example;
 
 public class ScorePrinter {
     public static void print(GameScore gameScore) {
-        String formattedScore = getFormattedScore(gameScore);
+        String formattedScore = formatScore(gameScore);
         System.out.println(formattedScore);
     }
 
-    private static String getFormattedScore(GameScore gameScore) {
+    private static String formatScore(GameScore gameScore) {
         if(gameScore.playerAWon()){
             return "Player A wins the game";
         }
