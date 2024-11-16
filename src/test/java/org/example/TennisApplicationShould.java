@@ -5,10 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.InOrder;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,15 +19,19 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class TennisApplicationTest {
 
     private TennisApplication tennisApplication;
+    private TennisGame tennisGame;
     private ByteArrayOutputStream baos;
 
     @BeforeEach
     void setUp() {
-        tennisApplication = new TennisApplication();
+        tennisGame = spy(new TennisGame());
+        tennisApplication = new TennisApplication(tennisGame);
         baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
     }
@@ -136,5 +143,18 @@ class TennisApplicationTest {
 
         // THEN
         assertThat(baos.toString()).isEqualTo(expectedOutput);
+    }
+
+
+    @Test
+    void should_call_game_scoring_method_multiple_times_for_input_sequence() {
+        // GIVEN
+        InOrder inOrder = inOrder(tennisGame);
+
+        // WHEN
+        tennisApplication.playGameForInput("A");
+
+        // THEN
+        inOrder.verify(tennisGame).scorePointForPlayerA();
     }
 }
