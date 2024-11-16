@@ -123,13 +123,14 @@ class TennisApplicationTest {
     @Test
     void should_print_score_correctly_for_sequence() {
         // WHEN
-        tennisApplication.playGameForInput("ABA");
+        tennisApplication.playGameForInput("ABAB");
 
         // THEN
         String expectedOutput = """
                 Player A : 15 / Player B : 0
                 Player A : 15 / Player B : 15
                 Player A : 30 / Player B : 15
+                Player A : 30 / Player B : 30
                 """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
