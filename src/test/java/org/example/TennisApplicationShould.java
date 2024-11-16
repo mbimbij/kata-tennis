@@ -2,12 +2,10 @@ package org.example;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledIf;
-import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -74,17 +72,45 @@ class TennisApplicationShould {
         assertThat(actualOutput).isEqualTo(expectedOutput);
     }
 
-    @Test()
-    void throw_an_error_on_empty_input() {
+    @ParameterizedTest()
+    @ValueSource(
+            strings = {
+                    "",
+                    " ",
+                    "\t \n"
+            }
+    )
+    void throw_an_error_on_blank_input(String input) {
         // GIVEN
         TennisApplication tennisApplication = new TennisApplication();
 
         // WHEN
-        ThrowableAssert.ThrowingCallable throwingCallable = () -> tennisApplication.playGameForInput("");
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> tennisApplication.playGameForInput(input);
 
         // THEN
         assertThatThrownBy(throwingCallable)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("input shouldn't be empty");
+                .hasMessage("input shouldn't be blank");
+    }
+
+    @ParameterizedTest
+    @ValueSource(
+            strings = {
+                    "ABC",
+                    "AB AB",
+                    "AB AB"
+            }
+    )
+    void throw_an_error_on_invalid_character(String input) {
+        // GIVEN
+        TennisApplication tennisApplication = new TennisApplication();
+
+        // WHEN
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> tennisApplication.playGameForInput(input);
+
+        // THEN
+        assertThatThrownBy(throwingCallable)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("invalid character in input: %s".formatted(input));
     }
 }
