@@ -6,22 +6,17 @@ public class TennisGame {
     private PlayerScore playerBScore = PlayerScore.ZERO;
 
 
-    void scorePointForPlayerA() {
+    public GameScore scorePointForPlayerA() {
         if(PlayerScore.ZERO.equals(playerAScore)){
             playerAScore = PlayerScore.FIFTEEN;
         }
-        printScore();
+        return new GameScore(playerAScore, playerBScore);
     }
 
-    private void printScore() {
-        String formattedScore = "Player A : %s / Player B : %s".formatted(playerAScore.getValue(), playerBScore.getValue());
-        System.out.println(formattedScore);
-    }
-
-    public void scorePointForPlayerB() {
+    public GameScore scorePointForPlayerB() {
         if(PlayerScore.ZERO.equals(playerBScore)){
             playerBScore = PlayerScore.FIFTEEN;
         }
-        printScore();
+        return new GameScore(playerAScore, playerBScore);
     }
 }
