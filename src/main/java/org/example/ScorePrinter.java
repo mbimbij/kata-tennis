@@ -21,6 +21,9 @@ public class ScorePrinter {
         if(ADVANTAGE.equals(gameScore.playerAScore()) && DEUCE.equals(gameScore.playerBScore())){
             return "Advantage Player A";
         }
+        if(DEUCE.equals(gameScore.playerAScore()) && ADVANTAGE.equals(gameScore.playerBScore())){
+            return "Advantage Player B";
+        }
         return "Player A : %s / Player B : %s".formatted(
                 gameScore.playerAScore().getValue(),
                 gameScore.playerBScore().getValue()

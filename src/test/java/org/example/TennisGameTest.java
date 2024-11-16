@@ -2,7 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.SoftAssertions.assertSoftly;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.example.PlayerScore.*;
 
 class TennisGameTest {
@@ -15,10 +15,7 @@ class TennisGameTest {
         GameScore gameScore = tennisGame.scorePointForPlayerA();
 
         // THEN
-        assertSoftly(sa -> {
-            sa.assertThat(gameScore.playerAScore()).isEqualTo(DEUCE);
-            sa.assertThat(gameScore.playerBScore()).isEqualTo(DEUCE);
-        });
+        assertThat(gameScore).isEqualTo(new GameScore(DEUCE, DEUCE));
     }
 
     @Test
@@ -30,9 +27,18 @@ class TennisGameTest {
         GameScore gameScore = tennisGame.scorePointForPlayerA();
 
         // THEN
-        assertSoftly(sa -> {
-            sa.assertThat(gameScore.playerAScore()).isEqualTo(ADVANTAGE);
-            sa.assertThat(gameScore.playerBScore()).isEqualTo(DEUCE);
-        });
+        assertThat(gameScore).isEqualTo(new GameScore(ADVANTAGE, DEUCE));
+    }
+
+    @Test
+    void should_score_advantage_to_playerB_when_deuce_and_playerB_scores() {
+        // GIVEN
+        TennisGame tennisGame = new TennisGame(DEUCE, DEUCE);
+
+        // WHEN
+        GameScore gameScore = tennisGame.scorePointForPlayerB();
+
+        // THEN
+        assertThat(gameScore).isEqualTo(new GameScore(DEUCE, ADVANTAGE));
     }
 }

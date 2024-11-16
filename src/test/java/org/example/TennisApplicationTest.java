@@ -2,7 +2,6 @@ package org.example;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -121,6 +120,24 @@ class TennisApplicationTest {
                     Player A : 40 / Player B : 30
                     Deuce
                     Advantage Player A
+                    """;
+        assertThat(baos.toString()).isEqualTo(expectedOutput);
+    }
+
+    @Test()
+    void should_print_correctly_a_game_until_advantage_playerB() {
+        // WHEN
+        tennisApplication.playGameForInput("ABABABB");
+
+        // THEN
+        String expectedOutput = """
+                    Player A : 15 / Player B : 0
+                    Player A : 15 / Player B : 15
+                    Player A : 30 / Player B : 15
+                    Player A : 30 / Player B : 30
+                    Player A : 40 / Player B : 30
+                    Deuce
+                    Advantage Player B
                     """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
