@@ -115,8 +115,12 @@ class TennisApplicationTest {
 
     private static Stream<Arguments> should_print_score_correctly_for_sequence() {
         return Stream.of(
-                Arguments.of("A", "Player A : 15 / Player B : 0"),
-                Arguments.of("B", "Player A : 0 / Player B : 15")
+                Arguments.of("A", """
+                        Player A : 15 / Player B : 0
+                        """),
+                Arguments.of("B", """
+                        Player A : 0 / Player B : 15
+                        """)
         );
     }
 

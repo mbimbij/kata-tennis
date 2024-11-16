@@ -10,6 +10,10 @@ public class TennisApplication {
         if(!input.matches("[AB]+")){
             throw new IllegalArgumentException("invalid character in input: %s".formatted(input));
         }
-        System.out.println("Player A : 15 / Player B : 0");
+        if(input.equals("A")) {
+            System.out.println("Player A : 15 / Player B : 0");
+        }else {
+            System.out.println("Player A : 0 / Player B : 15");
+        }
     }
 }
