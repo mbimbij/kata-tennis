@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Objects;
 
-import static org.example.PlayerScore.WIN;
+import static org.example.PlayerScore.*;
 
 public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
 
@@ -14,4 +14,15 @@ public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
         return Objects.equals(WIN, playerBScore());
     }
 
+    boolean isDeuce() {
+        return this.equals(new GameScore(FORTY, FORTY));
+    }
+
+    boolean isAdvantagePlayerA() {
+        return this.equals(new GameScore(ADVANTAGE, FORTY));
+    }
+
+    boolean isAdvantagePlayerB() {
+        return this.equals(new GameScore(FORTY, ADVANTAGE));
+    }
 }

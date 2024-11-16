@@ -1,7 +1,5 @@
 package org.example;
 
-import static org.example.GameScores.*;
-
 public class ScorePrinter {
     public static void print(GameScore gameScore) {
         String formattedScore = getFormattedScore(gameScore);
@@ -15,13 +13,13 @@ public class ScorePrinter {
         if(gameScore.playerBWon()){
             return "Player B wins the game";
         }
-        if(gameScore.equals(DEUCE)){
+        if(gameScore.isDeuce()){
             return "Deuce";
         }
-        if(gameScore.equals(ADVANTAGE_PLAYER_A)){
+        if(gameScore.isAdvantagePlayerA()){
             return "Advantage Player A";
         }
-        if(gameScore.equals(ADVANTAGE_PLAYER_B)){
+        if(gameScore.isAdvantagePlayerB()){
             return "Advantage Player B";
         }
         return "Player A : %s / Player B : %s".formatted(
