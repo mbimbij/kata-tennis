@@ -110,7 +110,7 @@ class TennisApplicationTest {
     @Test()
     void should_play_and_print_an_entire_game_with_deuces_and_advantages_and_playerA_wins() {
         // WHEN
-        tennisApplication.playGameForInput("ABABAB");
+        tennisApplication.playGameForInput("ABABABA");
 
         // THEN
         String expectedOutput = """
@@ -120,6 +120,7 @@ class TennisApplicationTest {
                     Player A : 30 / Player B : 30
                     Player A : 40 / Player B : 30
                     Deuce
+                    Advantage Player A
                     """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }

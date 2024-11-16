@@ -1,7 +1,6 @@
 package org.example;
 
-import static org.example.PlayerScore.DEUCE;
-import static org.example.PlayerScore.WIN;
+import static org.example.PlayerScore.*;
 
 public class ScorePrinter {
     public static void print(GameScore gameScore) {
@@ -16,8 +15,11 @@ public class ScorePrinter {
         if(playerBWon(gameScore)){
             return "Player B wins the game";
         }
-        if(DEUCE.equals(gameScore.playerBScore()) && DEUCE.equals(gameScore.playerAScore())){
+        if(DEUCE.equals(gameScore.playerAScore()) && DEUCE.equals(gameScore.playerBScore())){
             return "Deuce";
+        }
+        if(ADVANTAGE.equals(gameScore.playerAScore()) && DEUCE.equals(gameScore.playerBScore())){
+            return "Advantage Player A";
         }
         return "Player A : %s / Player B : %s".formatted(
                 gameScore.playerAScore().getValue(),

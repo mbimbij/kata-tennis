@@ -20,4 +20,19 @@ class TennisGameTest {
             sa.assertThat(gameScore.playerBScore()).isEqualTo(DEUCE);
         });
     }
+
+    @Test
+    void should_score_advantage_to_playerA_when_deuce_and_playerA_scores() {
+        // GIVEN
+        TennisGame tennisGame = new TennisGame(DEUCE, DEUCE);
+
+        // WHEN
+        GameScore gameScore = tennisGame.scorePointForPlayerA();
+
+        // THEN
+        assertSoftly(sa -> {
+            sa.assertThat(gameScore.playerAScore()).isEqualTo(ADVANTAGE);
+            sa.assertThat(gameScore.playerBScore()).isEqualTo(DEUCE);
+        });
+    }
 }
