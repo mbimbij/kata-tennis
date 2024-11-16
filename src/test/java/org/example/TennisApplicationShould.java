@@ -39,7 +39,6 @@ class TennisApplicationTest {
     @Nested
     class AcceptanceTests {
         @Test
-        @EnabledIfEnvironmentVariable(named = "OUTSIDE", matches = ".*")
         void should_play_and_print_an_entire_game_without_deuces_and_advantages() {
             // WHEN
             tennisApplication.playGameForInput("ABABAA");
@@ -121,9 +120,9 @@ class TennisApplicationTest {
     }
 
     @Test
-    void should_print_score_correctly_for_sequence() {
+    void should_print_score_correctly_for_sequence_() {
         // WHEN
-        tennisApplication.playGameForInput("ABAB");
+        tennisApplication.playGameForInput("ABABA");
 
         // THEN
         String expectedOutput = """
@@ -131,6 +130,7 @@ class TennisApplicationTest {
                 Player A : 15 / Player B : 15
                 Player A : 30 / Player B : 15
                 Player A : 30 / Player B : 30
+                Player A : 40 / Player B : 30
                 """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }

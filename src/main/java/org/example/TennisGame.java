@@ -1,25 +1,31 @@
 package org.example;
 
+import static org.example.PlayerScore.*;
+
 public class TennisGame {
 
-    private PlayerScore playerAScore = PlayerScore.ZERO;
-    private PlayerScore playerBScore = PlayerScore.ZERO;
+    private PlayerScore playerAScore = ZERO;
+    private PlayerScore playerBScore = ZERO;
 
 
     public GameScore scorePointForPlayerA() {
-        if (PlayerScore.ZERO.equals(playerAScore)) {
-            playerAScore = PlayerScore.FIFTEEN;
-        } else if (PlayerScore.FIFTEEN.equals(playerAScore)) {
-            playerAScore = PlayerScore.THIRTY;
+        if (ZERO.equals(playerAScore)) {
+            playerAScore = FIFTEEN;
+        } else if (FIFTEEN.equals(playerAScore)) {
+            playerAScore = THIRTY;
+        } else if (THIRTY.equals(playerAScore)) {
+            playerAScore = FORTY;
+        } else if (FORTY.equals(playerAScore)) {
+            playerAScore = WIN;
         }
         return new GameScore(playerAScore, playerBScore);
     }
 
     public GameScore scorePointForPlayerB() {
-        if (PlayerScore.ZERO.equals(playerBScore)) {
-            playerBScore = PlayerScore.FIFTEEN;
-        } else if (PlayerScore.FIFTEEN.equals(playerBScore)) {
-            playerBScore = PlayerScore.THIRTY;
+        if (ZERO.equals(playerBScore)) {
+            playerBScore = FIFTEEN;
+        } else if (FIFTEEN.equals(playerBScore)) {
+            playerBScore = THIRTY;
         }
         return new GameScore(playerAScore, playerBScore);
     }
