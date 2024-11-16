@@ -94,9 +94,18 @@ class TennisGameTest {
         GameScore gameScore = tennisGame.scorePointForPlayerA();
 
         // THEN
-        SoftAssertions.assertSoftly(sa -> {
-            sa.assertThat(gameScore.playerAScore()).isEqualTo(WIN);
-            sa.assertThat(gameScore.playerBScore()).isNotEqualTo(WIN);
-        });
+        assertThat(gameScore).isEqualTo(new GameScore(WIN, FORTY));
+    }
+
+    @Test
+    void playerB_should_win_when_advantage_to_playerB_and_playerB_scores() {
+        // GIVEN
+        TennisGame tennisGame = new TennisGame(FORTY, ADVANTAGE);
+
+        // WHEN
+        GameScore gameScore = tennisGame.scorePointForPlayerB();
+
+        // THEN
+        assertThat(gameScore).isEqualTo(new GameScore(FORTY, WIN));
     }
 }

@@ -51,6 +51,8 @@ public class TennisGame {
             playerBScore = FORTY;
         } else if (FORTY.equals(playerBScore)) {
             playerBScore = WIN;
+        } else if (ADVANTAGE.equals(playerBScore)) {
+            playerBScore = WIN;
         }
         return new GameScore(playerAScore, playerBScore);
     }
