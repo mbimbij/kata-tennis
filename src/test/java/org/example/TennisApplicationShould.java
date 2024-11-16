@@ -31,8 +31,6 @@ class TennisApplicationTest {
         @Test
         @EnabledIfEnvironmentVariable(named = "OUTSIDE", matches = ".*")
         void should_play_and_print_an_entire_game_without_deuces_and_advantages() {
-            // GIVEN
-
             // WHEN
             tennisApplication.playGameForInput("ABABAA");
 
@@ -45,15 +43,12 @@ class TennisApplicationTest {
                 Player A : 40 / Player B : 30
                 Player A wins the game
                 """;
-            String actualOutput = baos.toString();
-            assertThat(actualOutput).isEqualTo(expectedOutput);
+            assertThat(baos.toString()).isEqualTo(expectedOutput);
         }
 
         @Test()
         @EnabledIfEnvironmentVariable(named = "OUTSIDE", matches = ".*")
         void should_play_and_print_an_entire_game_with_deuces_and_advantages() {
-            // GIVEN
-            TennisApplication tennisApplication = new TennisApplication();
             // WHEN
             tennisApplication.playGameForInput("ABABAA");
 
@@ -72,8 +67,7 @@ class TennisApplicationTest {
                 advantage Player A
                 Player A wins the game
                 """;
-            String actualOutput = baos.toString();
-            assertThat(actualOutput).isEqualTo(expectedOutput);
+            assertThat(baos.toString()).isEqualTo(expectedOutput);
         }
     }
 
@@ -88,9 +82,6 @@ class TennisApplicationTest {
                 }
         )
         void should_throw_an_error_on_blank_input(String input) {
-            // GIVEN
-            TennisApplication tennisApplication = new TennisApplication();
-
             // WHEN
             ThrowableAssert.ThrowingCallable throwingCallable = () -> tennisApplication.playGameForInput(input);
 
@@ -109,9 +100,6 @@ class TennisApplicationTest {
                 }
         )
         void should_throw_an_error_on_invalid_character(String input) {
-            // GIVEN
-            TennisApplication tennisApplication = new TennisApplication();
-
             // WHEN
             ThrowableAssert.ThrowingCallable throwingCallable = () -> tennisApplication.playGameForInput(input);
 
@@ -123,6 +111,14 @@ class TennisApplicationTest {
     }
 
     @Test
-    void should_print_1_action() {
+    void should_print_correctly_sequence_A() {
+        // WHEN
+        tennisApplication.playGameForInput("A");
+
+        // THEN
+        String expectedOutput = """
+                Player A : 15 / Player B : 0
+                """;
+        assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
 }
