@@ -18,6 +18,10 @@ public class TennisGame {
     }
 
     public GameScore scorePointForPlayerA() {
+        if(WIN.equals(playerAScore) || WIN.equals(playerBScore)){
+            throw  new IllegalStateException("cannot score when there is a winner");
+        }
+
         if (ZERO.equals(playerAScore)) {
             playerAScore = FIFTEEN;
         } else if (FIFTEEN.equals(playerAScore)) {

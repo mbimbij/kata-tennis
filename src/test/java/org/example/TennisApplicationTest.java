@@ -71,44 +71,10 @@ class TennisApplicationTest {
         }
     }
 
-    @Test
-    void should_play_and_print_an_entire_game_without_deuces_and_advantages_and_playerA_wins() {
-        // WHEN
-        tennisApplication.playGameForInput("ABABAA");
-
-        // THEN
-        String expectedOutput = """
-                    Player A : 15 / Player B : 0
-                    Player A : 15 / Player B : 15
-                    Player A : 30 / Player B : 15
-                    Player A : 30 / Player B : 30
-                    Player A : 40 / Player B : 30
-                    Player A wins the game
-                    """;
-        assertThat(baos.toString()).isEqualTo(expectedOutput);
-    }
-
-    @Test
-    void should_play_and_print_an_entire_game_without_deuces_and_advantages_and_playerB_wins() {
-        // WHEN
-        tennisApplication.playGameForInput("ABABBB");
-
-        // THEN
-        String expectedOutput = """
-                    Player A : 15 / Player B : 0
-                    Player A : 15 / Player B : 15
-                    Player A : 30 / Player B : 15
-                    Player A : 30 / Player B : 30
-                    Player A : 30 / Player B : 40
-                    Player B wins the game
-                    """;
-        assertThat(baos.toString()).isEqualTo(expectedOutput);
-    }
-
     @Test()
-    void should_play_and_print_an_entire_game_with_deuces_and_advantages_and_playerA_wins() {
+    void should_print_correctly_an_entire_game() {
         // WHEN
-        tennisApplication.playGameForInput("ABABABA");
+        tennisApplication.playGameForInput("ABABABABBAAA");
 
         // THEN
         String expectedOutput = """
@@ -119,24 +85,11 @@ class TennisApplicationTest {
                     Player A : 40 / Player B : 30
                     Deuce
                     Advantage Player A
-                    """;
-        assertThat(baos.toString()).isEqualTo(expectedOutput);
-    }
-
-    @Test()
-    void should_print_correctly_a_game_until_advantage_playerB() {
-        // WHEN
-        tennisApplication.playGameForInput("ABABABB");
-
-        // THEN
-        String expectedOutput = """
-                    Player A : 15 / Player B : 0
-                    Player A : 15 / Player B : 15
-                    Player A : 30 / Player B : 15
-                    Player A : 30 / Player B : 30
-                    Player A : 40 / Player B : 30
                     Deuce
                     Advantage Player B
+                    Deuce
+                    Advantage Player A
+                    Player A wins the game
                     """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }

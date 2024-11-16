@@ -4,6 +4,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.example.PlayerScore.*;
 
 class TennisGameTest {
@@ -107,5 +108,16 @@ class TennisGameTest {
 
         // THEN
         assertThat(gameScore).isEqualTo(new GameScore(FORTY, WIN));
+    }
+
+    @Test
+    void should_throw_exception_if_trying_to_score_when_there_is_a_winner() {
+        // GIVEN
+        TennisGame tennisGame = new TennisGame(WIN, FORTY);
+
+        // WHEN
+        assertThatThrownBy(tennisGame::scorePointForPlayerA)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("cannot score when there is a winner");
     }
 }
