@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -36,13 +39,13 @@ class TennisApplicationTest {
 
             // THEN
             String expectedOutput = """
-                Player A : 15 / Player B : 0
-                Player A : 15 / Player B : 15
-                Player A : 30 / Player B : 15
-                Player A : 30 / Player B : 30
-                Player A : 40 / Player B : 30
-                Player A wins the game
-                """;
+                    Player A : 15 / Player B : 0
+                    Player A : 15 / Player B : 15
+                    Player A : 30 / Player B : 15
+                    Player A : 30 / Player B : 30
+                    Player A : 40 / Player B : 30
+                    Player A wins the game
+                    """;
             assertThat(baos.toString()).isEqualTo(expectedOutput);
         }
 
@@ -54,25 +57,25 @@ class TennisApplicationTest {
 
             // THEN
             String expectedOutput = """
-                Player A : 15 / Player B : 0
-                Player A : 15 / Player B : 15
-                Player A : 30 / Player B : 15
-                Player A : 30 / Player B : 30
-                Player A : 40 / Player B : 30
-                Deuce
-                advantage Player A
-                Deuce
-                advantage Player B
-                Deuce
-                advantage Player A
-                Player A wins the game
-                """;
+                    Player A : 15 / Player B : 0
+                    Player A : 15 / Player B : 15
+                    Player A : 30 / Player B : 15
+                    Player A : 30 / Player B : 30
+                    Player A : 40 / Player B : 30
+                    Deuce
+                    advantage Player A
+                    Deuce
+                    advantage Player B
+                    Deuce
+                    advantage Player A
+                    Player A wins the game
+                    """;
             assertThat(baos.toString()).isEqualTo(expectedOutput);
         }
     }
 
     @Nested
-    public class ErrorCases{
+    public class ErrorCases {
         @ParameterizedTest()
         @ValueSource(
                 strings = {
@@ -110,15 +113,20 @@ class TennisApplicationTest {
         }
     }
 
-    @Test
-    void should_print_correctly_sequence_A() {
+    private static Stream<Arguments> should_print_score_correctly_for_sequence() {
+        return Stream.of(
+                Arguments.of("A", "Player A : 15 / Player B : 0"),
+                Arguments.of("B", "Player A : 0 / Player B : 15")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    void should_print_score_correctly_for_sequence(String input, String expectedOutput) {
         // WHEN
-        tennisApplication.playGameForInput("A");
+        tennisApplication.playGameForInput(input);
 
         // THEN
-        String expectedOutput = """
-                Player A : 15 / Player B : 0
-                """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
 }
