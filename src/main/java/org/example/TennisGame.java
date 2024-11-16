@@ -26,7 +26,12 @@ public class TennisGame {
             playerAScore = FORTY;
         } else if (FORTY.equals(playerAScore) && FORTY.equals(playerBScore)) {
             playerAScore = ADVANTAGE;
+        } else if (ADVANTAGE.equals(playerBScore)) {
+            playerAScore = FORTY;
+            playerBScore = FORTY;
         } else if (FORTY.equals(playerAScore)) {
+            playerAScore = WIN;
+        } else if (ADVANTAGE.equals(playerAScore)) {
             playerAScore = WIN;
         }
         return new GameScore(playerAScore, playerBScore);
@@ -41,6 +46,9 @@ public class TennisGame {
             playerBScore = FORTY;
         } else if (FORTY.equals(playerAScore) && FORTY.equals(playerBScore)) {
             playerBScore = ADVANTAGE;
+        } else if (ADVANTAGE.equals(playerAScore)) {
+            playerAScore = FORTY;
+            playerBScore = FORTY;
         } else if (FORTY.equals(playerBScore)) {
             playerBScore = WIN;
         }
