@@ -21,15 +21,11 @@ public class TennisApplication {
 
         Arrays.stream(input.split(""))
                 .map(PlayerToScoreFor::valueOf)
-                .map(this::scorePointForPlayer)
+                .map(gameCommand -> switch (gameCommand) {
+                    case A -> tennisGame.scorePointForPlayerA();
+                    case B -> tennisGame.scorePointForPlayerB();
+                })
                 .forEach(ScorePrinter::print);
-    }
-
-    private GameScore scorePointForPlayer(PlayerToScoreFor gameCommand) {
-        return switch (gameCommand) {
-            case A -> tennisGame.scorePointForPlayerA();
-            case B -> tennisGame.scorePointForPlayerB();
-        };
     }
 
     public enum PlayerToScoreFor {

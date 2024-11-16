@@ -9,6 +9,8 @@ public class TennisGame {
     public GameScore scorePointForPlayerA() {
         if(PlayerScore.ZERO.equals(playerAScore)){
             playerAScore = PlayerScore.FIFTEEN;
+        } else if (PlayerScore.FIFTEEN.equals(playerAScore)) {
+            playerAScore = PlayerScore.THIRTY;
         }
         return new GameScore(playerAScore, playerBScore);
     }
