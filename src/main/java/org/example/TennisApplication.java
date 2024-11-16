@@ -2,6 +2,8 @@ package org.example;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+
 public class TennisApplication {
     private final TennisGame tennisGame;
 
@@ -16,18 +18,20 @@ public class TennisApplication {
         if (!input.matches("[AB]+")) {
             throw new IllegalArgumentException("invalid character in input: %s".formatted(input));
         }
-        if (input.equals("A")) {
-            tennisGame.scorePointForPlayerA();
-        } else if (input.equals("B")) {
-            System.out.print("""
-                    Player A : 0 / Player B : 15
-                    """);
-        } else {
-            System.out.print("""
-                    Player A : 15 / Player B : 0
-                    Player A : 15 / Player B : 15
-                    """);
+
+        Arrays.stream(input.split(""))
+                .map(PlayerToScoreFor::valueOf)
+                .forEach(this::scorePointForPlayer);
+    }
+
+    private void scorePointForPlayer(PlayerToScoreFor gameCommand) {
+        switch (gameCommand) {
+            case A -> tennisGame.scorePointForPlayerA();
+            case B -> tennisGame.scorePointForPlayerB();
         }
     }
 
+    public enum PlayerToScoreFor {
+        A, B
+    }
 }

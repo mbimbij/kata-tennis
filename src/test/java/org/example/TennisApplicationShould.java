@@ -152,9 +152,10 @@ class TennisApplicationTest {
         InOrder inOrder = inOrder(tennisGame);
 
         // WHEN
-        tennisApplication.playGameForInput("A");
+        tennisApplication.playGameForInput("AB");
 
         // THEN
         inOrder.verify(tennisGame).scorePointForPlayerA();
+        inOrder.verify(tennisGame).scorePointForPlayerB();
     }
 }
