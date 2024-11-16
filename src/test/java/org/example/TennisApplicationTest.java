@@ -15,8 +15,7 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TennisApplicationTest {
@@ -149,10 +148,15 @@ class TennisApplicationTest {
         InOrder inOrder = inOrder(tennisGame);
 
         // WHEN
-        tennisApplication.playGameForInput("AB");
+        tennisApplication.playGameForInput("ABABBAAA");
 
         // THEN
         inOrder.verify(tennisGame).scorePointForPlayerA();
         inOrder.verify(tennisGame).scorePointForPlayerB();
+        inOrder.verify(tennisGame).scorePointForPlayerA();
+        inOrder.verify(tennisGame, times(2))
+                .scorePointForPlayerB();
+        inOrder.verify(tennisGame, times(3))
+                .scorePointForPlayerA();
     }
 }
