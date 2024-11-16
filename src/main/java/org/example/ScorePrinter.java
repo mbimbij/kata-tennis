@@ -10,6 +10,9 @@ public class ScorePrinter {
         if(PlayerScore.WIN.equals(gameScore.playerAScore())){
             return "Player A wins the game";
         }
+        if(PlayerScore.WIN.equals(gameScore.playerBScore())){
+            return "Player B wins the game";
+        }
         return "Player A : %s / Player B : %s".formatted(
                 gameScore.playerAScore().getValue(),
                 gameScore.playerBScore().getValue()

@@ -26,6 +26,10 @@ public class TennisGame {
             playerBScore = FIFTEEN;
         } else if (FIFTEEN.equals(playerBScore)) {
             playerBScore = THIRTY;
+        } else if (THIRTY.equals(playerBScore)) {
+            playerBScore = FORTY;
+        } else if (FORTY.equals(playerBScore)) {
+            playerBScore = WIN;
         }
         return new GameScore(playerAScore, playerBScore);
     }
