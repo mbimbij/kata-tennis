@@ -120,6 +120,10 @@ class TennisApplicationTest {
                         """),
                 Arguments.of("B", """
                         Player A : 0 / Player B : 15
+                        """),
+                Arguments.of("AB", """
+                        Player A : 15 / Player B : 0
+                        Player A : 15 / Player B : 15
                         """)
         );
     }
