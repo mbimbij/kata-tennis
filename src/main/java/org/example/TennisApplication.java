@@ -11,10 +11,6 @@ public class TennisApplication {
         tennisGame = new TennisGame();
     }
 
-    public TennisApplication(TennisGame tennisGame) {
-        this.tennisGame = tennisGame;
-    }
-
     public void playGameForInput(String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("input shouldn't be blank");

@@ -22,14 +22,11 @@ import static org.mockito.Mockito.*;
 class TennisApplicationTest {
 
     private TennisApplication tennisApplication;
-    private TennisGame tennisGame;
     private ByteArrayOutputStream baos;
 
     @BeforeEach
     void setUp() {
-        tennisGame = spy(new TennisGame());
-//        tennisGame = new TennisGame();
-        tennisApplication = new TennisApplication(tennisGame);
+        tennisApplication = new TennisApplication();
         baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
     }
@@ -94,23 +91,5 @@ class TennisApplicationTest {
                     Player A wins the game
                     """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
-    }
-    @Test
-    void should_call_game_scoring_method_multiple_times_for_input_sequence() {
-
-        // GIVEN
-        InOrder inOrder = inOrder(tennisGame);
-
-        // WHEN
-        tennisApplication.playGameForInput("ABABBAAA");
-
-        // THEN
-        inOrder.verify(tennisGame).scorePointForPlayerA();
-        inOrder.verify(tennisGame).scorePointForPlayerB();
-        inOrder.verify(tennisGame).scorePointForPlayerA();
-        inOrder.verify(tennisGame, times(2))
-                .scorePointForPlayerB();
-        inOrder.verify(tennisGame, times(3))
-                .scorePointForPlayerA();
     }
 }
