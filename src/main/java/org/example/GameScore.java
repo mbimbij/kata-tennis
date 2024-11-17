@@ -6,6 +6,10 @@ import static org.example.PlayerScore.*;
 
 public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
 
+    public static GameScore loveAll(){
+        return new GameScore(ZERO, ZERO);
+    }
+
     public GameScore scorePointForPlayerA() {
         if(WIN.equals(playerAScore) || WIN.equals(playerBScore)){
             throw  new IllegalStateException("cannot score when there is a winner");

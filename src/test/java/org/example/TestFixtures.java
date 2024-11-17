@@ -3,24 +3,8 @@ package org.example;
 import static org.example.PlayerScore.*;
 
 public class TestFixtures {
-    public static TennisGame a30Vs40Game() {
-        return new TennisGame(THIRTY, FORTY);
-    }
-
     static GameScore deuce() {
         return new GameScore(FORTY, FORTY);
-    }
-
-    static TennisGame a40Vs40Game() {
-        return new TennisGame(FORTY, FORTY);
-    }
-
-    static TennisGame advantagePlayerAGame() {
-        return new TennisGame(ADVANTAGE, FORTY);
-    }
-
-    static TennisGame advantagePlayerBGame() {
-        return new TennisGame(FORTY, ADVANTAGE);
     }
 
     public static GameScore a40Vs30Score() {

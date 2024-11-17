@@ -2,13 +2,11 @@ package org.example;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.InOrder;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayOutputStream;
@@ -16,7 +14,6 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TennisApplicationTest {
@@ -26,7 +23,7 @@ class TennisApplicationTest {
 
     @BeforeEach
     void setUp() {
-        tennisApplication = new TennisApplication();
+        tennisApplication = TennisApplication.newStandardTennisApplication();
         baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
     }
