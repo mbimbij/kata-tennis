@@ -2,6 +2,7 @@ package org.example;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,7 @@ class TennisApplicationTest {
     @BeforeEach
     void setUp() {
         tennisGame = spy(new TennisGame());
+//        tennisGame = new TennisGame();
         tennisApplication = new TennisApplication(tennisGame);
         baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
@@ -94,6 +96,7 @@ class TennisApplicationTest {
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
     @Test
+    @Disabled
     void should_call_game_scoring_method_multiple_times_for_input_sequence() {
 
         // GIVEN

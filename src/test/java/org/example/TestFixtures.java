@@ -23,10 +23,6 @@ public class TestFixtures {
         return new TennisGame(FORTY, ADVANTAGE);
     }
 
-    static TennisGame aGameWonByPlayerA() {
-        return new TennisGame(WIN, FORTY);
-    }
-
     public static GameScore a40Vs30Score() {
         return new GameScore(FORTY, THIRTY);
     }
@@ -49,5 +45,9 @@ public class TestFixtures {
 
     public static GameScore aWinVs40Score() {
         return new GameScore(WIN, FORTY);
+    }
+
+    public static GameScore a40VsWinScore() {
+        return new GameScore(FORTY, WIN);
     }
 }
