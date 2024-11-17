@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @ExtendWith(MockitoExtension.class)
 class TennisApplicationTest {
 
-    private GameScoreFactory gameScoreFactory = new EnumBasedGameScoreFactory();
+    private GameScoreFactory gameScoreFactory = new IntegerBasedGameScoreFactory();
     private TennisApplication tennisApplication;
     private ByteArrayOutputStream baos;
 
