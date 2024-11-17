@@ -40,11 +40,11 @@ public class GameScoreFactory {
     }
 
     public GameScore gameForty() {
-        return new EnumBasedGameScore(WIN, FORTY);
+        return new EnumBasedGameScore(GAME, FORTY);
     }
 
     public GameScore fortyGame() {
-        return new EnumBasedGameScore(FORTY, WIN);
+        return new EnumBasedGameScore(FORTY, GAME);
     }
 
     public GameScore fifteenLove() {
@@ -56,7 +56,7 @@ public class GameScoreFactory {
     }
 
     public GameScore gameThirty() {
-        return new EnumBasedGameScore(WIN, THIRTY);
+        return new EnumBasedGameScore(GAME, THIRTY);
     }
 
     public GameScore loveFifteen() {
@@ -72,6 +72,6 @@ public class GameScoreFactory {
     }
 
     public GameScore gameToLovePlayerB() {
-        return new EnumBasedGameScore(ZERO, WIN);
+        return new EnumBasedGameScore(ZERO, GAME);
     }
 }

@@ -23,7 +23,7 @@ public final class EnumBasedGameScore extends GameScore {
 
     @Override
     public GameScore scorePointForPlayerA() {
-        if (WIN.equals(playerAScore) || WIN.equals(playerBScore)) {
+        if (GAME.equals(playerAScore) || GAME.equals(playerBScore)) {
             throw new IllegalStateException("cannot score when there is a winner");
         }
 
@@ -38,14 +38,14 @@ public final class EnumBasedGameScore extends GameScore {
         } else if (ADVANTAGE.equals(playerBScore)) {
             return new EnumBasedGameScore(FORTY, FORTY);
         } else if (FORTY.equals(playerAScore) || ADVANTAGE.equals(playerAScore)) {
-            return new EnumBasedGameScore(WIN, playerBScore);
+            return new EnumBasedGameScore(GAME, playerBScore);
         }
         throw new IllegalStateException("Should not be able to reach this");
     }
 
     @Override
     public GameScore scorePointForPlayerB() {
-        if (WIN.equals(playerAScore) || WIN.equals(playerBScore)) {
+        if (GAME.equals(playerAScore) || GAME.equals(playerBScore)) {
             throw new IllegalStateException("cannot score when there is a winner");
         }
 
@@ -60,9 +60,9 @@ public final class EnumBasedGameScore extends GameScore {
         } else if (ADVANTAGE.equals(playerAScore)) {
             return new EnumBasedGameScore(FORTY, FORTY);
         } else if (FORTY.equals(playerBScore)) {
-            return new EnumBasedGameScore(playerAScore, WIN);
+            return new EnumBasedGameScore(playerAScore, GAME);
         } else if (ADVANTAGE.equals(playerBScore)) {
-            return new EnumBasedGameScore(playerAScore, WIN);
+            return new EnumBasedGameScore(playerAScore, GAME);
         }
         return new EnumBasedGameScore(playerAScore, playerBScore);
     }
@@ -76,12 +76,12 @@ public final class EnumBasedGameScore extends GameScore {
 
     @Override
     public boolean playerAWon() {
-        return Objects.equals(WIN, playerAScore());
+        return Objects.equals(GAME, playerAScore());
     }
 
     @Override
     public boolean playerBWon() {
-        return Objects.equals(WIN, playerBScore());
+        return Objects.equals(GAME, playerBScore());
     }
 
     @Override
@@ -123,6 +123,6 @@ public final class EnumBasedGameScore extends GameScore {
         THIRTY,
         FORTY,
         ADVANTAGE,
-        WIN
+        GAME
     }
 }

@@ -33,27 +33,27 @@ public class IntegerBasedGameScore extends GameScore {
 
     @Override
     protected boolean playerAWon() {
-        return false;
+        return playerAScore >= 4 && playerAScore >= playerBScore + 2;
     }
 
     @Override
     protected boolean playerBWon() {
-        return playerBScore == 4;
+        return playerBScore >= 4 && playerBScore >= playerAScore + 2;
     }
 
     @Override
     protected boolean isDeuce() {
-        return false;
+        return playerAScore == playerBScore && playerAScore >= 3;
     }
 
     @Override
     protected boolean isAdvantagePlayerA() {
-        return false;
+        return playerAScore >= 4 && playerBScore == playerAScore - 1;
     }
 
     @Override
     protected boolean isAdvantagePlayerB() {
-        return false;
+        return playerBScore >= 4 && playerAScore == playerBScore - 1;
     }
 
     public String getFormattedValue(int score) {
