@@ -72,7 +72,7 @@ class TennisApplicationTest {
     }
 
     @Test()
-    void should_print_correctly_an_entire_game() {
+    void should_print_correctly_an_entire_game_with_playerA_winning() {
         // WHEN
         tennisApplication.playGameForInput("ABABABABBAAA");
 
@@ -93,7 +93,6 @@ class TennisApplicationTest {
                     """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
-
 
     @Test
     void should_call_game_scoring_method_multiple_times_for_input_sequence() {

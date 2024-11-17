@@ -99,6 +99,30 @@ class TennisGameTest {
     }
 
     @Test
+    void playerA_should_win_when_40_30_and_playerA_scores() {
+        // GIVEN
+        TennisGame tennisGame = new TennisGame(FORTY, THIRTY);
+
+        // WHEN
+        GameScore gameScore = tennisGame.scorePointForPlayerA();
+
+        // THEN
+        assertThat(gameScore).isEqualTo(new GameScore(WIN, THIRTY));
+    }
+
+    @Test
+    void playerB_should_win_when_30_40_and_playerB_scores() {
+        // GIVEN
+        TennisGame tennisGame = new TennisGame(THIRTY, FORTY);
+
+        // WHEN
+        GameScore gameScore = tennisGame.scorePointForPlayerB();
+
+        // THEN
+        assertThat(gameScore).isEqualTo(new GameScore(THIRTY, WIN));
+    }
+
+    @Test
     void playerB_should_win_when_advantage_to_playerB_and_playerB_scores() {
         // GIVEN
         TennisGame tennisGame = new TennisGame(FORTY, ADVANTAGE);
