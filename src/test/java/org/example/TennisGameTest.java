@@ -8,17 +8,6 @@ import static org.example.PlayerScore.*;
 
 class TennisGameTest {
 
-//    @Test
-//    void should_score_deuce_when_40_30_and_playerB_scores() {
-//        // GIVEN
-//        GameScore score = TestFixtures.a40_30Score();
-//
-//        // WHEN
-//        GameScore newScore = score.scorePointForPlayerB();
-//
-//        // THEN
-//        assertThat(newScore).isEqualTo(TestFixtures.deuce());
-//    }
 
     @Test
     void should_score_advantage_to_playerB_when_deuce_and_playerB_scores() {
