@@ -3,63 +3,75 @@ package org.example;
 import static org.example.GameScore.PlayerScore.*;
 
 public class GameScoreFactory {
-    public static GameScore loveAll() {
+    private static GameScoreFactory instance;
+
+    private GameScoreFactory() {
+    }
+
+    public static GameScoreFactory getInstance() {
+        if(instance == null) {
+            instance = new GameScoreFactory();
+        }
+        return instance;
+    }
+
+    public GameScore loveAll() {
         return new GameScore(ZERO, ZERO);
     }
 
-    public static GameScore thirtyForty() {
+    public GameScore thirtyForty() {
         return new GameScore(THIRTY, FORTY);
     }
 
-    public static GameScore fortyThirty() {
+    public GameScore fortyThirty() {
         return new GameScore(FORTY, THIRTY);
     }
 
-    public static GameScore deuce() {
+    public GameScore deuce() {
         return new GameScore(FORTY, FORTY);
     }
 
-    public static GameScore advantagePlayerA() {
+    public GameScore advantagePlayerA() {
         return new GameScore(ADVANTAGE, FORTY);
     }
 
-    public static GameScore advantagePlayerB() {
+    public GameScore advantagePlayerB() {
         return new GameScore(FORTY, ADVANTAGE);
     }
 
-    public static GameScore gameForty() {
+    public GameScore gameForty() {
         return new GameScore(WIN, FORTY);
     }
 
-    public static GameScore fortyGame() {
+    public GameScore fortyGame() {
         return new GameScore(FORTY, WIN);
     }
 
-    public static GameScore fifteenLove() {
+    public GameScore fifteenLove() {
         return new GameScore(FIFTEEN, ZERO);
     }
 
-    public static GameScore thirtyLove() {
+    public GameScore thirtyLove() {
         return new GameScore(THIRTY, ZERO);
     }
 
-    public static GameScore gameThirty() {
+    public GameScore gameThirty() {
         return new GameScore(WIN, THIRTY);
     }
 
-    public static GameScore loveFifteen() {
+    public GameScore loveFifteen() {
         return new GameScore(ZERO, FIFTEEN);
     }
 
-    public static GameScore loveThirty() {
+    public GameScore loveThirty() {
         return new GameScore(ZERO, THIRTY);
     }
 
-    public static GameScore loveForty() {
+    public GameScore loveForty() {
         return new GameScore(ZERO, FORTY);
     }
 
-    public static GameScore gameToLovePlayerB() {
+    public GameScore gameToLovePlayerB() {
         return new GameScore(ZERO, WIN);
     }
 }

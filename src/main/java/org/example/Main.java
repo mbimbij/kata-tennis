@@ -1,9 +1,9 @@
 package org.example;
 
-import static org.example.TennisApplication.newStandardTennisApplication;
-
 public class Main {
     public static void main(String[] args) {
-        newStandardTennisApplication().playGameForInput("ABABAA");
+        GameScoreFactory gameScoreFactory = GameScoreFactory.getInstance();
+        GameScore initialScore = gameScoreFactory.loveAll();
+        new TennisApplication(initialScore).playGameForInput("ABABAA");
     }
 }

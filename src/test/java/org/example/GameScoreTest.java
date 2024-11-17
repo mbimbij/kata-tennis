@@ -10,10 +10,9 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.GameScoreFactory.*;
-import static org.example.GameScoreFactory.loveAll;
 
 class GameScoreTest {
+    private static GameScoreFactory gameScoreFactory = GameScoreFactory.getInstance();
 
     @Nested
     class Computing {
@@ -21,13 +20,13 @@ class GameScoreTest {
         class ScoreForPlayerA {
             private static Stream<Arguments> should_return_correct_score_when_playerA_scores() {
                 return Stream.of(
-                        Arguments.of(loveAll(), fifteenLove()),
-                        Arguments.of(fifteenLove(), thirtyLove()),
-                        Arguments.of(thirtyForty(), deuce()),
-                        Arguments.of(deuce(), advantagePlayerA()),
-                        Arguments.of(advantagePlayerB(), deuce()),
-                        Arguments.of(advantagePlayerA(), gameForty()),
-                        Arguments.of(fortyThirty(), gameThirty())
+                        Arguments.of(GameScoreTest.gameScoreFactory.loveAll(), GameScoreTest.gameScoreFactory.fifteenLove()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.fifteenLove(), GameScoreTest.gameScoreFactory.thirtyLove()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.thirtyForty(), GameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.deuce(), GameScoreTest.gameScoreFactory.advantagePlayerA()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerB(), GameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerA(), GameScoreTest.gameScoreFactory.gameForty()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.fortyThirty(), GameScoreTest.gameScoreFactory.gameThirty())
                 );
             }
 
@@ -42,14 +41,14 @@ class GameScoreTest {
         class ScoreForPlayerB {
             private static Stream<Arguments> should_return_correct_score_when_playerB_scores() {
                 return Stream.of(
-                        Arguments.of(loveAll(), loveFifteen()),
-                        Arguments.of(loveFifteen(), loveThirty()),
-                        Arguments.of(loveThirty(), loveForty()),
-                        Arguments.of(loveForty(), gameToLovePlayerB()),
-                        Arguments.of(deuce(), advantagePlayerB()),
-                        Arguments.of(advantagePlayerA(), deuce()),
-                        Arguments.of(fortyThirty(), deuce()),
-                        Arguments.of(advantagePlayerB(), fortyGame())
+                        Arguments.of(GameScoreTest.gameScoreFactory.loveAll(), GameScoreTest.gameScoreFactory.loveFifteen()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.loveFifteen(), GameScoreTest.gameScoreFactory.loveThirty()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.loveThirty(), GameScoreTest.gameScoreFactory.loveForty()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.loveForty(), GameScoreTest.gameScoreFactory.gameToLovePlayerB()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.deuce(), GameScoreTest.gameScoreFactory.advantagePlayerB()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerA(), GameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.fortyThirty(), GameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerB(), GameScoreTest.gameScoreFactory.fortyGame())
                 );
             }
 
@@ -64,8 +63,8 @@ class GameScoreTest {
         class TryToScoreWhenThereIsAlreadyAWinner {
             private static Stream<Arguments> should_throw_exception_if_trying_to_score_when_there_is_a_winner() {
                 return Stream.of(
-                        Arguments.of(gameForty()),
-                        Arguments.of(fortyGame())
+                        Arguments.of(GameScoreTest.gameScoreFactory.gameForty()),
+                        Arguments.of(GameScoreTest.gameScoreFactory.fortyGame())
                 );
             }
 
@@ -89,7 +88,7 @@ class GameScoreTest {
     class Formatting {
         @Test
         void format_correctly_when_playerB_won() {
-            assertThat(fortyGame().format()).isEqualTo("Player B wins the game");
+            assertThat(gameScoreFactory.fortyGame().format()).isEqualTo("Player B wins the game");
         }
     }
 }

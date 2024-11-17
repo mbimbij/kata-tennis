@@ -5,18 +5,12 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.example.GameScoreFactory.loveAll;
-
 
 public class TennisApplication {
     private final GameScore initialScore;
 
-    private TennisApplication(GameScore initialScore) {
+    public TennisApplication(GameScore initialScore) {
         this.initialScore = initialScore;
-    }
-
-    static TennisApplication newStandardTennisApplication() {
-        return new TennisApplication(loveAll());
     }
 
     public void playGameForInput(String input) {

@@ -18,12 +18,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @ExtendWith(MockitoExtension.class)
 class TennisApplicationTest {
 
+    private GameScoreFactory gameScoreFactory = GameScoreFactory.getInstance();
     private TennisApplication tennisApplication;
     private ByteArrayOutputStream baos;
 
     @BeforeEach
     void setUp() {
-        tennisApplication = TennisApplication.newStandardTennisApplication();
+        GameScore initialScore = gameScoreFactory.loveAll();
+        tennisApplication = new TennisApplication(initialScore);
         baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
     }
