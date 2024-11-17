@@ -1,61 +1,12 @@
 package org.example;
 
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
 
-import static org.example.GameScore.PlayerScore.*;
+@EqualsAndHashCode
+public abstract class GameScore {
+    abstract GameScore scorePointForPlayerA();
 
-public final class GameScore {
-    private final PlayerScore playerAScore;
-    private final PlayerScore playerBScore;
-
-    public GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
-        this.playerAScore = playerAScore;
-        this.playerBScore = playerBScore;
-    }
-
-    public GameScore scorePointForPlayerA() {
-        if (WIN.equals(playerAScore) || WIN.equals(playerBScore)) {
-            throw new IllegalStateException("cannot score when there is a winner");
-        }
-
-        if (ZERO.equals(playerAScore)) {
-            return new GameScore(FIFTEEN, playerBScore);
-        } else if (FIFTEEN.equals(playerAScore)) {
-            return new GameScore(THIRTY, playerBScore);
-        } else if (THIRTY.equals(playerAScore)) {
-            return new GameScore(FORTY, playerBScore);
-        } else if (FORTY.equals(playerAScore) && FORTY.equals(playerBScore)) {
-            return new GameScore(ADVANTAGE, playerBScore);
-        } else if (ADVANTAGE.equals(playerBScore)) {
-            return new GameScore(FORTY, FORTY);
-        } else if (FORTY.equals(playerAScore) || ADVANTAGE.equals(playerAScore)) {
-            return new GameScore(WIN, playerBScore);
-        }
-        throw new IllegalStateException("Should not be able to reach this");
-    }
-
-    public GameScore scorePointForPlayerB() {
-        if (WIN.equals(playerAScore) || WIN.equals(playerBScore)) {
-            throw new IllegalStateException("cannot score when there is a winner");
-        }
-
-        if (ZERO.equals(playerBScore)) {
-            return new GameScore(playerAScore, FIFTEEN);
-        } else if (FIFTEEN.equals(playerBScore)) {
-            return new GameScore(playerAScore, THIRTY);
-        } else if (THIRTY.equals(playerBScore)) {
-            return new GameScore(playerAScore, FORTY);
-        } else if (FORTY.equals(playerAScore) && FORTY.equals(playerBScore)) {
-            return new GameScore(playerAScore, ADVANTAGE);
-        } else if (ADVANTAGE.equals(playerAScore)) {
-            return new GameScore(FORTY, FORTY);
-        } else if (FORTY.equals(playerBScore)) {
-            return new GameScore(playerAScore, WIN);
-        } else if (ADVANTAGE.equals(playerBScore)) {
-            return new GameScore(playerAScore, WIN);
-        }
-        return new GameScore(playerAScore, playerBScore);
-    }
+    abstract GameScore scorePointForPlayerB();
 
     public String format() {
         if (playerAWon()) {
@@ -73,71 +24,18 @@ public final class GameScore {
         if (isAdvantagePlayerB()) {
             return "Advantage Player B";
         }
-        return "Player A : %s / Player B : %s".formatted(
-                getStringValue(playerAScore()),
-                getStringValue(playerBScore())
-        );
+        return getDefaultFormattedScore();
     }
 
-    private boolean playerAWon() {
-        return Objects.equals(WIN, playerAScore());
-    }
+    protected abstract String getDefaultFormattedScore();
 
-    private boolean playerBWon() {
-        return Objects.equals(WIN, playerBScore());
-    }
+    protected abstract boolean playerAWon();
 
-    private boolean isDeuce() {
-        return this.equals(new GameScore(FORTY, FORTY));
-    }
+    protected abstract boolean playerBWon();
 
-    private boolean isAdvantagePlayerA() {
-        return this.equals(new GameScore(ADVANTAGE, FORTY));
-    }
+    protected abstract boolean isDeuce();
 
-    private boolean isAdvantagePlayerB() {
-        return this.equals(new GameScore(FORTY, ADVANTAGE));
-    }
+    protected abstract boolean isAdvantagePlayerA();
 
-    private String getStringValue(PlayerScore playerScore) {
-        return switch (playerScore) {
-            case ZERO -> "0";
-            case FIFTEEN -> "15";
-            case THIRTY -> "30";
-            case FORTY -> "40";
-            default -> throw new IllegalStateException("should not try to get string representation for single player score: " + playerScore);
-        };
-    }
-
-    private PlayerScore playerAScore() {
-        return playerAScore;
-    }
-
-    private PlayerScore playerBScore() {
-        return playerBScore;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (GameScore) obj;
-        return Objects.equals(this.playerAScore, that.playerAScore) &&
-               Objects.equals(this.playerBScore, that.playerBScore);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(playerAScore, playerBScore);
-    }
-
-
-    public enum PlayerScore {
-        ZERO,
-        FIFTEEN,
-        THIRTY,
-        FORTY,
-        ADVANTAGE,
-        WIN
-    }
+    protected abstract boolean isAdvantagePlayerB();
 }

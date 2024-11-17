@@ -1,6 +1,6 @@
 package org.example;
 
-import static org.example.GameScore.PlayerScore.*;
+import static org.example.EnumBasedGameScore.PlayerScore.*;
 
 public class GameScoreFactory {
     private static GameScoreFactory instance;
@@ -16,62 +16,62 @@ public class GameScoreFactory {
     }
 
     public GameScore loveAll() {
-        return new GameScore(ZERO, ZERO);
+        return new EnumBasedGameScore(ZERO, ZERO);
     }
 
     public GameScore thirtyForty() {
-        return new GameScore(THIRTY, FORTY);
+        return new EnumBasedGameScore(THIRTY, FORTY);
     }
 
     public GameScore fortyThirty() {
-        return new GameScore(FORTY, THIRTY);
+        return new EnumBasedGameScore(FORTY, THIRTY);
     }
 
     public GameScore deuce() {
-        return new GameScore(FORTY, FORTY);
+        return new EnumBasedGameScore(FORTY, FORTY);
     }
 
     public GameScore advantagePlayerA() {
-        return new GameScore(ADVANTAGE, FORTY);
+        return new EnumBasedGameScore(ADVANTAGE, FORTY);
     }
 
     public GameScore advantagePlayerB() {
-        return new GameScore(FORTY, ADVANTAGE);
+        return new EnumBasedGameScore(FORTY, ADVANTAGE);
     }
 
     public GameScore gameForty() {
-        return new GameScore(WIN, FORTY);
+        return new EnumBasedGameScore(WIN, FORTY);
     }
 
     public GameScore fortyGame() {
-        return new GameScore(FORTY, WIN);
+        return new EnumBasedGameScore(FORTY, WIN);
     }
 
     public GameScore fifteenLove() {
-        return new GameScore(FIFTEEN, ZERO);
+        return new EnumBasedGameScore(FIFTEEN, ZERO);
     }
 
     public GameScore thirtyLove() {
-        return new GameScore(THIRTY, ZERO);
+        return new EnumBasedGameScore(THIRTY, ZERO);
     }
 
     public GameScore gameThirty() {
-        return new GameScore(WIN, THIRTY);
+        return new EnumBasedGameScore(WIN, THIRTY);
     }
 
     public GameScore loveFifteen() {
-        return new GameScore(ZERO, FIFTEEN);
+        return new EnumBasedGameScore(ZERO, FIFTEEN);
     }
 
     public GameScore loveThirty() {
-        return new GameScore(ZERO, THIRTY);
+        return new EnumBasedGameScore(ZERO, THIRTY);
     }
 
     public GameScore loveForty() {
-        return new GameScore(ZERO, FORTY);
+        return new EnumBasedGameScore(ZERO, FORTY);
     }
 
     public GameScore gameToLovePlayerB() {
-        return new GameScore(ZERO, WIN);
+        return new EnumBasedGameScore(ZERO, WIN);
     }
 }

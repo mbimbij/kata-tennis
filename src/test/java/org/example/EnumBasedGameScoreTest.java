@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class GameScoreTest {
-    private static GameScoreFactory gameScoreFactory = GameScoreFactory.getInstance();
+class EnumBasedGameScoreTest {
+    private static final GameScoreFactory gameScoreFactory = GameScoreFactory.getInstance();
 
     @Nested
     class Computing {
@@ -20,13 +20,13 @@ class GameScoreTest {
         class ScoreForPlayerA {
             private static Stream<Arguments> should_return_correct_score_when_playerA_scores() {
                 return Stream.of(
-                        Arguments.of(GameScoreTest.gameScoreFactory.loveAll(), GameScoreTest.gameScoreFactory.fifteenLove()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.fifteenLove(), GameScoreTest.gameScoreFactory.thirtyLove()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.thirtyForty(), GameScoreTest.gameScoreFactory.deuce()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.deuce(), GameScoreTest.gameScoreFactory.advantagePlayerA()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerB(), GameScoreTest.gameScoreFactory.deuce()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerA(), GameScoreTest.gameScoreFactory.gameForty()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.fortyThirty(), GameScoreTest.gameScoreFactory.gameThirty())
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.loveAll(), EnumBasedGameScoreTest.gameScoreFactory.fifteenLove()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.fifteenLove(), EnumBasedGameScoreTest.gameScoreFactory.thirtyLove()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.thirtyForty(), EnumBasedGameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.deuce(), EnumBasedGameScoreTest.gameScoreFactory.advantagePlayerA()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.advantagePlayerB(), EnumBasedGameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.advantagePlayerA(), EnumBasedGameScoreTest.gameScoreFactory.gameForty()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.fortyThirty(), EnumBasedGameScoreTest.gameScoreFactory.gameThirty())
                 );
             }
 
@@ -41,14 +41,14 @@ class GameScoreTest {
         class ScoreForPlayerB {
             private static Stream<Arguments> should_return_correct_score_when_playerB_scores() {
                 return Stream.of(
-                        Arguments.of(GameScoreTest.gameScoreFactory.loveAll(), GameScoreTest.gameScoreFactory.loveFifteen()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.loveFifteen(), GameScoreTest.gameScoreFactory.loveThirty()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.loveThirty(), GameScoreTest.gameScoreFactory.loveForty()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.loveForty(), GameScoreTest.gameScoreFactory.gameToLovePlayerB()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.deuce(), GameScoreTest.gameScoreFactory.advantagePlayerB()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerA(), GameScoreTest.gameScoreFactory.deuce()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.fortyThirty(), GameScoreTest.gameScoreFactory.deuce()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.advantagePlayerB(), GameScoreTest.gameScoreFactory.fortyGame())
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.loveAll(), EnumBasedGameScoreTest.gameScoreFactory.loveFifteen()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.loveFifteen(), EnumBasedGameScoreTest.gameScoreFactory.loveThirty()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.loveThirty(), EnumBasedGameScoreTest.gameScoreFactory.loveForty()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.loveForty(), EnumBasedGameScoreTest.gameScoreFactory.gameToLovePlayerB()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.deuce(), EnumBasedGameScoreTest.gameScoreFactory.advantagePlayerB()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.advantagePlayerA(), EnumBasedGameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.fortyThirty(), EnumBasedGameScoreTest.gameScoreFactory.deuce()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.advantagePlayerB(), EnumBasedGameScoreTest.gameScoreFactory.fortyGame())
                 );
             }
 
@@ -63,8 +63,8 @@ class GameScoreTest {
         class TryToScoreWhenThereIsAlreadyAWinner {
             private static Stream<Arguments> should_throw_exception_if_trying_to_score_when_there_is_a_winner() {
                 return Stream.of(
-                        Arguments.of(GameScoreTest.gameScoreFactory.gameForty()),
-                        Arguments.of(GameScoreTest.gameScoreFactory.fortyGame())
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.gameForty()),
+                        Arguments.of(EnumBasedGameScoreTest.gameScoreFactory.fortyGame())
                 );
             }
 
