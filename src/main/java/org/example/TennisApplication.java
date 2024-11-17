@@ -7,6 +7,10 @@ import java.util.Arrays;
 public class TennisApplication {
     private final TennisGame tennisGame;
 
+    public TennisApplication() {
+        tennisGame = new TennisGame();
+    }
+
     public TennisApplication(TennisGame tennisGame) {
         this.tennisGame = tennisGame;
     }
