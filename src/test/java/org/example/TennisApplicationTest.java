@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.InOrder;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayOutputStream;
@@ -15,19 +14,16 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class TennisApplicationTest {
 
     private TennisApplication tennisApplication;
-    private TennisGame tennisGame;
     private ByteArrayOutputStream baos;
 
     @BeforeEach
     void setUp() {
-        tennisGame = spy(new TennisGame());
-        tennisApplication = new TennisApplication(tennisGame);
+        tennisApplication = TennisApplication.newStandardTennisApplication();
         baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
     }
@@ -92,23 +88,5 @@ class TennisApplicationTest {
                     Player A wins the game
                     """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
-    }
-    @Test
-    void should_call_game_scoring_method_multiple_times_for_input_sequence() {
-
-        // GIVEN
-        InOrder inOrder = inOrder(tennisGame);
-
-        // WHEN
-        tennisApplication.playGameForInput("ABABBAAA");
-
-        // THEN
-        inOrder.verify(tennisGame).scorePointForPlayerA();
-        inOrder.verify(tennisGame).scorePointForPlayerB();
-        inOrder.verify(tennisGame).scorePointForPlayerA();
-        inOrder.verify(tennisGame, times(2))
-                .scorePointForPlayerB();
-        inOrder.verify(tennisGame, times(3))
-                .scorePointForPlayerA();
     }
 }

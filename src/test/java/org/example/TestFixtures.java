@@ -3,35 +3,35 @@ package org.example;
 import static org.example.PlayerScore.*;
 
 public class TestFixtures {
-    public static TennisGame a30_40Game() {
-        return new TennisGame(THIRTY, FORTY);
-    }
-
-    static TennisGame a40_30Game() {
-        return new TennisGame(FORTY, THIRTY);
-    }
-
     static GameScore deuce() {
         return new GameScore(FORTY, FORTY);
     }
 
-    static GameScore advantagePlayerA() {
-        return new GameScore(ADVANTAGE, FORTY);
+    public static GameScore a40Vs30Score() {
+        return new GameScore(FORTY, THIRTY);
     }
 
-    static GameScore advantagePlayerB() {
+    public static GameScore a40Vs40Score() {
+        return new GameScore(FORTY, FORTY);
+    }
+
+    public static GameScore advantagePlayerBScore() {
         return new GameScore(FORTY, ADVANTAGE);
     }
 
-    static TennisGame a40_40Game() {
-        return new TennisGame(FORTY, FORTY);
+    public static GameScore advantagePlayerAScore() {
+        return new GameScore(ADVANTAGE, FORTY);
     }
 
-    static TennisGame advantagePlayerAGame() {
-        return new TennisGame(ADVANTAGE, FORTY);
+    public static GameScore a30Vs40Score() {
+        return new GameScore(THIRTY, FORTY);
     }
 
-    static TennisGame advantagePlayerBGame() {
-        return new TennisGame(FORTY, ADVANTAGE);
+    public static GameScore aWinVs40Score() {
+        return new GameScore(WIN, FORTY);
+    }
+
+    public static GameScore a40VsWinScore() {
+        return new GameScore(FORTY, WIN);
     }
 }
