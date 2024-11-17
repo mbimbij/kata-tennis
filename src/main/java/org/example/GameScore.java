@@ -4,15 +4,18 @@ import java.util.Objects;
 
 import static org.example.GameScore.PlayerScore.*;
 
-public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
+public final class GameScore {
+    private final PlayerScore playerAScore;
+    private final PlayerScore playerBScore;
 
-    public static GameScore loveAll(){
-        return new GameScore(ZERO, ZERO);
+    public GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
+        this.playerAScore = playerAScore;
+        this.playerBScore = playerBScore;
     }
 
     public GameScore scorePointForPlayerA() {
-        if(WIN.equals(playerAScore) || WIN.equals(playerBScore)){
-            throw  new IllegalStateException("cannot score when there is a winner");
+        if (WIN.equals(playerAScore) || WIN.equals(playerBScore)) {
+            throw new IllegalStateException("cannot score when there is a winner");
         }
 
         if (ZERO.equals(playerAScore)) {
@@ -32,8 +35,8 @@ public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
     }
 
     public GameScore scorePointForPlayerB() {
-        if(WIN.equals(playerAScore) || WIN.equals(playerBScore)){
-            throw  new IllegalStateException("cannot score when there is a winner");
+        if (WIN.equals(playerAScore) || WIN.equals(playerBScore)) {
+            throw new IllegalStateException("cannot score when there is a winner");
         }
 
         if (ZERO.equals(playerBScore)) {
@@ -55,19 +58,19 @@ public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
     }
 
     public String format() {
-        if(playerAWon()){
+        if (playerAWon()) {
             return "Player A wins the game";
         }
-        if(playerBWon()){
+        if (playerBWon()) {
             return "Player B wins the game";
         }
-        if(isDeuce()){
+        if (isDeuce()) {
             return "Deuce";
         }
-        if(isAdvantagePlayerA()){
+        if (isAdvantagePlayerA()) {
             return "Advantage Player A";
         }
-        if(isAdvantagePlayerB()){
+        if (isAdvantagePlayerB()) {
             return "Advantage Player B";
         }
         return "Player A : %s / Player B : %s".formatted(
@@ -97,7 +100,7 @@ public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
     }
 
     private String getStringValue(PlayerScore playerScore) {
-        return switch (playerScore){
+        return switch (playerScore) {
             case ZERO -> "0";
             case FIFTEEN -> "15";
             case THIRTY -> "30";
@@ -105,6 +108,29 @@ public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
             default -> throw new IllegalStateException("should not try to get string representation for single player score: " + playerScore);
         };
     }
+
+    private PlayerScore playerAScore() {
+        return playerAScore;
+    }
+
+    private PlayerScore playerBScore() {
+        return playerBScore;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (GameScore) obj;
+        return Objects.equals(this.playerAScore, that.playerAScore) &&
+               Objects.equals(this.playerBScore, that.playerBScore);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerAScore, playerBScore);
+    }
+
 
     public enum PlayerScore {
         ZERO,

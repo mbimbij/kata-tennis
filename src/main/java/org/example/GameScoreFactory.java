@@ -2,60 +2,64 @@ package org.example;
 
 import static org.example.GameScore.PlayerScore.*;
 
-class GameScoreFixtures {
-    static GameScore thirtyForty() {
+public class GameScoreFactory {
+    public static GameScore loveAll() {
+        return new GameScore(ZERO, ZERO);
+    }
+
+    public static GameScore thirtyForty() {
         return new GameScore(THIRTY, FORTY);
     }
 
-    static GameScore fortyThirty() {
+    public static GameScore fortyThirty() {
         return new GameScore(FORTY, THIRTY);
     }
 
-    static GameScore deuce() {
+    public static GameScore deuce() {
         return new GameScore(FORTY, FORTY);
     }
 
-    static GameScore advantagePlayerA() {
+    public static GameScore advantagePlayerA() {
         return new GameScore(ADVANTAGE, FORTY);
     }
 
-    static GameScore advantagePlayerB() {
+    public static GameScore advantagePlayerB() {
         return new GameScore(FORTY, ADVANTAGE);
     }
 
-    static GameScore gameForty() {
+    public static GameScore gameForty() {
         return new GameScore(WIN, FORTY);
     }
 
-    static GameScore fortyGame() {
+    public static GameScore fortyGame() {
         return new GameScore(FORTY, WIN);
     }
 
-    static GameScore fifteenLove() {
+    public static GameScore fifteenLove() {
         return new GameScore(FIFTEEN, ZERO);
     }
 
-    static GameScore thirtyLove() {
+    public static GameScore thirtyLove() {
         return new GameScore(THIRTY, ZERO);
     }
 
-    static GameScore gameThirty() {
+    public static GameScore gameThirty() {
         return new GameScore(WIN, THIRTY);
     }
 
-    static GameScore loveFifteen() {
+    public static GameScore loveFifteen() {
         return new GameScore(ZERO, FIFTEEN);
     }
 
-    static GameScore loveThirty() {
+    public static GameScore loveThirty() {
         return new GameScore(ZERO, THIRTY);
     }
 
-    static GameScore loveForty() {
+    public static GameScore loveForty() {
         return new GameScore(ZERO, FORTY);
     }
 
-    static GameScore gameToLovePlayerB() {
+    public static GameScore gameToLovePlayerB() {
         return new GameScore(ZERO, WIN);
     }
 }

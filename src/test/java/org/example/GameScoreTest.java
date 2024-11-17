@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.GameScore.loveAll;
-import static org.example.GameScoreFixtures.*;
+import static org.example.GameScoreFactory.*;
+import static org.example.GameScoreFactory.loveAll;
 
 class GameScoreTest {
 

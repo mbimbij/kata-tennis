@@ -5,7 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.example.GameScore.loveAll;
+import static org.example.GameScoreFactory.loveAll;
+
 
 public class TennisApplication {
     private final GameScore initialScore;
@@ -26,13 +27,16 @@ public class TennisApplication {
             throw new IllegalArgumentException("invalid character in input: %s".formatted(input));
         }
 
-        List<Command> commandList = Arrays.stream(input.split(""))
-                .map(Command::valueOf).toList();
-
-        applyCommandList(commandList);
+        List<Command> commandList = parse(input);
+        apply(commandList);
     }
 
-    private void applyCommandList(List<Command> commandList) {
+    private static List<Command> parse(String input) {
+        return Arrays.stream(input.split(""))
+                .map(Command::valueOf).toList();
+    }
+
+    private void apply(List<Command> commandList) {
         GameScore gameScore = initialScore;
         for (Command cmd : commandList) {
             gameScore = switch (cmd) {
