@@ -10,7 +10,7 @@ import static org.example.GameScore.loveAll;
 public class TennisApplication {
     private final GameScore initialScore;
 
-    public TennisApplication(GameScore initialScore) {
+    private TennisApplication(GameScore initialScore) {
         this.initialScore = initialScore;
     }
 
@@ -26,24 +26,24 @@ public class TennisApplication {
             throw new IllegalArgumentException("invalid character in input: %s".formatted(input));
         }
 
-        List<PlayerToScoreFor> commandList = Arrays.stream(input.split(""))
-                .map(PlayerToScoreFor::valueOf).toList();
+        List<Command> commandList = Arrays.stream(input.split(""))
+                .map(Command::valueOf).toList();
 
-        applyCommandList2(commandList);
+        applyCommandList(commandList);
     }
 
-    private void applyCommandList2(List<PlayerToScoreFor> commandList) {
+    private void applyCommandList(List<Command> commandList) {
         GameScore gameScore = initialScore;
-        for (PlayerToScoreFor cmd : commandList) {
+        for (Command cmd : commandList) {
             gameScore = switch (cmd) {
                 case A -> gameScore.scorePointForPlayerA();
                 case B -> gameScore.scorePointForPlayerB();
             };
-            ScorePrinter.print(gameScore);
+            ScorePrinter.print(gameScore.format());
         }
     }
 
-    public enum PlayerToScoreFor {
+    public enum Command {
         A, B
     }
 }

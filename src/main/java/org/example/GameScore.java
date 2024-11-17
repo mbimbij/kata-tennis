@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Objects;
 
-import static org.example.PlayerScore.*;
+import static org.example.GameScore.PlayerScore.*;
 
 public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
 
@@ -54,23 +54,64 @@ public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
         return new GameScore(playerAScore, playerBScore);
     }
 
-    boolean playerAWon() {
+    public String format() {
+        if(playerAWon()){
+            return "Player A wins the game";
+        }
+        if(playerBWon()){
+            return "Player B wins the game";
+        }
+        if(isDeuce()){
+            return "Deuce";
+        }
+        if(isAdvantagePlayerA()){
+            return "Advantage Player A";
+        }
+        if(isAdvantagePlayerB()){
+            return "Advantage Player B";
+        }
+        return "Player A : %s / Player B : %s".formatted(
+                getStringValue(playerAScore()),
+                getStringValue(playerBScore())
+        );
+    }
+
+    private boolean playerAWon() {
         return Objects.equals(WIN, playerAScore());
     }
 
-    boolean playerBWon() {
+    private boolean playerBWon() {
         return Objects.equals(WIN, playerBScore());
     }
 
-    boolean isDeuce() {
+    private boolean isDeuce() {
         return this.equals(new GameScore(FORTY, FORTY));
     }
 
-    boolean isAdvantagePlayerA() {
+    private boolean isAdvantagePlayerA() {
         return this.equals(new GameScore(ADVANTAGE, FORTY));
     }
 
-    boolean isAdvantagePlayerB() {
+    private boolean isAdvantagePlayerB() {
         return this.equals(new GameScore(FORTY, ADVANTAGE));
+    }
+
+    private String getStringValue(PlayerScore playerScore) {
+        return switch (playerScore){
+            case ZERO -> "0";
+            case FIFTEEN -> "15";
+            case THIRTY -> "30";
+            case FORTY -> "40";
+            default -> throw new IllegalStateException("should not try to get string representation for single player score: " + playerScore);
+        };
+    }
+
+    public enum PlayerScore {
+        ZERO,
+        FIFTEEN,
+        THIRTY,
+        FORTY,
+        ADVANTAGE,
+        WIN
     }
 }
