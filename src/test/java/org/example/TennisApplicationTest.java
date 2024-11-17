@@ -93,9 +93,9 @@ class TennisApplicationTest {
                     """;
         assertThat(baos.toString()).isEqualTo(expectedOutput);
     }
-
     @Test
     void should_call_game_scoring_method_multiple_times_for_input_sequence() {
+
         // GIVEN
         InOrder inOrder = inOrder(tennisGame);
 
