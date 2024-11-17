@@ -3,6 +3,7 @@ package org.example;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -88,12 +89,13 @@ class IntegerBasedGameScoreTest {
                 Arguments.of(new IntegerBasedGameScore(4, 6), "Player B wins the game"),
                 Arguments.of(new IntegerBasedGameScore(5, 7), "Player B wins the game"),
                 Arguments.of(new IntegerBasedGameScore(6, 8), "Player B wins the game")
-                );
+        );
     }
 
     @ParameterizedTest
-    @MethodSource
-    void should_format_score_properly(IntegerBasedGameScore gameScore, String expectedFormattedScore) {
+    @CsvFileSource(files = "src/test/resources/integer_based_game_score_format_test_cases.csv", useHeadersInDisplayName = true)
+    void should_format_score_properly(int playerAScore, int playerBScore, String expectedFormattedScore) {
+        GameScore gameScore = new IntegerBasedGameScore(playerAScore, playerBScore);
         assertThat(gameScore.format()).isEqualTo(expectedFormattedScore);
     }
 }
