@@ -4,7 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.With;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @ToString
 @With
 public class IntegerBasedGameScore extends GameScore {
@@ -18,12 +18,20 @@ public class IntegerBasedGameScore extends GameScore {
 
     @Override
     public GameScore scorePointForPlayerA() {
+        validateNoWinner();
         return this.withPlayerAScore(playerAScore + 1);
     }
 
     @Override
     public GameScore scorePointForPlayerB() {
+        validateNoWinner();
         return this.withPlayerBScore(playerBScore + 1);
+    }
+
+    private void validateNoWinner() {
+        if(playerAWon() || playerBWon()){
+            throw new IllegalStateException("Cannot score when there is a winner");
+        }
     }
 
     @Override
@@ -65,5 +73,11 @@ public class IntegerBasedGameScore extends GameScore {
             default ->
                     throw new IllegalArgumentException("Invalid score: " + score + ". Should be a 'deuce', an 'advantage' or a 'win'.");
         };
+    }
+
+    @Override
+    protected boolean scoreDetailsEqual(GameScore o) {
+        IntegerBasedGameScore that = ((IntegerBasedGameScore) o);
+        return playerAScore == that.playerAScore && playerBScore == that.playerBScore;
     }
 }

@@ -9,7 +9,7 @@ import java.util.Objects;
 import static org.example.EnumBasedGameScore.PlayerScore.*;
 
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @ToString
 @Getter
 public final class EnumBasedGameScore extends GameScore {
@@ -23,9 +23,7 @@ public final class EnumBasedGameScore extends GameScore {
 
     @Override
     public GameScore scorePointForPlayerA() {
-        if (GAME.equals(playerAScore) || GAME.equals(playerBScore)) {
-            throw new IllegalStateException("cannot score when there is a winner");
-        }
+        validateNoWinner();
 
         if (ZERO.equals(playerAScore)) {
             return new EnumBasedGameScore(FIFTEEN, playerBScore);
@@ -45,9 +43,7 @@ public final class EnumBasedGameScore extends GameScore {
 
     @Override
     public GameScore scorePointForPlayerB() {
-        if (GAME.equals(playerAScore) || GAME.equals(playerBScore)) {
-            throw new IllegalStateException("cannot score when there is a winner");
-        }
+        validateNoWinner();
 
         if (ZERO.equals(playerBScore)) {
             return new EnumBasedGameScore(playerAScore, FIFTEEN);
@@ -65,6 +61,12 @@ public final class EnumBasedGameScore extends GameScore {
             return new EnumBasedGameScore(playerAScore, GAME);
         }
         return new EnumBasedGameScore(playerAScore, playerBScore);
+    }
+
+    private void validateNoWinner() {
+        if (GAME.equals(playerAScore) || GAME.equals(playerBScore)) {
+            throw new IllegalStateException("Cannot score when there is a winner");
+        }
     }
 
     @Override
@@ -97,6 +99,12 @@ public final class EnumBasedGameScore extends GameScore {
     @Override
     public boolean isAdvantagePlayerB() {
         return this.equals(new EnumBasedGameScore(FORTY, ADVANTAGE));
+    }
+
+    @Override
+    protected boolean scoreDetailsEqual(GameScore o) {
+        EnumBasedGameScore that = ((EnumBasedGameScore) o);
+        return playerAScore == that.playerAScore && playerBScore == that.playerBScore;
     }
 
     private String getStringValue(PlayerScore playerScore) {
