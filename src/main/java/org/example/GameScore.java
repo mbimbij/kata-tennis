@@ -28,6 +28,10 @@ public record GameScore(PlayerScore playerAScore, PlayerScore playerBScore) {
     }
 
     public GameScore scorePointForPlayerB() {
+        if(WIN.equals(playerAScore) || WIN.equals(playerBScore)){
+            throw  new IllegalStateException("cannot score when there is a winner");
+        }
+
         if (ZERO.equals(playerBScore)) {
             return new GameScore(playerAScore, FIFTEEN);
         } else if (FIFTEEN.equals(playerBScore)) {

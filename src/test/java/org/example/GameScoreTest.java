@@ -69,8 +69,13 @@ class GameScoreTest {
         @ParameterizedTest
         @MethodSource
         void should_throw_exception_if_trying_to_score_when_there_is_a_winner(GameScore aGameAlreadyWon) {
-            // WHEN
+            // WHEN score for player A
             assertThatThrownBy(aGameAlreadyWon::scorePointForPlayerA)
+                    .isInstanceOf(IllegalStateException.class)
+                    .hasMessage("cannot score when there is a winner");
+
+            // WHEN score for player B
+            assertThatThrownBy(aGameAlreadyWon::scorePointForPlayerB)
                     .isInstanceOf(IllegalStateException.class)
                     .hasMessage("cannot score when there is a winner");
         }
