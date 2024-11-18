@@ -29,14 +29,16 @@ public class IntegerBasedGameScore extends GameScore {
     }
 
     private void validateNoWinner() {
-        if(playerAWon() || playerBWon()){
+        if (playerAWon() || playerBWon()) {
             throw new IllegalStateException("Cannot score when there is a winner");
         }
     }
 
     @Override
-    protected String getDefaultFormattedScore() {
-        return "Player A : %s / Player B : %s".formatted(getFormattedValue(playerAScore), getFormattedValue(playerBScore));
+    protected String getDefaultFormattedScore(GameScore gameScore) {
+        IntegerBasedGameScore integerBasedGameScore = (IntegerBasedGameScore) gameScore;
+        return "Player A : %s / Player B : %s".formatted(this.getFormattedValue(integerBasedGameScore.playerAScore),
+                this.getFormattedValue(integerBasedGameScore.playerBScore));
     }
 
     @Override
@@ -64,7 +66,7 @@ public class IntegerBasedGameScore extends GameScore {
         return playerBScore >= 4 && playerAScore == playerBScore - 1;
     }
 
-    public String getFormattedValue(int score) {
+    private String getFormattedValue(int score) {
         return switch (score) {
             case 0 -> "0";
             case 1 -> "15";

@@ -37,7 +37,7 @@ public class TennisApplication {
                 case A -> gameScore.scorePointForPlayerA();
                 case B -> gameScore.scorePointForPlayerB();
             };
-            ScorePrinter.print(gameScore.format());
+            ScorePrinter.print(gameScore.format(gameScore));
         }
     }
 

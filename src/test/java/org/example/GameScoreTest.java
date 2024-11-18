@@ -115,14 +115,14 @@ class GameScoreTest {
         @ParameterizedTest
         @MethodSource
         void should_format_correctly(GameScore gameScore, String expected) {
-            assertThat(gameScore.format()).isEqualTo(expected);
+            assertThat(gameScore.format(gameScore)).isEqualTo(expected);
         }
 
         @ParameterizedTest
         @CsvFileSource(files = "src/test/resources/integer_based_scoring_format_test_cases.csv", useHeadersInDisplayName = true)
         void integer_based_specific_tests(int playerAScore, int playerBScore, String expectedFormattedScore) {
             GameScore gameScore = new IntegerBasedGameScore(playerAScore, playerBScore);
-            assertThat(gameScore.format()).isEqualTo(expectedFormattedScore);
+            assertThat(gameScore.format(gameScore)).isEqualTo(expectedFormattedScore);
         }
     }
 }
