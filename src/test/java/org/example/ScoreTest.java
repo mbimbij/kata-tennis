@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class GameScoreTest {
-    private static final GameScoreFactory factory = new IntegerBasedGameScoreFactory();
+class ScoreTest {
+    private static final ScoreFactory factory = new ScoreFactory();
 
     @Nested
     class Computing {
@@ -34,7 +34,7 @@ class GameScoreTest {
 
             @ParameterizedTest
             @MethodSource
-            void should_return_correct_score_when_playerA_scores(GameScore score, GameScore expectedAfter) {
+            void should_return_correct_score_when_playerA_scores(Score score, Score expectedAfter) {
                 boolean scoresEqual = score.scorePointForPlayerA().scoreEquals(expectedAfter);
                 assertThat(scoresEqual).isTrue();
             }
@@ -57,7 +57,7 @@ class GameScoreTest {
 
             @ParameterizedTest
             @MethodSource
-            void should_return_correct_score_when_playerB_scores(GameScore score, GameScore expectedAfter) {
+            void should_return_correct_score_when_playerB_scores(Score score, Score expectedAfter) {
                 boolean scoresEqual = score.scorePointForPlayerB().scoreEquals(expectedAfter);
                 assertThat(scoresEqual).isTrue();
             }
@@ -74,7 +74,7 @@ class GameScoreTest {
 
             @ParameterizedTest
             @MethodSource
-            void should_throw_exception_if_trying_to_score_when_there_is_a_winner(GameScore aGameAlreadyWon) {
+            void should_throw_exception_if_trying_to_score_when_there_is_a_winner(Score aGameAlreadyWon) {
                 // WHEN score for player A
                 assertThatThrownBy(aGameAlreadyWon::scorePointForPlayerA)
                         .isInstanceOf(IllegalStateException.class)
@@ -90,6 +90,9 @@ class GameScoreTest {
 
     @Nested
     class Formatting {
+
+        private ScoreFormatter scoreFormatter = new ScoreFormatter();
+        ;
 
         private static Stream<Arguments> should_format_correctly() {
             return Stream.of(
@@ -114,15 +117,15 @@ class GameScoreTest {
 
         @ParameterizedTest
         @MethodSource
-        void should_format_correctly(GameScore gameScore, String expected) {
-            assertThat(gameScore.format()).isEqualTo(expected);
+        void should_format_correctly(Score gameScore, String expected) {
+            assertThat(scoreFormatter.format(gameScore)).isEqualTo(expected);
         }
 
         @ParameterizedTest
         @CsvFileSource(files = "src/test/resources/integer_based_scoring_format_test_cases.csv", useHeadersInDisplayName = true)
         void integer_based_specific_tests(int playerAScore, int playerBScore, String expectedFormattedScore) {
-            GameScore gameScore = new IntegerBasedGameScore(playerAScore, playerBScore);
-            assertThat(gameScore.format()).isEqualTo(expectedFormattedScore);
+            Score gameScore = new Score(playerAScore, playerBScore);
+            assertThat(scoreFormatter.format(gameScore)).isEqualTo(expectedFormattedScore);
         }
     }
 }

@@ -23,8 +23,9 @@ class TennisApplicationTest {
 
     @BeforeEach
     void setUp() {
-        GameScoreFactory gameScoreFactory = new IntegerBasedGameScoreFactory();
-        tennisApplication = new TennisApplication(gameScoreFactory.loveAll());
+        ScoreFactory gameScoreFactory = new ScoreFactory();
+        ScoreFormatter scoreFormatter = new ScoreFormatter();
+        tennisApplication = new TennisApplication(gameScoreFactory.loveAll(), scoreFormatter);
         baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
     }
