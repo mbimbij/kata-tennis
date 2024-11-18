@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class GameScoreTest {
-    private static final GameScoreFactory factory = new IntegerBasedGameScoreFactory();
+    private static final ScoreFactory factory = new ScoreFactory();
 
     @Nested
     class Computing {
@@ -124,7 +124,7 @@ class GameScoreTest {
         @ParameterizedTest
         @CsvFileSource(files = "src/test/resources/integer_based_scoring_format_test_cases.csv", useHeadersInDisplayName = true)
         void integer_based_specific_tests(int playerAScore, int playerBScore, String expectedFormattedScore) {
-            GameScore gameScore = new IntegerBasedGameScore(playerAScore, playerBScore);
+            GameScore gameScore = new GameScore(playerAScore, playerBScore);
             assertThat(scoreFormatter.format(gameScore)).isEqualTo(expectedFormattedScore);
         }
     }

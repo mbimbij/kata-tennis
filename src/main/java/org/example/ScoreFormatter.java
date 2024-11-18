@@ -2,7 +2,7 @@ package org.example;
 
 public class ScoreFormatter {
     protected String getDefaultFormattedScore(GameScore gameScore) {
-        IntegerBasedGameScore that = (IntegerBasedGameScore) gameScore;
+        GameScore that = (GameScore) gameScore;
         return "Player A : %s / Player B : %s".formatted(this.getFormattedValue(that.getPlayerAScore()),
                 this.getFormattedValue(that.getPlayerBScore()));
     }
