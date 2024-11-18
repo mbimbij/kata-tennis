@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class GameScoreTest {
     private static final GameScoreFactory factory = new IntegerBasedGameScoreFactory();
-//    private static final GameScoreFactory factory = new EnumBasedGameScoreFactory();
 
     @Nested
     class Computing {
