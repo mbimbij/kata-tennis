@@ -5,27 +5,6 @@ public abstract class GameScore {
 
     abstract GameScore scorePointForPlayerB();
 
-    public String format(GameScore gameScore) {
-        if (gameScore.playerAWon()) {
-            return "Player A wins the game";
-        }
-        if (gameScore.playerBWon()) {
-            return "Player B wins the game";
-        }
-        if (gameScore.isDeuce()) {
-            return "Deuce";
-        }
-        if (gameScore.isAdvantagePlayerA()) {
-            return "Advantage Player A";
-        }
-        if (gameScore.isAdvantagePlayerB()) {
-            return "Advantage Player B";
-        }
-        return gameScore.getDefaultFormattedScore(gameScore);
-    }
-
-    protected abstract String getDefaultFormattedScore(GameScore gameScore);
-
     protected abstract boolean playerAWon();
 
     protected abstract boolean playerBWon();

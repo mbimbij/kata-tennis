@@ -91,6 +91,9 @@ class GameScoreTest {
     @Nested
     class Formatting {
 
+        private ScoreFormatter scoreFormatter = new ScoreFormatter();
+        ;
+
         private static Stream<Arguments> should_format_correctly() {
             return Stream.of(
                     Arguments.of(factory.loveAll(), "Player A : 0 / Player B : 0"),
@@ -115,14 +118,14 @@ class GameScoreTest {
         @ParameterizedTest
         @MethodSource
         void should_format_correctly(GameScore gameScore, String expected) {
-            assertThat(gameScore.format(gameScore)).isEqualTo(expected);
+            assertThat(scoreFormatter.format(gameScore)).isEqualTo(expected);
         }
 
         @ParameterizedTest
         @CsvFileSource(files = "src/test/resources/integer_based_scoring_format_test_cases.csv", useHeadersInDisplayName = true)
         void integer_based_specific_tests(int playerAScore, int playerBScore, String expectedFormattedScore) {
             GameScore gameScore = new IntegerBasedGameScore(playerAScore, playerBScore);
-            assertThat(gameScore.format(gameScore)).isEqualTo(expectedFormattedScore);
+            assertThat(scoreFormatter.format(gameScore)).isEqualTo(expectedFormattedScore);
         }
     }
 }

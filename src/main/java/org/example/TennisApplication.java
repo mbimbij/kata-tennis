@@ -8,9 +8,10 @@ import java.util.List;
 
 public class TennisApplication {
     private final GameScore initialScore;
-
-    public TennisApplication(GameScore initialScore) {
+    private final ScoreFormatter scoreFormatter;
+    public TennisApplication(GameScore initialScore, ScoreFormatter scoreFormatter) {
         this.initialScore = initialScore;
+        this.scoreFormatter = scoreFormatter;
     }
 
     public void playGameForInput(String input) {
@@ -37,7 +38,7 @@ public class TennisApplication {
                 case A -> gameScore.scorePointForPlayerA();
                 case B -> gameScore.scorePointForPlayerB();
             };
-            ScorePrinter.print(gameScore.format(gameScore));
+            ScorePrinter.print(scoreFormatter.format(gameScore));
         }
     }
 
