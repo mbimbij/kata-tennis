@@ -9,21 +9,21 @@ import lombok.With;
 @ToString
 @With
 @Getter
-public class GameScore {
+public class Score {
     private final int playerAScore;
     private final int playerBScore;
 
-    public GameScore(int playerAScore, int playerBScore) {
+    public Score(int playerAScore, int playerBScore) {
         this.playerAScore = playerAScore;
         this.playerBScore = playerBScore;
     }
 
-    public GameScore scorePointForPlayerA() {
+    public Score scorePointForPlayerA() {
         validateNoWinner();
         return this.withPlayerAScore(playerAScore + 1);
     }
 
-    public GameScore scorePointForPlayerB() {
+    public Score scorePointForPlayerB() {
         validateNoWinner();
         return this.withPlayerBScore(playerBScore + 1);
     }
@@ -54,12 +54,12 @@ public class GameScore {
         return playerBScore >= 4 && playerAScore == playerBScore - 1;
     }
 
-    protected boolean scoreDetailsEqual(GameScore o) {
-        GameScore that = ((GameScore) o);
+    protected boolean scoreDetailsEqual(Score o) {
+        Score that = ((Score) o);
         return playerAScore == that.playerAScore && playerBScore == that.playerBScore;
     }
 
-    public boolean scoreEquals(GameScore that) {
+    public boolean scoreEquals(Score that) {
         return this.isDeuce() && that.isDeuce()
                || this.isAdvantagePlayerA() && that.isAdvantagePlayerA()
                || this.isAdvantagePlayerB() && that.isAdvantagePlayerB()

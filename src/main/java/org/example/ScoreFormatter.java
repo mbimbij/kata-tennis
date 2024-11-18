@@ -1,10 +1,9 @@
 package org.example;
 
 public class ScoreFormatter {
-    protected String getDefaultFormattedScore(GameScore gameScore) {
-        GameScore that = (GameScore) gameScore;
-        return "Player A : %s / Player B : %s".formatted(this.getFormattedValue(that.getPlayerAScore()),
-                this.getFormattedValue(that.getPlayerBScore()));
+    protected String getDefaultFormattedScore(Score gameScore) {
+        return "Player A : %s / Player B : %s".formatted(this.getFormattedValue(gameScore.getPlayerAScore()),
+                this.getFormattedValue(gameScore.getPlayerBScore()));
     }
 
     private String getFormattedValue(int score) {
@@ -18,7 +17,7 @@ public class ScoreFormatter {
         };
     }
 
-    public String format(GameScore gameScore) {
+    public String format(Score gameScore) {
         if (gameScore.playerAWon()) {
             return "Player A wins the game";
         }

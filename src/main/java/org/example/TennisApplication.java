@@ -7,9 +7,9 @@ import java.util.List;
 
 
 public class TennisApplication {
-    private final GameScore initialScore;
+    private final Score initialScore;
     private final ScoreFormatter scoreFormatter;
-    public TennisApplication(GameScore initialScore, ScoreFormatter scoreFormatter) {
+    public TennisApplication(Score initialScore, ScoreFormatter scoreFormatter) {
         this.initialScore = initialScore;
         this.scoreFormatter = scoreFormatter;
     }
@@ -32,7 +32,7 @@ public class TennisApplication {
     }
 
     private void apply(List<Command> commandList) {
-        GameScore gameScore = initialScore;
+        Score gameScore = initialScore;
         for (Command cmd : commandList) {
             gameScore = switch (cmd) {
                 case A -> gameScore.scorePointForPlayerA();
