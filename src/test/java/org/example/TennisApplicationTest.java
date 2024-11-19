@@ -11,15 +11,12 @@ class TennisApplicationTest {
 
     @Test()
     void should_print_correctly_an_entire_game_with_playerA_winning() {
-        // GIVEN a new application
+        // GIVEN stdout redirection for further assertions
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
 
-        // AND stdout redirection for further assertions
-        TennisApplication tennisApplication = new TennisApplication(Scores.loveAll());
-
         // WHEN
-        tennisApplication.playGameForInput("ABABABABBAAA");
+        TennisApplication.playGameForInput("ABABABABBAAA");
 
         // THEN
         String expectedOutput = """

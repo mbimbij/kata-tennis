@@ -4,19 +4,22 @@ import java.util.List;
 
 
 public class TennisApplication {
-    private final Score initialScore;
 
-    public TennisApplication(Score initialScore) {
-        this.initialScore = initialScore;
+    public static void main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Please provide a tennis game input as a single argument, in the format [AB]+");
+            System.exit(1);
+        }
+        playGameForInput(args[0]);
     }
 
-    public void playGameForInput(String input) {
+    public static void playGameForInput(String input) {
         List<Command> commandList = InputParser.parse(input);
         apply(commandList);
     }
 
-    private void apply(List<Command> commandList) {
-        Score gameScore = initialScore;
+    private static void apply(List<Command> commandList) {
+        Score gameScore = Scores.loveAll();
         for (Command cmd : commandList) {
             gameScore = switch (cmd) {
                 case A -> gameScore.scorePointForPlayerA();

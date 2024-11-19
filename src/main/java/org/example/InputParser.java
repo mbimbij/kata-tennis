@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.List;
 
-public class InputParser {
+public class InputParser extends TennisApplication {
     public static List<Command> parse(String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("input shouldn't be blank");
