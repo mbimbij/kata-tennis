@@ -32,9 +32,12 @@ public class ScoreFormatter {
             case 1 -> "15";
             case 2 -> "30";
             case 3 -> "40";
-            default ->
-                    throw new IllegalArgumentException("Invalid score: %d. Should be 'deuce', 'advantage' or 'win'."
-                            .formatted(score));
+            default -> {
+                String errorMessage = ("Shouldn't reach here. Invalid score: %d. "
+                                       + "Formatted score should have been 'deuce', 'advantage' or 'win'.")
+                        .formatted(score);
+                throw new IllegalStateException(errorMessage);
+            }
         };
     }
 }
