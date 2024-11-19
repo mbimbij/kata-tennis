@@ -7,10 +7,10 @@ import java.io.PrintStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class TennisApplicationTest {
+class TennisApplicationShould {
 
     @Test()
-    void should_print_correctly_an_entire_game_with_playerA_winning() {
+    void play_an_entire_game_and_print_output_correctly() {
         // GIVEN stdout redirection for further assertions
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));

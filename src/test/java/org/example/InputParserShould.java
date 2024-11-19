@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.example.Command.A;
 import static org.example.Command.B;
 
-class InputParserTest {
+class InputParserShould {
     @ParameterizedTest()
     @ValueSource(
             strings = {
@@ -21,7 +21,7 @@ class InputParserTest {
                     "\t \n"
             }
     )
-    void should_throw_an_error_on_blank_input(String input) {
+    void throw_an_error_on_blank_input(String input) {
         // WHEN
         ThrowableAssert.ThrowingCallable throwingCallable = () -> InputParser.parse(input);
 
@@ -39,7 +39,7 @@ class InputParserTest {
                     "AB AB"
             }
     )
-    void should_throw_an_error_on_invalid_character(String input) {
+    void throw_an_error_on_invalid_character(String input) {
         // WHEN
         ThrowableAssert.ThrowingCallable throwingCallable = () -> InputParser.parse(input);
 
@@ -50,7 +50,7 @@ class InputParserTest {
     }
 
     @Test
-    void should_parse_proper_input() {
+    void parse_proper_input() {
         // WHEN
         List<Command> commands = InputParser.parse("ABBAABABBB");
 

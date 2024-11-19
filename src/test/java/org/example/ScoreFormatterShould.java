@@ -5,11 +5,11 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ScoreFormatterTest {
+class ScoreFormatterShould {
 
     @ParameterizedTest
     @CsvFileSource(files = "src/test/resources/score_formatting_test_cases.csv", useHeadersInDisplayName = true)
-    void should_format_score_properly(int playerAScore, int playerBScore, String expected) {
+    void format_score_properly(int playerAScore, int playerBScore, String expected) {
         // GIVEN
         Score score = new Score(playerAScore, playerBScore);
 
