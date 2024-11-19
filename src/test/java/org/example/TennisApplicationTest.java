@@ -16,7 +16,7 @@ class TennisApplicationTest {
         System.setOut(new PrintStream(baos));
 
         // AND stdout redirection for further assertions
-        TennisApplication tennisApplication = new TennisApplication(Scores.loveAll(), new ScoreFormatter());
+        TennisApplication tennisApplication = new TennisApplication(Scores.loveAll());
 
         // WHEN
         tennisApplication.playGameForInput("ABABABABBAAA");

@@ -1,24 +1,7 @@
 package org.example;
 
 public class ScoreFormatter {
-    protected String getDefaultFormattedScore(Score gameScore) {
-        return "Player A : %s / Player B : %s".formatted(this.getFormattedValue(gameScore.playerAScore()),
-                this.getFormattedValue(gameScore.playerBScore()));
-    }
-
-    private String getFormattedValue(int score) {
-        return switch (score) {
-            case 0 -> "0";
-            case 1 -> "15";
-            case 2 -> "30";
-            case 3 -> "40";
-            default ->
-                    throw new IllegalArgumentException("Invalid score: %d. Should be a 'deuce', an 'advantage' or a 'win'."
-                            .formatted(score));
-        };
-    }
-
-    public String format(Score gameScore) {
+    public static String format(Score gameScore) {
         if (gameScore.playerAWon()) {
             return "Player A wins the game";
         }
@@ -35,5 +18,23 @@ public class ScoreFormatter {
             return "Advantage Player B";
         }
         return getDefaultFormattedScore(gameScore);
+    }
+
+    private static String getDefaultFormattedScore(Score gameScore) {
+        String formattedPlayerAScore = ScoreFormatter.getFormattedValue(gameScore.playerAScore());
+        String formattedPlayerBScore = ScoreFormatter.getFormattedValue(gameScore.playerBScore());
+        return "Player A : %s / Player B : %s".formatted(formattedPlayerAScore, formattedPlayerBScore);
+    }
+
+    private static String getFormattedValue(int score) {
+        return switch (score) {
+            case 0 -> "0";
+            case 1 -> "15";
+            case 2 -> "30";
+            case 3 -> "40";
+            default ->
+                    throw new IllegalArgumentException("Invalid score: %d. Should be 'deuce', 'advantage' or 'win'."
+                            .formatted(score));
+        };
     }
 }

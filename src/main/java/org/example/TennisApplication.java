@@ -5,10 +5,9 @@ import java.util.List;
 
 public class TennisApplication {
     private final Score initialScore;
-    private final ScoreFormatter scoreFormatter;
-    public TennisApplication(Score initialScore, ScoreFormatter scoreFormatter) {
+
+    public TennisApplication(Score initialScore) {
         this.initialScore = initialScore;
-        this.scoreFormatter = scoreFormatter;
     }
 
     public void playGameForInput(String input) {
@@ -23,7 +22,7 @@ public class TennisApplication {
                 case A -> gameScore.scorePointForPlayerA();
                 case B -> gameScore.scorePointForPlayerB();
             };
-            Printer.print(scoreFormatter.format(gameScore));
+            Printer.print(ScoreFormatter.format(gameScore));
         }
     }
 

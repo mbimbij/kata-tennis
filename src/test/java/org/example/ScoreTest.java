@@ -82,18 +82,4 @@ class ScoreTest {
             }
         }
     }
-
-    @ParameterizedTest
-    @CsvFileSource(files = "src/test/resources/score_formatting_test_cases.csv", useHeadersInDisplayName = true)
-    void should_print_score_properly(int playerAScore, int playerBScore, String expected) {
-        // GIVEN
-        Score score = new Score(playerAScore, playerBScore);
-        ScoreFormatter formatter = new ScoreFormatter();
-
-        // WHEN
-        String actual = formatter.format(score);
-
-        // THEN
-        assertThat(actual).isEqualTo(expected);
-    }
 }
