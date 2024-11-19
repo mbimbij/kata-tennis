@@ -2,8 +2,8 @@ package org.example;
 
 public class ScoreFormatter {
     protected String getDefaultFormattedScore(Score gameScore) {
-        return "Player A : %s / Player B : %s".formatted(this.getFormattedValue(gameScore.getPlayerAScore()),
-                this.getFormattedValue(gameScore.getPlayerBScore()));
+        return "Player A : %s / Player B : %s".formatted(this.getFormattedValue(gameScore.playerAScore()),
+                this.getFormattedValue(gameScore.playerBScore()));
     }
 
     private String getFormattedValue(int score) {

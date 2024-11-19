@@ -5,6 +5,34 @@ public class ScoreFactory {
         return new Score(0, 0);
     }
 
+    public Score fifteenLove() {
+        return new Score(1,0);
+    }
+
+    public Score thirtyLove() {
+        return new Score(2,0);
+    }
+
+    public Score fortyLove() {
+        return new Score(3,0);
+    }
+
+    public Score loveFifteen() {
+        return new Score(0,1);
+    }
+
+    public Score loveThirty() {
+        return new Score(0,2);
+    }
+
+    public Score loveForty() {
+        return new Score(0,3);
+    }
+
+    public Score gameToLovePlayerB() {
+        return new Score(0,4);
+    }
+
     public Score thirtyForty() {
         return new Score(2, 3);
     }
@@ -33,35 +61,7 @@ public class ScoreFactory {
         return new Score(3, 5);
     }
 
-    public Score fifteenLove() {
-        return new Score(1,0);
-    }
-
-    public Score thirtyLove() {
-        return new Score(2,0);
-    }
-
     public Score gameThirty() {
         return new Score(4,2);
-    }
-
-    public Score loveFifteen() {
-        return new Score(0,1);
-    }
-
-    public Score loveThirty() {
-        return new Score(0,2);
-    }
-
-    public Score loveForty() {
-        return new Score(0,3);
-    }
-
-    public Score gameToLovePlayerB() {
-        return new Score(0,4);
-    }
-
-    public Score fortyLove() {
-        return new Score(3,0);
     }
 }

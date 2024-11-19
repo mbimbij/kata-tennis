@@ -1,22 +1,9 @@
 package org.example;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 import lombok.With;
 
-@EqualsAndHashCode(callSuper = false)
-@ToString
 @With
-@Getter
-public class Score {
-    private final int playerAScore;
-    private final int playerBScore;
-
-    public Score(int playerAScore, int playerBScore) {
-        this.playerAScore = playerAScore;
-        this.playerBScore = playerBScore;
-    }
+public record Score(int playerAScore, int playerBScore) {
 
     public Score scorePointForPlayerA() {
         validateNoWinner();
@@ -34,37 +21,68 @@ public class Score {
         }
     }
 
-    protected boolean playerAWon() {
-        return playerAScore >= 4 && playerAScore >= playerBScore + 2;
+    boolean playerAWon() {
+        return playerAScored4PointsOrMore() && playerALeadsBy2PointsOrMore();
     }
 
-    protected boolean playerBWon() {
-        return playerBScore >= 4 && playerBScore >= playerAScore + 2;
+    boolean playerBWon() {
+        return playerBScored4PointsOrMore() && playerBLeadsBy2Points();
     }
 
-    protected boolean isDeuce() {
-        return playerAScore == playerBScore && playerAScore >= 3;
+    boolean isDeuce() {
+        return bothPlayersScored3PointsOrMore() && bothScoresEqual();
     }
 
-    protected boolean isAdvantagePlayerA() {
-        return playerAScore >= 4 && playerBScore == playerAScore - 1;
+    boolean isAdvantagePlayerA() {
+        return playerAScored4PointsOrMore() && playerALeadsBy1Point();
     }
 
-    protected boolean isAdvantagePlayerB() {
-        return playerBScore >= 4 && playerAScore == playerBScore - 1;
+    boolean isAdvantagePlayerB() {
+        return playerBScored4PointsOrMore() && playerBLeadsBy1Point();
     }
 
-    protected boolean scoreDetailsEqual(Score o) {
-        Score that = ((Score) o);
-        return playerAScore == that.playerAScore && playerBScore == that.playerBScore;
+    private boolean playerAScored4PointsOrMore() {
+        return playerAScore >= 4;
     }
 
-    public boolean scoreEquals(Score that) {
-        return this.isDeuce() && that.isDeuce()
-               || this.isAdvantagePlayerA() && that.isAdvantagePlayerA()
-               || this.isAdvantagePlayerB() && that.isAdvantagePlayerB()
-               || this.playerAWon() && that.playerAWon()
-               || this.playerBWon() && that.playerBWon()
-               || scoreDetailsEqual(that);
+    private boolean playerALeadsBy2PointsOrMore() {
+        return playerAScore >= playerBScore + 2;
+    }
+
+    private boolean playerBScored4PointsOrMore() {
+        return playerBScore >= 4;
+    }
+
+    private boolean playerBLeadsBy2Points() {
+        return playerBScore >= playerAScore + 2;
+    }
+
+    private boolean bothScoresEqual() {
+        return playerAScore == playerBScore;
+    }
+
+    private boolean bothPlayersScored3PointsOrMore() {
+        return playerBScore >= 3 && playerAScore >= 3;
+    }
+
+    private boolean playerALeadsBy1Point() {
+        return playerAScore == playerBScore + 1;
+    }
+
+    private boolean playerBLeadsBy1Point() {
+        return playerBScore == playerAScore + 1;
+    }
+
+    private boolean scoreDetailsEqualTo(Score other) {
+        return playerAScore == other.playerAScore && playerBScore == other.playerBScore;
+    }
+
+    public boolean isScoreEquivalentTo(Score other) {
+        return this.isDeuce() && other.isDeuce()
+               || this.isAdvantagePlayerA() && other.isAdvantagePlayerA()
+               || this.isAdvantagePlayerB() && other.isAdvantagePlayerB()
+               || this.playerAWon() && other.playerAWon()
+               || this.playerBWon() && other.playerBWon()
+               || this.scoreDetailsEqualTo(other);
     }
 }
