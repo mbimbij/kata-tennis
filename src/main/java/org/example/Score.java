@@ -15,12 +15,6 @@ public record Score(int playerAScore, int playerBScore) {
         return this.withPlayerBScore(playerBScore + 1);
     }
 
-    private void validateNoWinner() {
-        if (playerAWon() || playerBWon()) {
-            throw new IllegalStateException("Cannot score when there is a winner");
-        }
-    }
-
     boolean playerAWon() {
         return playerAScored4PointsOrMore() && playerALeadsBy2PointsOrMore();
     }
@@ -30,7 +24,7 @@ public record Score(int playerAScore, int playerBScore) {
     }
 
     boolean isDeuce() {
-        return bothPlayersScored3PointsOrMore() && bothScoresEqual();
+        return bothPlayersScored3PointsOrMore() && bothScoresAreEqual();
     }
 
     boolean isAdvantagePlayerA() {
@@ -50,6 +44,12 @@ public record Score(int playerAScore, int playerBScore) {
                || this.scoreDetailsEqualTo(other);
     }
 
+    private void validateNoWinner() {
+        if (playerAWon() || playerBWon()) {
+            throw new IllegalStateException("Cannot score when there is a winner");
+        }
+    }
+
     private boolean playerAScored4PointsOrMore() {
         return playerAScore >= 4;
     }
@@ -66,7 +66,7 @@ public record Score(int playerAScore, int playerBScore) {
         return playerBScore >= playerAScore + 2;
     }
 
-    private boolean bothScoresEqual() {
+    private boolean bothScoresAreEqual() {
         return playerAScore == playerBScore;
     }
 
