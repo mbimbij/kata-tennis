@@ -13,7 +13,8 @@ public class ScoreFormatter {
             case 2 -> "30";
             case 3 -> "40";
             default ->
-                    throw new IllegalArgumentException("Invalid score: " + score + ". Should be a 'deuce', an 'advantage' or a 'win'.");
+                    throw new IllegalArgumentException("Invalid score: %d. Should be a 'deuce', an 'advantage' or a 'win'."
+                            .formatted(score));
         };
     }
 

@@ -41,6 +41,15 @@ public record Score(int playerAScore, int playerBScore) {
         return playerBScored4PointsOrMore() && playerBLeadsBy1Point();
     }
 
+    boolean isScoreEquivalentTo(Score other) {
+        return this.isDeuce() && other.isDeuce()
+               || this.isAdvantagePlayerA() && other.isAdvantagePlayerA()
+               || this.isAdvantagePlayerB() && other.isAdvantagePlayerB()
+               || this.playerAWon() && other.playerAWon()
+               || this.playerBWon() && other.playerBWon()
+               || this.scoreDetailsEqualTo(other);
+    }
+
     private boolean playerAScored4PointsOrMore() {
         return playerAScore >= 4;
     }
@@ -75,14 +84,5 @@ public record Score(int playerAScore, int playerBScore) {
 
     private boolean scoreDetailsEqualTo(Score other) {
         return playerAScore == other.playerAScore && playerBScore == other.playerBScore;
-    }
-
-    public boolean isScoreEquivalentTo(Score other) {
-        return this.isDeuce() && other.isDeuce()
-               || this.isAdvantagePlayerA() && other.isAdvantagePlayerA()
-               || this.isAdvantagePlayerB() && other.isAdvantagePlayerB()
-               || this.playerAWon() && other.playerAWon()
-               || this.playerBWon() && other.playerBWon()
-               || this.scoreDetailsEqualTo(other);
     }
 }

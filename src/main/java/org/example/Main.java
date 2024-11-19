@@ -2,9 +2,10 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        ScoreFactory gameScoreFactory = new ScoreFactory();
-        Score initialScore = gameScoreFactory.loveAll();
+        Score initialScore = Scores.loveAll();
         ScoreFormatter scoreFormatter = new ScoreFormatter();
-        new TennisApplication(initialScore, scoreFormatter).playGameForInput("ABABAA");
+        TennisApplication tennisApplication = new TennisApplication(initialScore, scoreFormatter);
+        String playsSequence = "ABABAA";
+        tennisApplication.playGameForInput(playsSequence);
     }
 }
