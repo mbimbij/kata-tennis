@@ -16,10 +16,11 @@ class ScoreTest {
 
     @Nested
     class Computing {
+
         @Nested
         class ScoreForPlayerA {
 
-            private static Stream<Arguments> should_return_correct_score_when_playerA_scores() {
+            private static Stream<Arguments> should_update_score_when_playerA_scores() {
                 return Stream.of(
                         Arguments.of(factory.loveAll(), factory.fifteenLove()),
                         Arguments.of(factory.fifteenLove(), factory.thirtyLove()),
@@ -34,7 +35,7 @@ class ScoreTest {
 
             @ParameterizedTest
             @MethodSource
-            void should_return_correct_score_when_playerA_scores(Score score, Score expectedAfter) {
+            void should_update_score_when_playerA_scores(Score score, Score expectedAfter) {
                 boolean scoresEqual = score.scorePointForPlayerA().scoreEquals(expectedAfter);
                 assertThat(scoresEqual).isTrue();
             }
@@ -42,7 +43,7 @@ class ScoreTest {
 
         @Nested
         class ScoreForPlayerB {
-            private static Stream<Arguments> should_return_correct_score_when_playerB_scores() {
+            private static Stream<Arguments> should_update_score_when_playerB_scores() {
                 return Stream.of(
                         Arguments.of(factory.loveAll(), factory.loveFifteen()),
                         Arguments.of(factory.loveFifteen(), factory.loveThirty()),
@@ -57,7 +58,7 @@ class ScoreTest {
 
             @ParameterizedTest
             @MethodSource
-            void should_return_correct_score_when_playerB_scores(Score score, Score expectedAfter) {
+            void should_update_score_when_playerB_scores(Score score, Score expectedAfter) {
                 boolean scoresEqual = score.scorePointForPlayerB().scoreEquals(expectedAfter);
                 assertThat(scoresEqual).isTrue();
             }
