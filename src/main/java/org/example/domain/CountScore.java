@@ -12,7 +12,7 @@ public class CountScore {
     private final ScoreFormatter scoreFormatter;
     private final Score initialScore;
 
-    public void playGame(List<PlayerToScore> scoreSequence) {
+    public void executeSequence(List<PlayerToScore> scoreSequence) {
         Score gameScore = initialScore;
         for (PlayerToScore cmd : scoreSequence) {
             gameScore = switch (cmd) {

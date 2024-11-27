@@ -25,6 +25,7 @@ public class TennisApplication {
         Printer printer = new Printer();
         ScoreFactory scoreFactory = new ScoreFactory();
         ScoreFormatter scoreFormatter = scoreFactory.createScoreFormatter();
-        new CountScore(printer, scoreFormatter, scoreFactory.loveAll()).playGame(scoreSequence);
+        CountScore countScore = new CountScore(printer, scoreFormatter, scoreFactory.loveAll());
+        countScore.executeSequence(scoreSequence);
     }
 }
