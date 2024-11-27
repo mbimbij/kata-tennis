@@ -1,4 +1,4 @@
-package org.example;
+package org.example.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
@@ -12,14 +12,14 @@ class ScoreShould {
 
     private static Stream<Arguments> update_score_when_playerA_scores() {
         return Stream.of(
-                Arguments.of(Scores.loveAll(), Scores.fifteenLove()),
-                Arguments.of(Scores.fifteenLove(), Scores.thirtyLove()),
-                Arguments.of(Scores.thirtyLove(), Scores.fortyLove()),
-                Arguments.of(Scores.thirtyForty(), Scores.deuce()),
-                Arguments.of(Scores.deuce(), Scores.advantagePlayerA()),
-                Arguments.of(Scores.advantagePlayerB(), Scores.deuce()),
-                Arguments.of(Scores.advantagePlayerA(), Scores.gameFortyPlayerA()),
-                Arguments.of(Scores.fortyThirty(), Scores.gameThirtyPlayerA())
+                Arguments.of(ScoreFactory.loveAll(), ScoreFactory.fifteenLove()),
+                Arguments.of(ScoreFactory.fifteenLove(), ScoreFactory.thirtyLove()),
+                Arguments.of(ScoreFactory.thirtyLove(), ScoreFactory.fortyLove()),
+                Arguments.of(ScoreFactory.thirtyForty(), ScoreFactory.deuce()),
+                Arguments.of(ScoreFactory.deuce(), ScoreFactory.advantagePlayerA()),
+                Arguments.of(ScoreFactory.advantagePlayerB(), ScoreFactory.deuce()),
+                Arguments.of(ScoreFactory.advantagePlayerA(), ScoreFactory.gameFortyPlayerA()),
+                Arguments.of(ScoreFactory.fortyThirty(), ScoreFactory.gameThirtyPlayerA())
         );
     }
 
@@ -32,14 +32,14 @@ class ScoreShould {
 
     private static Stream<Arguments> update_score_when_playerB_scores() {
         return Stream.of(
-                Arguments.of(Scores.loveAll(), Scores.loveFifteen()),
-                Arguments.of(Scores.loveFifteen(), Scores.loveThirty()),
-                Arguments.of(Scores.loveThirty(), Scores.loveForty()),
-                Arguments.of(Scores.loveForty(), Scores.gameToLovePlayerB()),
-                Arguments.of(Scores.deuce(), Scores.advantagePlayerB()),
-                Arguments.of(Scores.advantagePlayerA(), Scores.deuce()),
-                Arguments.of(Scores.fortyThirty(), Scores.deuce()),
-                Arguments.of(Scores.advantagePlayerB(), Scores.gameFortyPlayerB())
+                Arguments.of(ScoreFactory.loveAll(), ScoreFactory.loveFifteen()),
+                Arguments.of(ScoreFactory.loveFifteen(), ScoreFactory.loveThirty()),
+                Arguments.of(ScoreFactory.loveThirty(), ScoreFactory.loveForty()),
+                Arguments.of(ScoreFactory.loveForty(), ScoreFactory.gameToLovePlayerB()),
+                Arguments.of(ScoreFactory.deuce(), ScoreFactory.advantagePlayerB()),
+                Arguments.of(ScoreFactory.advantagePlayerA(), ScoreFactory.deuce()),
+                Arguments.of(ScoreFactory.fortyThirty(), ScoreFactory.deuce()),
+                Arguments.of(ScoreFactory.advantagePlayerB(), ScoreFactory.gameFortyPlayerB())
         );
     }
 

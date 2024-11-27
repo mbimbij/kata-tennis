@@ -16,7 +16,7 @@ class TennisApplicationShould {
         System.setOut(new PrintStream(baos));
 
         // WHEN
-        TennisApplication.playGameForInput("ABABABABBAAA");
+        TennisApplication.run("ABABABABBAAA");
 
         // THEN
         String expectedOutput = """

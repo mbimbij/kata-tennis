@@ -1,5 +1,10 @@
 package org.example;
 
+import org.example.domain.PlayerToScore;
+import org.example.domain.CountScore;
+import org.example.infra.InputParser;
+import org.example.infra.Printer;
+
 import java.util.List;
 
 
@@ -10,23 +15,12 @@ public class TennisApplication {
             System.err.println("Please provide a tennis game input as a single argument, in the format [AB]+");
             System.exit(1);
         }
-        playGameForInput(args[0]);
+        run(args[0]);
     }
 
-    public static void playGameForInput(String input) {
-        List<Command> commandList = InputParser.parse(input);
-        apply(commandList);
+    public static void run(String inputString) {
+        List<PlayerToScore> scoreSequence = InputParser.parse(inputString);
+        Printer printer = new Printer();
+        new CountScore(printer).playGame(scoreSequence);
     }
-
-    private static void apply(List<Command> commandList) {
-        Score gameScore = Scores.loveAll();
-        for (Command cmd : commandList) {
-            gameScore = switch (cmd) {
-                case A -> gameScore.scorePointForPlayerA();
-                case B -> gameScore.scorePointForPlayerB();
-            };
-            Printer.print(ScoreFormatter.format(gameScore));
-        }
-    }
-
 }

@@ -1,12 +1,13 @@
-package org.example;
+package org.example.infra;
 
 import org.apache.commons.lang3.StringUtils;
+import org.example.domain.PlayerToScore;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class InputParser extends TennisApplication {
-    public static List<Command> parse(String input) {
+public class InputParser {
+    public static List<PlayerToScore> parse(String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("input shouldn't be blank");
         }
@@ -15,6 +16,6 @@ public class InputParser extends TennisApplication {
         }
 
         return Arrays.stream(input.split(""))
-                .map(Command::valueOf).toList();
+                .map(PlayerToScore::valueOf).toList();
     }
 }

@@ -1,6 +1,6 @@
-package org.example;
+package org.example.domain;
 
-public class Scores {
+public class ScoreFactory {
     public static Score loveAll() {
         return new Score(0, 0);
     }
