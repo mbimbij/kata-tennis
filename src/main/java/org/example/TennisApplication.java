@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.domain.PlayerToScore;
 import org.example.domain.CountScore;
+import org.example.domain.ScoreFactory;
+import org.example.domain.ScoreFormatter;
 import org.example.infra.InputParser;
 import org.example.infra.Printer;
 
@@ -21,6 +23,8 @@ public class TennisApplication {
     public static void run(String inputString) {
         List<PlayerToScore> scoreSequence = InputParser.parse(inputString);
         Printer printer = new Printer();
-        new CountScore(printer).playGame(scoreSequence);
+        ScoreFactory scoreFactory = new ScoreFactory();
+        ScoreFormatter scoreFormatter = scoreFactory.createScoreFormatter();
+        new CountScore(printer, scoreFormatter, scoreFactory.loveAll()).playGame(scoreSequence);
     }
 }

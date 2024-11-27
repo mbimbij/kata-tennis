@@ -1,5 +1,6 @@
 package org.example.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -9,17 +10,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ScoreShould {
+    private static ScoreFactory factory;
+
+    @BeforeEach
+    void setUp() {
+        factory = new ScoreFactory();
+    }
 
     private static Stream<Arguments> update_score_when_playerA_scores() {
         return Stream.of(
-                Arguments.of(ScoreFactory.loveAll(), ScoreFactory.fifteenLove()),
-                Arguments.of(ScoreFactory.fifteenLove(), ScoreFactory.thirtyLove()),
-                Arguments.of(ScoreFactory.thirtyLove(), ScoreFactory.fortyLove()),
-                Arguments.of(ScoreFactory.thirtyForty(), ScoreFactory.deuce()),
-                Arguments.of(ScoreFactory.deuce(), ScoreFactory.advantagePlayerA()),
-                Arguments.of(ScoreFactory.advantagePlayerB(), ScoreFactory.deuce()),
-                Arguments.of(ScoreFactory.advantagePlayerA(), ScoreFactory.gameFortyPlayerA()),
-                Arguments.of(ScoreFactory.fortyThirty(), ScoreFactory.gameThirtyPlayerA())
+                Arguments.of(factory.loveAll(), factory.fifteenLove()),
+                Arguments.of(factory.fifteenLove(), factory.thirtyLove()),
+                Arguments.of(factory.thirtyLove(), factory.fortyLove()),
+                Arguments.of(factory.thirtyForty(), factory.deuce()),
+                Arguments.of(factory.deuce(), factory.advantagePlayerA()),
+                Arguments.of(factory.advantagePlayerB(), factory.deuce()),
+                Arguments.of(factory.advantagePlayerA(), factory.gameFortyPlayerA()),
+                Arguments.of(factory.fortyThirty(), factory.gameThirtyPlayerA())
         );
     }
 
@@ -32,14 +39,14 @@ class ScoreShould {
 
     private static Stream<Arguments> update_score_when_playerB_scores() {
         return Stream.of(
-                Arguments.of(ScoreFactory.loveAll(), ScoreFactory.loveFifteen()),
-                Arguments.of(ScoreFactory.loveFifteen(), ScoreFactory.loveThirty()),
-                Arguments.of(ScoreFactory.loveThirty(), ScoreFactory.loveForty()),
-                Arguments.of(ScoreFactory.loveForty(), ScoreFactory.gameToLovePlayerB()),
-                Arguments.of(ScoreFactory.deuce(), ScoreFactory.advantagePlayerB()),
-                Arguments.of(ScoreFactory.advantagePlayerA(), ScoreFactory.deuce()),
-                Arguments.of(ScoreFactory.fortyThirty(), ScoreFactory.deuce()),
-                Arguments.of(ScoreFactory.advantagePlayerB(), ScoreFactory.gameFortyPlayerB())
+                Arguments.of(factory.loveAll(), factory.loveFifteen()),
+                Arguments.of(factory.loveFifteen(), factory.loveThirty()),
+                Arguments.of(factory.loveThirty(), factory.loveForty()),
+                Arguments.of(factory.loveForty(), factory.gameToLovePlayerB()),
+                Arguments.of(factory.deuce(), factory.advantagePlayerB()),
+                Arguments.of(factory.advantagePlayerA(), factory.deuce()),
+                Arguments.of(factory.fortyThirty(), factory.deuce()),
+                Arguments.of(factory.advantagePlayerB(), factory.gameFortyPlayerB())
         );
     }
 

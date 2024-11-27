@@ -12,9 +12,11 @@ class ScoreFormatterShould {
     void format_score_properly(int playerAScore, int playerBScore, String expected) {
         // GIVEN
         Score score = new Score(playerAScore, playerBScore);
+        ScoreFactory factory = new ScoreFactory();
+        ScoreFormatter formatter = factory.createScoreFormatter();
 
         // WHEN
-        String actual = ScoreFormatter.format(score);
+        String actual = formatter.format(score);
 
         // THEN
         assertThat(actual).isEqualTo(expected);

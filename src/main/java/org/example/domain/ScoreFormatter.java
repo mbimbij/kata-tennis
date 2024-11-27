@@ -1,7 +1,10 @@
 package org.example.domain;
 
 public class ScoreFormatter {
-    public static String format(Score gameScore) {
+    ScoreFormatter() {
+    }
+
+    public String format(Score gameScore) {
         if (gameScore.playerAWon()) {
             return "Player A wins the game";
         }
@@ -20,13 +23,13 @@ public class ScoreFormatter {
         return getDefaultFormattedScore(gameScore);
     }
 
-    private static String getDefaultFormattedScore(Score gameScore) {
-        String formattedPlayerAScore = ScoreFormatter.getFormattedValue(gameScore.playerAScore());
-        String formattedPlayerBScore = ScoreFormatter.getFormattedValue(gameScore.playerBScore());
+    private String getDefaultFormattedScore(Score gameScore) {
+        String formattedPlayerAScore = this.getFormattedValue(gameScore.playerAScore());
+        String formattedPlayerBScore = this.getFormattedValue(gameScore.playerBScore());
         return "Player A : %s / Player B : %s".formatted(formattedPlayerAScore, formattedPlayerBScore);
     }
 
-    private static String getFormattedValue(int score) {
+    private String getFormattedValue(int score) {
         return switch (score) {
             case 0 -> "0";
             case 1 -> "15";
