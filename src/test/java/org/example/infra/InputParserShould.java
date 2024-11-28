@@ -1,7 +1,8 @@
 package org.example.infra;
 
 import org.assertj.core.api.ThrowableAssert;
-import org.example.domain.PlayerToScore;
+import org.example.countscoreforsequence.InputParser;
+import org.example.countscoreforsequence.PlayerToScore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,8 +11,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.domain.PlayerToScore.A;
-import static org.example.domain.PlayerToScore.B;
+import static org.example.countscoreforsequence.PlayerToScore.A;
+import static org.example.countscoreforsequence.PlayerToScore.B;
 
 class InputParserShould {
     @ParameterizedTest()

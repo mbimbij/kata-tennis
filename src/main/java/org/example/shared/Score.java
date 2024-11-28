@@ -1,4 +1,4 @@
-package org.example.domain;
+package org.example.shared;
 
 import lombok.With;
 
@@ -15,23 +15,23 @@ public record Score(int playerAScore, int playerBScore) {
         return this.withPlayerBScore(playerBScore + 1);
     }
 
-    boolean playerAWon() {
+    public boolean playerAWon() {
         return playerAScored4PointsOrMore() && playerALeadsBy2PointsOrMore();
     }
 
-    boolean playerBWon() {
+    public boolean playerBWon() {
         return playerBScored4PointsOrMore() && playerBLeadsBy2Points();
     }
 
-    boolean isDeuce() {
+    public boolean isDeuce() {
         return bothPlayersScored3PointsOrMore() && bothScoresAreEqual();
     }
 
-    boolean isAdvantagePlayerA() {
+    public boolean isAdvantagePlayerA() {
         return playerAScored4PointsOrMore() && playerALeadsBy1Point();
     }
 
-    boolean isAdvantagePlayerB() {
+    public boolean isAdvantagePlayerB() {
         return playerBScored4PointsOrMore() && playerBLeadsBy1Point();
     }
 

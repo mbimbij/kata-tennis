@@ -1,4 +1,4 @@
-package org.example.infra;
+package org.example.countscoreforsequence;
 
 public class Printer {
     public void print(String formattedScore) {

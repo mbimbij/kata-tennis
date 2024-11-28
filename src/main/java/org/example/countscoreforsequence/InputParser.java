@@ -1,7 +1,6 @@
-package org.example.infra;
+package org.example.countscoreforsequence;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.domain.PlayerToScore;
 
 import java.util.Arrays;
 import java.util.List;

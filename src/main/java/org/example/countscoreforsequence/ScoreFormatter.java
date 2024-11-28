@@ -1,7 +1,9 @@
-package org.example.domain;
+package org.example.countscoreforsequence;
+
+import org.example.shared.Score;
 
 public class ScoreFormatter {
-    ScoreFormatter() {
+    public ScoreFormatter() {
     }
 
     public String format(Score gameScore) {

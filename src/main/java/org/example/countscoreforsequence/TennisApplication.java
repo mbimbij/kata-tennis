@@ -1,11 +1,6 @@
-package org.example;
+package org.example.countscoreforsequence;
 
-import org.example.domain.PlayerToScore;
-import org.example.domain.CountScore;
-import org.example.domain.ScoreFactory;
-import org.example.domain.ScoreFormatter;
-import org.example.infra.InputParser;
-import org.example.infra.Printer;
+import org.example.shared.ScoreFactory;
 
 import java.util.List;
 
@@ -25,7 +20,7 @@ public class TennisApplication {
         Printer printer = new Printer();
         ScoreFactory scoreFactory = new ScoreFactory();
         ScoreFormatter scoreFormatter = scoreFactory.createScoreFormatter();
-        CountScore countScore = new CountScore(printer, scoreFormatter, scoreFactory.loveAll());
+        CountScoreForSequence countScore = new CountScoreForSequence(printer, scoreFormatter, scoreFactory.loveAll());
         countScore.executeSequence(scoreSequence);
     }
 }

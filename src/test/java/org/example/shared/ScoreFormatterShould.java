@@ -1,5 +1,6 @@
-package org.example.domain;
+package org.example.shared;
 
+import org.example.countscoreforsequence.ScoreFormatter;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 

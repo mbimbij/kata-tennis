@@ -1,4 +1,6 @@
-package org.example.domain;
+package org.example.shared;
+
+import org.example.countscoreforsequence.ScoreFormatter;
 
 public class ScoreFactory {
     public ScoreFormatter createScoreFormatter() {
