@@ -9,26 +9,18 @@ public class ScoreFormatter {
     public String format(Score gameScore) {
         if (gameScore.playerAWon()) {
             return "Player A wins the game";
-        }
-        if (gameScore.playerBWon()) {
+        } else if (gameScore.playerBWon()) {
             return "Player B wins the game";
-        }
-        if (gameScore.isDeuce()) {
+        } else if (gameScore.isDeuce()) {
             return "Deuce";
-        }
-        if (gameScore.isAdvantagePlayerA()) {
+        } else if (gameScore.isAdvantagePlayerA()) {
             return "Advantage Player A";
-        }
-        if (gameScore.isAdvantagePlayerB()) {
+        } else if (gameScore.isAdvantagePlayerB()) {
             return "Advantage Player B";
+        } else {
+            return "Player A : %s / Player B : %s".formatted(gameScore.getPlayerAScore().getValue(),
+                    gameScore.getPlayerBScore().getValue());
         }
-        return getDefaultFormattedScore(gameScore);
-    }
-
-    private String getDefaultFormattedScore(Score gameScore) {
-        String formattedPlayerAScore = this.getFormattedValue(gameScore.playerAScore());
-        String formattedPlayerBScore = this.getFormattedValue(gameScore.playerBScore());
-        return "Player A : %s / Player B : %s".formatted(formattedPlayerAScore, formattedPlayerBScore);
     }
 
     private String getFormattedValue(int score) {

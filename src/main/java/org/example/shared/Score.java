@@ -1,11 +1,20 @@
 package org.example.shared;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.With;
+import lombok.experimental.FieldDefaults;
+
+import java.util.Objects;
 
 import static org.example.shared.PlayerScore.*;
 
+@AllArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @With
-public record Score(int playerAScore, int playerBScore) {
+public final class Score {
+    int playerAScore;
+    int playerBScore;
 
     public Score scorePointForPlayerA() {
         validateNoWinner();
@@ -116,4 +125,26 @@ public record Score(int playerAScore, int playerBScore) {
             throw new IllegalArgumentException("should never happen");
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        var that = (Score) obj;
+        return this.playerAScore == that.playerAScore &&
+               this.playerBScore == that.playerBScore;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(playerAScore, playerBScore);
+    }
+
+    @Override
+    public String toString() {
+        return "Score[" +
+               "playerAScore=" + playerAScore + ", " +
+               "playerBScore=" + playerBScore + ']';
+    }
+
 }
