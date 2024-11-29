@@ -1,7 +1,7 @@
-package org.example.countscorerestapi;
+package org.example.restapi;
 
-import org.example.shared.PlayerScore;
-import org.example.shared.Score;
+import org.example.core.PlayerScore;
+import org.example.core.Score;
 
 public record ScoreDto(String playerAScore, String playerBScore) {
     public static ScoreDto fromDomain(Score score) {

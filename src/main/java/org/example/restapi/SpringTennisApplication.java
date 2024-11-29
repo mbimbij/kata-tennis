@@ -1,8 +1,7 @@
-package org.example.countscorerestapi;
+package org.example.restapi;
 
-import org.example.shared.ScoreFactory;
+import org.example.core.ScoreFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -14,6 +13,6 @@ public class SpringTennisApplication {
 
     @Bean
     public ScoreFactory scoreFactory() {
-        return new ScoreFactory();
+        return ScoreFactory.getInstance();
     }
 }

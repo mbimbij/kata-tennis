@@ -1,6 +1,5 @@
-package org.example.shared;
+package org.example.core;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -8,16 +7,11 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.shared.PlayerScore.*;
-import static org.example.shared.PlayerScore.THIRTY;
+import static org.example.core.PlayerScore.*;
+import static org.example.core.PlayerScore.THIRTY;
 
 class ScoreShould {
-    private static ScoreFactory factory;
-
-    @BeforeEach
-    void setUp() {
-        factory = new ScoreFactory();
-    }
+    private static ScoreFactory factory = ScoreFactory.getInstance();
 
     @ParameterizedTest
     @MethodSource

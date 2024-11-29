@@ -1,11 +1,11 @@
-package org.example.shared;
+package org.example.core;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.With;
 
-import static org.example.shared.PlayerScore.*;
+import static org.example.core.PlayerScore.*;
 
 @EqualsAndHashCode
 @ToString

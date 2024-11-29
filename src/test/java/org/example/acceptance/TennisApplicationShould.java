@@ -1,6 +1,6 @@
 package org.example.acceptance;
 
-import org.example.countscoreforsequence.TennisApplication;
+import org.example.cli.TennisApplication;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

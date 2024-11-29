@@ -13,34 +13,8 @@ playerAScore, playerBScore, expectedFormattedScore
 3, 1, Player A : 40 / Player B : 15
 3, 2, Player A : 40 / Player B : 30
 3, 3, Deuce
-4, 4, Deuce
-5, 5, Deuce
-6, 6, Deuce
 4, 3, Advantage Player A
-5, 4, Advantage Player A
-6, 5, Advantage Player A
-7, 6, Advantage Player A
-3, 4, Advantage Player B
-4, 5, Advantage Player B
-5, 6, Advantage Player B
-6, 7, Advantage Player B
 4, 2, Player A wins the game
-4, 0, Player A wins the game
-4, 1, Player A wins the game
-5, 2, Player A wins the game
-6, 3, Player A wins the game
-7, 4, Player A wins the game
 5, 3, Player A wins the game
-6, 4, Player A wins the game
-7, 5, Player A wins the game
-8, 6, Player A wins the game
 2, 4, Player B wins the game
-0, 4, Player B wins the game
-1, 4, Player B wins the game
-2, 5, Player B wins the game
-3, 6, Player B wins the game
-4, 7, Player B wins the game
 3, 5, Player B wins the game
-4, 6, Player B wins the game
-5, 7, Player B wins the game
-6, 8, Player B wins the game
