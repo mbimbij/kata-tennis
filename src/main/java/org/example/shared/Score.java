@@ -2,6 +2,8 @@ package org.example.shared;
 
 import lombok.With;
 
+import static org.example.shared.PlayerScore.*;
+
 @With
 public record Score(int playerAScore, int playerBScore) {
 
@@ -16,11 +18,15 @@ public record Score(int playerAScore, int playerBScore) {
     }
 
     public boolean playerAWon() {
-        return playerAScored4PointsOrMore() && playerALeadsBy2PointsOrMore();
+        return playerWon(playerAScore, playerBScore);
     }
 
     public boolean playerBWon() {
-        return playerBScored4PointsOrMore() && playerBLeadsBy2Points();
+        return playerWon(playerBScore, playerAScore);
+    }
+
+    private boolean playerWon(int score, int scoreOther) {
+        return scored4PointsOrMore(score) && leadsBy2PointsOrMore(score, scoreOther);
     }
 
     public boolean isDeuce() {
@@ -28,11 +34,16 @@ public record Score(int playerAScore, int playerBScore) {
     }
 
     public boolean isAdvantagePlayerA() {
-        return playerAScored4PointsOrMore() && playerALeadsBy1Point();
+        return hasAdvantage(playerAScore, playerBScore);
+    }
+
+    private boolean hasAdvantage(int score, int scoreOther) {
+        if (!scored4PointsOrMore(score)) return false;
+        return leadsByOnePoint(score, scoreOther);
     }
 
     public boolean isAdvantagePlayerB() {
-        return playerBScored4PointsOrMore() && playerBLeadsBy1Point();
+        return hasAdvantage(playerBScore, playerAScore);
     }
 
     boolean isScoreEquivalentTo(Score other) {
@@ -50,20 +61,12 @@ public record Score(int playerAScore, int playerBScore) {
         }
     }
 
-    private boolean playerAScored4PointsOrMore() {
-        return playerAScore >= 4;
+    private boolean scored4PointsOrMore(int score) {
+        return score >= 4;
     }
 
-    private boolean playerALeadsBy2PointsOrMore() {
-        return playerAScore >= playerBScore + 2;
-    }
-
-    private boolean playerBScored4PointsOrMore() {
-        return playerBScore >= 4;
-    }
-
-    private boolean playerBLeadsBy2Points() {
-        return playerBScore >= playerAScore + 2;
+    private boolean leadsBy2PointsOrMore(int score, int scoreOther) {
+        return score >= scoreOther + 2;
     }
 
     private boolean bothScoresAreEqual() {
@@ -74,15 +77,43 @@ public record Score(int playerAScore, int playerBScore) {
         return playerBScore >= 3 && playerAScore >= 3;
     }
 
-    private boolean playerALeadsBy1Point() {
-        return playerAScore == playerBScore + 1;
-    }
-
-    private boolean playerBLeadsBy1Point() {
-        return playerBScore == playerAScore + 1;
+    private boolean leadsByOnePoint(int score, int scoreOther) {
+        return score == scoreOther + 1;
     }
 
     private boolean scoreDetailsEqualTo(Score other) {
         return playerAScore == other.playerAScore && playerBScore == other.playerBScore;
+    }
+
+    public PlayerScore getPlayerAScore() {
+        return getPlayerScore(playerAScore, playerBScore);
+    }
+
+    public PlayerScore getPlayerBScore() {
+        return getPlayerScore(playerBScore, playerAScore);
+    }
+
+    private PlayerScore getPlayerScore(int score, int scoreOther) {
+        if (playerWon(score, scoreOther)) {
+            return GAME;
+        } else if (bothPlayersScored3PointsOrMore() && leadsBy2PointsOrMore(scoreOther, score)) {
+            return FORTY;
+        } else if (hasAdvantage(score, scoreOther)) {
+            return ADVANTAGE;
+        } else if (hasAdvantage(scoreOther, score)) {
+            return FORTY;
+        } else if (isDeuce()) {
+            return FORTY;
+        } else if (score == 0) {
+            return LOVE;
+        } else if (score == 1) {
+            return FIFTEEN;
+        } else if (score == 2) {
+            return THIRTY;
+        } else if (score == 3) {
+            return FORTY;
+        } else {
+            throw new IllegalArgumentException("should never happen");
+        }
     }
 }

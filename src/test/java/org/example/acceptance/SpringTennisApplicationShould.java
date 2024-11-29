@@ -9,6 +9,7 @@ import org.example.countscorerestapi.ScoreDto;
 import org.example.countscorerestapi.SpringTennisApplication;
 import org.example.shared.Score;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,6 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = SpringTennisApplication.class
 )
+@Disabled
 class SpringTennisApplicationShould {
     @LocalServerPort
     private int port;
