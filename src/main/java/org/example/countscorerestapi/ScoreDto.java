@@ -2,18 +2,18 @@ package org.example.countscorerestapi;
 
 import org.example.shared.Score;
 
-public record ScoreDto (String playerAScore, String playerBScore) {
+public record ScoreDto(String playerAScore, String playerBScore) {
     public static ScoreDto fromDomain(Score score) {
-        if(score.isDeuce()){
-            return new ScoreDto("40", "40");
-        }
-        String playerAScore = formatSinglePlayerScore(score.playerAScore());
-        String playerBScore = formatSinglePlayerScore(score.playerBScore());
-        return new ScoreDto(playerAScore, playerBScore);
+        return switch (score){
+            case Score s when s.isAdvantagePlayerA() -> new ScoreDto("Ad", "40");
+            case Score s when s.isAdvantagePlayerB() -> new ScoreDto("40", "Ad");
+            case Score s when s.isDeuce() -> new ScoreDto("40", "40");
+            default ->new ScoreDto(format(score.playerAScore()), format(score.playerBScore()));
+        };
     }
 
-    private static String formatSinglePlayerScore(int score) {
-        if(score == 0){
+    private static String format(int score) {
+        if (score == 0) {
             return "0";
         } else if (score == 1) {
             return "15";
