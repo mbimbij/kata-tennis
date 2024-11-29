@@ -10,9 +10,14 @@ import org.example.countscorerestapi.SpringTennisApplication;
 import org.example.shared.Score;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,8 +41,8 @@ class SpringTennisApplicationShould {
 
     @Test
     void should_return_empty_score() {
+        Score score = new Score(1, 0);
         // GIVEN
-        Score score = new Score(0, 0);
         gameScoreController.setCurrentScore(score);
 
         // WHEN
@@ -52,7 +57,7 @@ class SpringTennisApplicationShould {
                 .as(ScoreDto.class);
         
         // AND
-        ScoreDto expected = new ScoreDto("0", "0");
+        ScoreDto expected = new ScoreDto("15", "0");
         assertThat(scoreDto).isEqualTo(expected);
     }
 }
