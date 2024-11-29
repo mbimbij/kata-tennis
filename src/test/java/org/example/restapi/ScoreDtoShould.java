@@ -1,9 +1,14 @@
 package org.example.restapi;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.example.core.Score;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.test.json.JsonAssert;
 
 import java.util.stream.Stream;
 
@@ -18,6 +23,26 @@ class ScoreDtoShould {
 
         // THEN status code is ok
         assertThat(scoreDto).isEqualTo(expected);
+    }
+
+    @SneakyThrows
+    @Test
+    void be_serialized_properly_by_jackson() {
+        // GIVEN
+        ObjectMapper objectMapper = new ObjectMapper();
+        ScoreDto scoreDto = new ScoreDto("15", "0");
+
+        // WHEN
+        String serializedValue = objectMapper.writeValueAsString(scoreDto);
+
+        // THEN
+        JSONAssert.assertEquals("""
+                        {
+                          "A": "15",
+                          "B": "0"
+                        }
+                        """,
+                serializedValue, true);
     }
 
     private static Stream<Arguments> map_value_from_domain_correctly() {

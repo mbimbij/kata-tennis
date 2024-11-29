@@ -1,44 +1,48 @@
-package org.example.acceptance;
+package org.example.acceptance.cucumber.steps;
 
+import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
+import org.example.core.Score;
+import org.example.core.ScoreFactory;
 import org.example.restapi.GameScoreController;
 import org.example.restapi.ScoreDto;
-import org.example.restapi.SpringTennisApplication;
-import org.example.core.Score;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = SpringTennisApplication.class
-)
-class SpringTennisApplicationShould {
+public class AcceptanceTestsSteps {
     @LocalServerPort
     private int port;
 
-    @MockitoSpyBean
-    private GameScoreController gameScoreController;
+    @Autowired
+    private GameScoreController controller;
 
-    @BeforeEach
-    void setUp() {
+    @Autowired
+    private ScoreFactory factory;
+
+    @Before
+    public void setUp() {
         RestAssured.port = port;
         RestAssured.urlEncodingEnabled = false;
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
     }
 
-    @Test
-    void should_return_empty_score() {
+    @When("i query the score")
+    public void iQueryTheScore() {
+    }
+
+    @Then("i get the following response:")
+    public void i_get_the_following_response(ScoreDto expectedScore) {
         Score score = new Score(1, 0);
         // GIVEN
-        gameScoreController.setCurrentScore(score);
+        controller.setCurrentScore(score);
 
         // WHEN
         Response response = RestAssured.when()
@@ -54,5 +58,10 @@ class SpringTennisApplicationShould {
         // AND
         ScoreDto expected = new ScoreDto("15", "0");
         assertThat(scoreDto).isEqualTo(expected);
+    }
+
+    @Given("the score is reset")
+    public void theScoreIsReset() {
+        controller.setCurrentScore(factory.loveAll());
     }
 }
