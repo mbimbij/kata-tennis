@@ -4,12 +4,15 @@ import org.example.shared.Score;
 
 public record ScoreDto(String playerAScore, String playerBScore) {
     public static ScoreDto fromDomain(Score score) {
-        return switch (score){
-            case Score s when s.isAdvantagePlayerA() -> new ScoreDto("Ad", "40");
-            case Score s when s.isAdvantagePlayerB() -> new ScoreDto("40", "Ad");
-            case Score s when s.isDeuce() -> new ScoreDto("40", "40");
-            default ->new ScoreDto(format(score.playerAScore()), format(score.playerBScore()));
-        };
+        if (score.isAdvantagePlayerA()) {
+            return new ScoreDto("Ad", "40");
+        } else if (score.isAdvantagePlayerB()) {
+            return new ScoreDto("40", "Ad");
+        } else if (score.isDeuce()) {
+            return new ScoreDto("40", "40");
+        }else {
+            return new ScoreDto(format(score.playerAScore()), format(score.playerBScore()));
+        }
     }
 
     private static String format(int score) {
