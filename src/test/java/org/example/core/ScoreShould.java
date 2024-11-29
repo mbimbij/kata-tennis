@@ -1,6 +1,5 @@
-package org.example.shared;
+package org.example.core;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -8,14 +7,11 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.example.core.PlayerScore.*;
+import static org.example.core.PlayerScore.THIRTY;
 
 class ScoreShould {
-    private static ScoreFactory factory;
-
-    @BeforeEach
-    void setUp() {
-        factory = new ScoreFactory();
-    }
+    private static ScoreFactory factory = ScoreFactory.getInstance();
 
     @ParameterizedTest
     @MethodSource
@@ -61,6 +57,13 @@ class ScoreShould {
         assertThat(score.isScoreEquivalentTo(otherScore)).isTrue();
     }
 
+    @ParameterizedTest
+    @MethodSource
+    void return_player_score_as_enum(Score score, PlayerScore expectedPlayerAScore, PlayerScore expectedPlayerBScore) {
+        assertThat(score.getPlayerAScore()).as("bad player A score").isEqualTo(expectedPlayerAScore);
+        assertThat(score.getPlayerBScore()).as("bad player B score").isEqualTo(expectedPlayerBScore);
+    }
+
     private static Stream<Arguments> update_score_when_playerA_scores() {
         return Stream.of(
                 Arguments.of(factory.loveAll(), factory.fifteenLove()),
@@ -103,5 +106,40 @@ class ScoreShould {
                 Arguments.of(new Score(3, 5), new Score(0, 4)),
                 Arguments.of(new Score(3, 5), new Score(1, 4))
                 );
+    }
+
+    private static Stream<Arguments> return_player_score_as_enum() {
+        Arguments[] arguments = {
+                Arguments.of(new Score(0, 0), LOVE, LOVE),
+                Arguments.of(new Score(1, 0), FIFTEEN, LOVE),
+                Arguments.of(new Score(2, 0), THIRTY, LOVE),
+                Arguments.of(new Score(3, 0), FORTY, LOVE),
+                Arguments.of(new Score(4, 0), GAME, LOVE),
+
+                Arguments.of(new Score(0, 1), LOVE, FIFTEEN),
+                Arguments.of(new Score(0, 2), LOVE, THIRTY),
+                Arguments.of(new Score(0, 3), LOVE, FORTY),
+                Arguments.of(new Score(0, 4), LOVE, GAME),
+
+                Arguments.of(new Score(1, 1), FIFTEEN, FIFTEEN),
+                Arguments.of(new Score(3, 2), FORTY, THIRTY),
+
+                Arguments.of(new Score(3, 3), FORTY, FORTY),
+                Arguments.of(new Score(4, 4), FORTY, FORTY),
+                Arguments.of(new Score(5, 5), FORTY, FORTY),
+
+                Arguments.of(new Score(4, 3), ADVANTAGE, FORTY),
+                Arguments.of(new Score(5, 4), ADVANTAGE, FORTY),
+                Arguments.of(new Score(6, 5), ADVANTAGE, FORTY),
+
+                Arguments.of(new Score(3, 4), FORTY, ADVANTAGE),
+                Arguments.of(new Score(4, 5), FORTY, ADVANTAGE),
+                Arguments.of(new Score(5, 6), FORTY, ADVANTAGE),
+
+                Arguments.of(new Score(5, 3), GAME, FORTY),
+                Arguments.of(new Score(6, 4), GAME, FORTY),
+                Arguments.of(new Score(7, 5), GAME, FORTY),
+        };
+        return Stream.of(arguments);
     }
 }

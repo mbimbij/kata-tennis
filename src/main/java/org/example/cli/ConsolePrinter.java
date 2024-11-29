@@ -1,6 +1,6 @@
-package org.example.countscoreforsequence;
+package org.example.cli;
 
-public class Printer {
+public class ConsolePrinter {
     public void print(String formattedScore) {
         System.out.println(formattedScore);
     }

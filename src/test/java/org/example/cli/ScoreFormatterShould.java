@@ -1,6 +1,6 @@
-package org.example.shared;
+package org.example.cli;
 
-import org.example.countscoreforsequence.ScoreFormatter;
+import org.example.core.Score;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -13,8 +13,7 @@ class ScoreFormatterShould {
     void format_score_properly(int playerAScore, int playerBScore, String expected) {
         // GIVEN
         Score score = new Score(playerAScore, playerBScore);
-        ScoreFactory factory = new ScoreFactory();
-        ScoreFormatter formatter = factory.createScoreFormatter();
+        ConsoleScoreFormatter formatter = new ConsoleScoreFormatter();
 
         // WHEN
         String actual = formatter.format(score);

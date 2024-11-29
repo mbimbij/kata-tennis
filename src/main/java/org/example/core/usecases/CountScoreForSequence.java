@@ -1,15 +1,17 @@
-package org.example.countscoreforsequence;
+package org.example.core.usecases;
 
 import lombok.RequiredArgsConstructor;
-import org.example.shared.Score;
+import org.example.cli.ConsoleScoreFormatter;
+import org.example.cli.ConsolePrinter;
+import org.example.core.Score;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 public class CountScoreForSequence {
 
-    private final Printer printer;
-    private final ScoreFormatter scoreFormatter;
+    private final ConsolePrinter printer;
+    private final ConsoleScoreFormatter scoreFormatter;
     private final Score initialScore;
 
     public void executeSequence(List<PlayerToScore> scoreSequence) {

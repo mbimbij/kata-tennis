@@ -1,10 +1,16 @@
-package org.example.shared;
-
-import org.example.countscoreforsequence.ScoreFormatter;
+package org.example.core;
 
 public class ScoreFactory {
-    public ScoreFormatter createScoreFormatter() {
-        return new ScoreFormatter();
+    private static ScoreFactory instance;
+
+    private ScoreFactory() {
+    }
+
+    public static ScoreFactory getInstance() {
+        if(instance == null) {
+            instance = new ScoreFactory();
+        }
+        return instance;
     }
 
     public Score loveAll() {

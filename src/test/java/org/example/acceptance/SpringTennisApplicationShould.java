@@ -4,20 +4,15 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
-import org.example.countscorerestapi.GameScoreController;
-import org.example.countscorerestapi.ScoreDto;
-import org.example.countscorerestapi.SpringTennisApplication;
-import org.example.shared.Score;
+import org.example.restapi.GameScoreController;
+import org.example.restapi.ScoreDto;
+import org.example.restapi.SpringTennisApplication;
+import org.example.core.Score;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
-
-import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

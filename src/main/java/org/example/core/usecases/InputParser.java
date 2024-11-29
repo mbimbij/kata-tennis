@@ -1,4 +1,4 @@
-package org.example.countscoreforsequence;
+package org.example.core.usecases;
 
 import org.apache.commons.lang3.StringUtils;
 

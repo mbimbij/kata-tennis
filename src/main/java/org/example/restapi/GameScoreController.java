@@ -1,9 +1,8 @@
-package org.example.countscorerestapi;
+package org.example.restapi;
 
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.example.shared.Score;
-import org.example.shared.ScoreFactory;
+import org.example.core.Score;
+import org.example.core.ScoreFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
