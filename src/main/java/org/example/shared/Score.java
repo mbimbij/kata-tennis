@@ -1,7 +1,9 @@
 package org.example.shared;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.With;
 
 import static org.example.shared.PlayerScore.*;
 

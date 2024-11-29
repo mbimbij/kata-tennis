@@ -26,7 +26,6 @@ import static org.assertj.core.api.Assertions.assertThat;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = SpringTennisApplication.class
 )
-@Disabled
 class SpringTennisApplicationShould {
     @LocalServerPort
     private int port;
