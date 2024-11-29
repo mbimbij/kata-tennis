@@ -47,6 +47,10 @@ class ScoreDtoShould {
                 Arguments.of(new Score(3, 4), new ScoreDto("40", "Ad")),
                 Arguments.of(new Score(4, 5), new ScoreDto("40", "Ad")),
                 Arguments.of(new Score(5, 6), new ScoreDto("40", "Ad")),
+
+                Arguments.of(new Score(5, 3), new ScoreDto("Game", "40")),
+                Arguments.of(new Score(6, 4), new ScoreDto("Game", "40")),
+                Arguments.of(new Score(7, 5), new ScoreDto("Game", "40")),
         };
         return Stream.of(arguments);
     }

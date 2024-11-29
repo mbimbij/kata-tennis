@@ -10,7 +10,11 @@ public record ScoreDto(String playerAScore, String playerBScore) {
             return new ScoreDto("40", "Ad");
         } else if (score.isDeuce()) {
             return new ScoreDto("40", "40");
-        }else {
+        } else if (score.playerAWon() && score.playerBScore() >= 3) {
+            return new ScoreDto("Game", "40");
+        } else if (score.playerBWon() && score.playerAScore() >= 3) {
+            return new ScoreDto("40", "Game");
+        } else {
             return new ScoreDto(format(score.playerAScore()), format(score.playerBScore()));
         }
     }
