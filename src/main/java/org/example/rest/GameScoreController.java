@@ -43,8 +43,7 @@ public class GameScoreController {
     public ScoreDto scoreSequence(@PathVariable("sequence") String sequenceStr) {
         List<PlayerToScore> sequence = InputParser.parse(sequenceStr);
         CountScoreForSequence countScoreForSequence = new CountScoreForSequence(currentScore);
-        currentScore = countScoreForSequence.executeSequence(sequence, score -> {
-        });
+        currentScore = countScoreForSequence.executeSequence(sequence);
         return ScoreDto.fromDomain(currentScore);
     }
 

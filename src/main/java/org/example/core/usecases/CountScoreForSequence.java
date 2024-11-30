@@ -23,4 +23,8 @@ public class CountScoreForSequence {
         return gameScore;
     }
 
+    public Score executeSequence(List<PlayerToScore> scoreSequence) {
+        return executeSequence(scoreSequence, score -> {});
+    }
+
 }
