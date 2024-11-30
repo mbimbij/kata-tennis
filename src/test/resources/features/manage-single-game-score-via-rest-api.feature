@@ -1,4 +1,4 @@
-Feature: Manage single game score via REST API
+Feature: Manage scoring via REST API
 
   Background: the score is reset
     Given the score is reset
