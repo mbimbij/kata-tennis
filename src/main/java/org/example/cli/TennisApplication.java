@@ -1,10 +1,10 @@
 package org.example.cli;
 
-import org.example.core.Score;
-import org.example.core.ScoreFactory;
-import org.example.core.usecases.CountScoreForSequence;
-import org.example.core.usecases.InputParser;
-import org.example.core.usecases.PlayerToScore;
+import org.example.shared.core.Score;
+import org.example.shared.core.ScoreFactory;
+import org.example.shared.core.usecases.CountScoreForSequence;
+import org.example.shared.core.usecases.InputParser;
+import org.example.shared.core.usecases.PlayerToScore;
 
 import java.util.List;
 

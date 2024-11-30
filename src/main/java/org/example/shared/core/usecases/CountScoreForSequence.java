@@ -1,7 +1,7 @@
-package org.example.core.usecases;
+package org.example.shared.core.usecases;
 
 import lombok.RequiredArgsConstructor;
-import org.example.core.Score;
+import org.example.shared.core.Score;
 
 import java.util.List;
 import java.util.function.Consumer;

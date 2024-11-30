@@ -11,8 +11,8 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.DocStringType;
 import io.cucumber.java.ParameterType;
 import lombok.SneakyThrows;
-import org.example.core.PlayerScore;
-import org.example.core.Score;
+import org.example.shared.core.PlayerScore;
+import org.example.shared.core.Score;
 import org.example.rest.ScoreDto;
 
 import java.util.Collection;

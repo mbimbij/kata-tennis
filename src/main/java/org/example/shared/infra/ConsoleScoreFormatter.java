@@ -1,6 +1,6 @@
 package org.example.cli;
 
-import org.example.core.Score;
+import org.example.shared.core.Score;
 
 public class ConsoleScoreFormatter {
     public ConsoleScoreFormatter() {

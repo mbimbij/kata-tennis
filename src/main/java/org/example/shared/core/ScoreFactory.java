@@ -1,4 +1,4 @@
-package org.example.core;
+package org.example.shared.core;
 
 public class ScoreFactory {
     private static ScoreFactory instance;

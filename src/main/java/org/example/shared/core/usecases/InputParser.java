@@ -1,4 +1,4 @@
-package org.example.core.usecases;
+package org.example.shared.core.usecases;
 
 import org.apache.commons.lang3.StringUtils;
 

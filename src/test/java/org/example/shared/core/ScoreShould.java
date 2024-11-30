@@ -1,6 +1,8 @@
-package org.example.core;
+package org.example.shared.core;
 
-import org.junit.jupiter.api.Test;
+import org.example.shared.core.PlayerScore;
+import org.example.shared.core.Score;
+import org.example.shared.core.ScoreFactory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -8,9 +10,9 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.core.PlayerScore.*;
-import static org.example.core.PlayerScore.THIRTY;
-import static org.example.core.Score.fromEnum;
+import static org.example.shared.core.PlayerScore.*;
+import static org.example.shared.core.PlayerScore.THIRTY;
+import static org.example.shared.core.Score.fromEnum;
 
 class ScoreShould {
     private static ScoreFactory factory = ScoreFactory.getInstance();

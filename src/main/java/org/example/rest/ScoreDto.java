@@ -1,8 +1,8 @@
 package org.example.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.example.core.PlayerScore;
-import org.example.core.Score;
+import org.example.shared.core.PlayerScore;
+import org.example.shared.core.Score;
 
 public record ScoreDto(
         @JsonProperty("A")

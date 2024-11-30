@@ -1,6 +1,6 @@
 package org.example.cli;
 
-import org.example.core.Score;
+import org.example.shared.core.Score;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
