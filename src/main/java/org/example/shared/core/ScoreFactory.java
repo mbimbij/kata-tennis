@@ -1,8 +1,16 @@
-package org.example.domain;
+package org.example.shared.core;
 
 public class ScoreFactory {
-    public ScoreFormatter createScoreFormatter() {
-        return new ScoreFormatter();
+    private static ScoreFactory instance;
+
+    private ScoreFactory() {
+    }
+
+    public static ScoreFactory getInstance() {
+        if(instance == null) {
+            instance = new ScoreFactory();
+        }
+        return instance;
     }
 
     public Score loveAll() {
@@ -19,6 +27,10 @@ public class ScoreFactory {
 
     public Score fortyLove() {
         return new Score(3, 0);
+    }
+
+    public Score gameToLovePlayerA() {
+        return new Score(4,0);
     }
 
     public Score loveFifteen() {
@@ -39,6 +51,10 @@ public class ScoreFactory {
 
     public Score thirtyForty() {
         return new Score(2, 3);
+    }
+
+    public Score fifteenThirty() {
+        return new Score(1, 2);
     }
 
     public Score fortyThirty() {
