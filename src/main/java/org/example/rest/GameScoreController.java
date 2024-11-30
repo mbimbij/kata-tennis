@@ -9,16 +9,17 @@ import org.example.core.usecases.PlayerToScore;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.function.Function;
 
 @Setter
 @RestController
 @RequestMapping("/api/v1/game/score")
 public class GameScoreController {
+    private final ScoreFactory factory;
     private Score currentScore;
 
     public GameScoreController(ScoreFactory scoreFactory) {
-        currentScore = scoreFactory.loveAll();
+        this.factory = scoreFactory;
+        currentScore = this.factory.loveAll();
     }
 
     @GetMapping
@@ -44,6 +45,12 @@ public class GameScoreController {
         CountScoreForSequence countScoreForSequence = new CountScoreForSequence(currentScore);
         currentScore = countScoreForSequence.executeSequence(sequence, score -> {
         });
+        return ScoreDto.fromDomain(currentScore);
+    }
+
+    @DeleteMapping
+    public ScoreDto resetScore() {
+        currentScore = factory.loveAll();
         return ScoreDto.fromDomain(currentScore);
     }
 }

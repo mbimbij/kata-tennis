@@ -74,7 +74,7 @@ public class AcceptanceTestsSteps {
 
     @When("i reset the score")
     public void iResetTheScore() {
-        throw new UnsupportedOperationException();
+        performApiAction(r -> r.delete("/api/v1/game/score"));
     }
 
     private void performApiAction(Function<RequestSender, Response> action) {
