@@ -17,4 +17,13 @@ public enum PlayerScore {
     PlayerScore(String value) {
         this.value = value;
     }
+
+    public static PlayerScore fromValue(String value) {
+        for (PlayerScore score : values()) {
+            if (score.value.equals(value)) {
+                return score;
+            }
+        }
+        throw new IllegalArgumentException("Invalid PlayerScore value: " + value);
+    }
 }

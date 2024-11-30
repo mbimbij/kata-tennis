@@ -1,4 +1,4 @@
-package org.example.restapi;
+package org.example.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.example.core.PlayerScore;

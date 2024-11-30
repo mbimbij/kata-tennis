@@ -1,4 +1,4 @@
-package org.example.restapi;
+package org.example.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.skyscreamer.jsonassert.JSONAssert;
-import org.springframework.test.json.JsonAssert;
 
 import java.util.stream.Stream;
 

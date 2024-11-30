@@ -1,4 +1,4 @@
-package org.example.restapi;
+package org.example.rest;
 
 import org.example.core.ScoreFactory;
 import org.springframework.boot.SpringApplication;

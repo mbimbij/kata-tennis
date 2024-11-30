@@ -15,6 +15,22 @@ public final class Score {
     private final int playerAScore;
     private final int playerBScore;
 
+    public static Score fromEnum(PlayerScore playerAScore, PlayerScore playerBScore) {
+        int scoreAInt = enumToInt(playerAScore);
+        int scoreBInt = enumToInt(playerBScore);
+        return new Score(scoreAInt, scoreBInt);
+    }
+
+    private static int enumToInt(PlayerScore score) {
+        return switch (score) {
+            case LOVE -> 0;
+            case FIFTEEN -> 1;
+            case THIRTY -> 2;
+            case FORTY -> 3;
+            case ADVANTAGE, GAME -> 4;
+        };
+    }
+
     public Score scorePointForPlayerA() {
         validateNoWinner();
         return this.withPlayerAScore(playerAScore + 1);

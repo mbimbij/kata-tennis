@@ -29,6 +29,10 @@ public class ScoreFactory {
         return new Score(3, 0);
     }
 
+    public Score gameToLovePlayerA() {
+        return new Score(4,0);
+    }
+
     public Score loveFifteen() {
         return new Score(0, 1);
     }
@@ -47,6 +51,10 @@ public class ScoreFactory {
 
     public Score thirtyForty() {
         return new Score(2, 3);
+    }
+
+    public Score fifteenThirty() {
+        return new Score(1, 2);
     }
 
     public Score fortyThirty() {

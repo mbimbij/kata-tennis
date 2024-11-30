@@ -8,13 +8,17 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.wnameless.json.unflattener.JsonUnflattener;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.DataTableType;
 import io.cucumber.java.DocStringType;
+import io.cucumber.java.ParameterType;
 import lombok.SneakyThrows;
-import org.example.restapi.ScoreDto;
+import org.example.core.PlayerScore;
+import org.example.core.Score;
+import org.example.rest.ScoreDto;
 
 import java.util.Collection;
 import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TypeMappers {
 
@@ -41,7 +45,16 @@ public class TypeMappers {
 
     @SneakyThrows
     @DocStringType
-    public ScoreDto displayedGames(String docString) {
+    public ScoreDto scoreDto(String docString) {
         return objectMapper.readValue(docString, ScoreDto.class);
+    }
+
+    @ParameterType(".*")
+    public Score score(String scoreString) {
+        assertThat(scoreString).matches(".*-.*");
+        String[] scoresSplit = scoreString.replace("\"", "").split("-");
+        PlayerScore playerAScore = PlayerScore.fromValue(scoresSplit[0].trim());
+        PlayerScore playerBScore = PlayerScore.fromValue(scoresSplit[1].trim());
+        return Score.fromEnum(playerAScore, playerBScore);
     }
 }

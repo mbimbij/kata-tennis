@@ -1,5 +1,6 @@
 package org.example.core;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -9,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.example.core.PlayerScore.*;
 import static org.example.core.PlayerScore.THIRTY;
+import static org.example.core.Score.fromEnum;
 
 class ScoreShould {
     private static ScoreFactory factory = ScoreFactory.getInstance();
@@ -64,6 +66,35 @@ class ScoreShould {
         assertThat(score.getPlayerBScore()).as("bad player B score").isEqualTo(expectedPlayerBScore);
     }
 
+    @ParameterizedTest
+    @MethodSource
+    void return_expected_score_from_enums(Score score, Score expected) {
+        assertThat(score.isScoreEquivalentTo(expected)).isTrue();
+    }
+
+    private static Stream<Arguments> return_expected_score_from_enums() {
+        Arguments[] arguments = new Arguments[]{
+                Arguments.of(fromEnum(LOVE, LOVE), factory.loveAll()),
+                Arguments.of(fromEnum(FIFTEEN, LOVE), factory.fifteenLove()),
+                Arguments.of(fromEnum(THIRTY, LOVE), factory.thirtyLove()),
+                Arguments.of(fromEnum(FORTY, LOVE), factory.fortyLove()),
+                Arguments.of(fromEnum(GAME, LOVE), factory.gameToLovePlayerA()),
+
+                Arguments.of(fromEnum(LOVE, FIFTEEN), factory.loveFifteen()),
+                Arguments.of(fromEnum(LOVE, THIRTY), factory.loveThirty()),
+                Arguments.of(fromEnum(LOVE, FORTY), factory.loveForty()),
+                Arguments.of(fromEnum(LOVE, GAME), factory.gameToLovePlayerB()),
+
+                Arguments.of(fromEnum(THIRTY, FORTY), factory.thirtyForty()),
+                Arguments.of(fromEnum(FIFTEEN, THIRTY), factory.fifteenThirty()),
+
+                Arguments.of(fromEnum(FORTY, FORTY), factory.deuce()),
+                Arguments.of(fromEnum(ADVANTAGE, FORTY), factory.advantagePlayerA()),
+                Arguments.of(fromEnum(FORTY, ADVANTAGE), factory.advantagePlayerB()),
+        };
+        return Stream.of(arguments);
+    }
+
     private static Stream<Arguments> update_score_when_playerA_scores() {
         return Stream.of(
                 Arguments.of(factory.loveAll(), factory.fifteenLove()),
@@ -105,7 +136,7 @@ class ScoreShould {
                 Arguments.of(new Score(3, 5), new Score(5, 7)),
                 Arguments.of(new Score(3, 5), new Score(0, 4)),
                 Arguments.of(new Score(3, 5), new Score(1, 4))
-                );
+        );
     }
 
     private static Stream<Arguments> return_player_score_as_enum() {

@@ -20,11 +20,15 @@ public class TennisApplication {
     }
 
     public static void run(String inputString) {
-        List<PlayerToScore> scoreSequence = InputParser.parse(inputString);
         ConsolePrinter printer = new ConsolePrinter();
         ConsoleScoreFormatter scoreFormatter = new ConsoleScoreFormatter();
+
+        List<PlayerToScore> scoreSequence = InputParser.parse(inputString);
         Score initialScore = ScoreFactory.getInstance().loveAll();
-        CountScoreForSequence countScore = new CountScoreForSequence(printer, scoreFormatter, initialScore);
-        countScore.executeSequence(scoreSequence);
+
+        CountScoreForSequence countScore = new CountScoreForSequence(initialScore);
+
+        countScore.executeSequence(scoreSequence,
+                score -> printer.printScoreAsNeeded(score, scoreFormatter));
     }
 }
