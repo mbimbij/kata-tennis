@@ -5,23 +5,23 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.With;
 
-import static org.example.shared.core.PlayerScore.*;
+import static org.example.shared.core.PlayerGameScore.*;
 
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor
 @With
-public final class Score {
+public final class GameScore {
     private final int playerAScore;
     private final int playerBScore;
 
-    public static Score fromEnum(PlayerScore playerAScore, PlayerScore playerBScore) {
+    public static GameScore fromEnum(PlayerGameScore playerAScore, PlayerGameScore playerBScore) {
         int scoreAInt = enumToInt(playerAScore);
         int scoreBInt = enumToInt(playerBScore);
-        return new Score(scoreAInt, scoreBInt);
+        return new GameScore(scoreAInt, scoreBInt);
     }
 
-    private static int enumToInt(PlayerScore score) {
+    private static int enumToInt(PlayerGameScore score) {
         return switch (score) {
             case LOVE -> 0;
             case FIFTEEN -> 1;
@@ -31,12 +31,12 @@ public final class Score {
         };
     }
 
-    public Score scorePointForPlayerA() {
+    public GameScore scorePointForPlayerA() {
         validateNoWinner();
         return this.withPlayerAScore(playerAScore + 1);
     }
 
-    public Score scorePointForPlayerB() {
+    public GameScore scorePointForPlayerB() {
         validateNoWinner();
         return this.withPlayerBScore(playerBScore + 1);
     }
@@ -70,7 +70,7 @@ public final class Score {
         return hasAdvantage(playerBScore, playerAScore);
     }
 
-    boolean isScoreEquivalentTo(Score other) {
+    boolean isScoreEquivalentTo(GameScore other) {
         return this.isDeuce() && other.isDeuce()
                || this.isAdvantagePlayerA() && other.isAdvantagePlayerA()
                || this.isAdvantagePlayerB() && other.isAdvantagePlayerB()
@@ -105,19 +105,19 @@ public final class Score {
         return score == scoreOther + 1;
     }
 
-    private boolean scoreDetailsEqualTo(Score other) {
+    private boolean scoreDetailsEqualTo(GameScore other) {
         return playerAScore == other.playerAScore && playerBScore == other.playerBScore;
     }
 
-    public PlayerScore getPlayerAScore() {
+    public PlayerGameScore getPlayerAScore() {
         return getPlayerScore(playerAScore, playerBScore);
     }
 
-    public PlayerScore getPlayerBScore() {
+    public PlayerGameScore getPlayerBScore() {
         return getPlayerScore(playerBScore, playerAScore);
     }
 
-    private PlayerScore getPlayerScore(int score, int scoreOther) {
+    private PlayerGameScore getPlayerScore(int score, int scoreOther) {
         if (playerWon(score, scoreOther)) {
             return GAME;
         } else if (bothPlayersScored3PointsOrMore() && leadsBy2PointsOrMore(scoreOther, score)) {

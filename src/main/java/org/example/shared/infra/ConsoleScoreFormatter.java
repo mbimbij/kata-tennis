@@ -1,12 +1,12 @@
 package org.example.shared.infra;
 
-import org.example.shared.core.Score;
+import org.example.shared.core.GameScore;
 
 public class ConsoleScoreFormatter {
     public ConsoleScoreFormatter() {
     }
 
-    public String format(Score gameScore) {
+    public String format(GameScore gameScore) {
         if (gameScore.playerAWon()) {
             return "Player A wins the game";
         } else if (gameScore.playerBWon()) {

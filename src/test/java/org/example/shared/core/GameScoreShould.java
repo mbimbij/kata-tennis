@@ -1,8 +1,5 @@
 package org.example.shared.core;
 
-import org.example.shared.core.PlayerScore;
-import org.example.shared.core.Score;
-import org.example.shared.core.ScoreFactory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
@@ -10,23 +7,23 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.shared.core.PlayerScore.*;
-import static org.example.shared.core.PlayerScore.THIRTY;
-import static org.example.shared.core.Score.fromEnum;
+import static org.example.shared.core.PlayerGameScore.*;
+import static org.example.shared.core.PlayerGameScore.THIRTY;
+import static org.example.shared.core.GameScore.fromEnum;
 
-class ScoreShould {
-    private static ScoreFactory factory = ScoreFactory.getInstance();
+class GameScoreShould {
+    private static GameScoreFactory factory = GameScoreFactory.getInstance();
 
     @ParameterizedTest
     @MethodSource
-    void update_score_when_playerA_scores(Score score, Score expectedAfter) {
+    void update_score_when_playerA_scores(GameScore score, GameScore expectedAfter) {
         boolean scoresEqual = score.scorePointForPlayerA().isScoreEquivalentTo(expectedAfter);
         assertThat(scoresEqual).isTrue();
     }
 
     @ParameterizedTest
     @MethodSource
-    void update_score_when_playerB_scores(Score score, Score expectedAfter) {
+    void update_score_when_playerB_scores(GameScore score, GameScore expectedAfter) {
         boolean scoresEqual = score.scorePointForPlayerB().isScoreEquivalentTo(expectedAfter);
         assertThat(scoresEqual).isTrue();
     }
@@ -37,7 +34,7 @@ class ScoreShould {
             "0,4"
     })
     void throw_exception_if_trying_to_score_for_playerA_when_there_is_a_winner(int playerAScore, int playerBScore) {
-        Score aGameAlreadyWon = new Score(playerAScore, playerBScore);
+        GameScore aGameAlreadyWon = new GameScore(playerAScore, playerBScore);
         assertThatThrownBy(aGameAlreadyWon::scorePointForPlayerA)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("Cannot score when there is a winner");
@@ -49,7 +46,7 @@ class ScoreShould {
             "0,4"
     })
     void throw_exception_if_trying_to_score_for_playerB_when_there_is_a_winner(int playerAScore, int playerBScore) {
-        Score aGameAlreadyWon = new Score(playerAScore, playerBScore);
+        GameScore aGameAlreadyWon = new GameScore(playerAScore, playerBScore);
         assertThatThrownBy(aGameAlreadyWon::scorePointForPlayerB)
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("Cannot score when there is a winner");
@@ -57,20 +54,20 @@ class ScoreShould {
 
     @ParameterizedTest
     @MethodSource
-    void test_score_equivalence_appropriately(Score score, Score otherScore) {
+    void test_score_equivalence_appropriately(GameScore score, GameScore otherScore) {
         assertThat(score.isScoreEquivalentTo(otherScore)).isTrue();
     }
 
     @ParameterizedTest
     @MethodSource
-    void return_player_score_as_enum(Score score, PlayerScore expectedPlayerAScore, PlayerScore expectedPlayerBScore) {
+    void return_player_score_as_enum(GameScore score, PlayerGameScore expectedPlayerAScore, PlayerGameScore expectedPlayerBScore) {
         assertThat(score.getPlayerAScore()).as("bad player A score").isEqualTo(expectedPlayerAScore);
         assertThat(score.getPlayerBScore()).as("bad player B score").isEqualTo(expectedPlayerBScore);
     }
 
     @ParameterizedTest
     @MethodSource
-    void return_expected_score_from_enums(Score score, Score expected) {
+    void return_expected_score_from_enums(GameScore score, GameScore expected) {
         assertThat(score.isScoreEquivalentTo(expected)).isTrue();
     }
 
@@ -125,53 +122,53 @@ class ScoreShould {
 
     private static Stream<Arguments> test_score_equivalence_appropriately() {
         return Stream.of(
-                Arguments.of(new Score(3, 3), new Score(4, 4)),
-                Arguments.of(new Score(4, 3), new Score(5, 4)),
-                Arguments.of(new Score(4, 3), new Score(6, 5)),
-                Arguments.of(new Score(3, 4), new Score(4, 5)),
-                Arguments.of(new Score(3, 4), new Score(5, 6)),
-                Arguments.of(new Score(5, 3), new Score(6, 4)),
-                Arguments.of(new Score(5, 3), new Score(7, 5)),
-                Arguments.of(new Score(5, 3), new Score(4, 0)),
-                Arguments.of(new Score(5, 3), new Score(4, 1)),
-                Arguments.of(new Score(3, 5), new Score(4, 6)),
-                Arguments.of(new Score(3, 5), new Score(5, 7)),
-                Arguments.of(new Score(3, 5), new Score(0, 4)),
-                Arguments.of(new Score(3, 5), new Score(1, 4))
+                Arguments.of(new GameScore(3, 3), new GameScore(4, 4)),
+                Arguments.of(new GameScore(4, 3), new GameScore(5, 4)),
+                Arguments.of(new GameScore(4, 3), new GameScore(6, 5)),
+                Arguments.of(new GameScore(3, 4), new GameScore(4, 5)),
+                Arguments.of(new GameScore(3, 4), new GameScore(5, 6)),
+                Arguments.of(new GameScore(5, 3), new GameScore(6, 4)),
+                Arguments.of(new GameScore(5, 3), new GameScore(7, 5)),
+                Arguments.of(new GameScore(5, 3), new GameScore(4, 0)),
+                Arguments.of(new GameScore(5, 3), new GameScore(4, 1)),
+                Arguments.of(new GameScore(3, 5), new GameScore(4, 6)),
+                Arguments.of(new GameScore(3, 5), new GameScore(5, 7)),
+                Arguments.of(new GameScore(3, 5), new GameScore(0, 4)),
+                Arguments.of(new GameScore(3, 5), new GameScore(1, 4))
         );
     }
 
     private static Stream<Arguments> return_player_score_as_enum() {
         Arguments[] arguments = {
-                Arguments.of(new Score(0, 0), LOVE, LOVE),
-                Arguments.of(new Score(1, 0), FIFTEEN, LOVE),
-                Arguments.of(new Score(2, 0), THIRTY, LOVE),
-                Arguments.of(new Score(3, 0), FORTY, LOVE),
-                Arguments.of(new Score(4, 0), GAME, LOVE),
+                Arguments.of(new GameScore(0, 0), LOVE, LOVE),
+                Arguments.of(new GameScore(1, 0), FIFTEEN, LOVE),
+                Arguments.of(new GameScore(2, 0), THIRTY, LOVE),
+                Arguments.of(new GameScore(3, 0), FORTY, LOVE),
+                Arguments.of(new GameScore(4, 0), GAME, LOVE),
 
-                Arguments.of(new Score(0, 1), LOVE, FIFTEEN),
-                Arguments.of(new Score(0, 2), LOVE, THIRTY),
-                Arguments.of(new Score(0, 3), LOVE, FORTY),
-                Arguments.of(new Score(0, 4), LOVE, GAME),
+                Arguments.of(new GameScore(0, 1), LOVE, FIFTEEN),
+                Arguments.of(new GameScore(0, 2), LOVE, THIRTY),
+                Arguments.of(new GameScore(0, 3), LOVE, FORTY),
+                Arguments.of(new GameScore(0, 4), LOVE, GAME),
 
-                Arguments.of(new Score(1, 1), FIFTEEN, FIFTEEN),
-                Arguments.of(new Score(3, 2), FORTY, THIRTY),
+                Arguments.of(new GameScore(1, 1), FIFTEEN, FIFTEEN),
+                Arguments.of(new GameScore(3, 2), FORTY, THIRTY),
 
-                Arguments.of(new Score(3, 3), FORTY, FORTY),
-                Arguments.of(new Score(4, 4), FORTY, FORTY),
-                Arguments.of(new Score(5, 5), FORTY, FORTY),
+                Arguments.of(new GameScore(3, 3), FORTY, FORTY),
+                Arguments.of(new GameScore(4, 4), FORTY, FORTY),
+                Arguments.of(new GameScore(5, 5), FORTY, FORTY),
 
-                Arguments.of(new Score(4, 3), ADVANTAGE, FORTY),
-                Arguments.of(new Score(5, 4), ADVANTAGE, FORTY),
-                Arguments.of(new Score(6, 5), ADVANTAGE, FORTY),
+                Arguments.of(new GameScore(4, 3), ADVANTAGE, FORTY),
+                Arguments.of(new GameScore(5, 4), ADVANTAGE, FORTY),
+                Arguments.of(new GameScore(6, 5), ADVANTAGE, FORTY),
 
-                Arguments.of(new Score(3, 4), FORTY, ADVANTAGE),
-                Arguments.of(new Score(4, 5), FORTY, ADVANTAGE),
-                Arguments.of(new Score(5, 6), FORTY, ADVANTAGE),
+                Arguments.of(new GameScore(3, 4), FORTY, ADVANTAGE),
+                Arguments.of(new GameScore(4, 5), FORTY, ADVANTAGE),
+                Arguments.of(new GameScore(5, 6), FORTY, ADVANTAGE),
 
-                Arguments.of(new Score(5, 3), GAME, FORTY),
-                Arguments.of(new Score(6, 4), GAME, FORTY),
-                Arguments.of(new Score(7, 5), GAME, FORTY),
+                Arguments.of(new GameScore(5, 3), GAME, FORTY),
+                Arguments.of(new GameScore(6, 4), GAME, FORTY),
+                Arguments.of(new GameScore(7, 5), GAME, FORTY),
         };
         return Stream.of(arguments);
     }

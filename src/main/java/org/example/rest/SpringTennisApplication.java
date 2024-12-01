@@ -1,6 +1,6 @@
 package org.example.rest;
 
-import org.example.shared.core.ScoreFactory;
+import org.example.shared.core.GameScoreFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ public class SpringTennisApplication {
     }
 
     @Bean
-    public ScoreFactory scoreFactory() {
-        return ScoreFactory.getInstance();
+    public GameScoreFactory scoreFactory() {
+        return GameScoreFactory.getInstance();
     }
 }

@@ -1,9 +1,9 @@
 package org.example.rest;
 
 import lombok.Setter;
-import org.example.shared.core.Score;
-import org.example.shared.core.ScoreFactory;
-import org.example.shared.core.usecases.CountScoreForSequence;
+import org.example.shared.core.GameScore;
+import org.example.shared.core.GameScoreFactory;
+import org.example.shared.core.usecases.ComputeSingleGameScoreForSequence;
 import org.example.shared.core.usecases.InputParser;
 import org.example.shared.core.usecases.PlayerToScore;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +14,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/game/score")
 public class GameScoreController {
-    private final ScoreFactory factory;
-    private Score currentScore;
+    private final GameScoreFactory factory;
+    private GameScore currentScore;
 
-    public GameScoreController(ScoreFactory scoreFactory) {
+    public GameScoreController(GameScoreFactory scoreFactory) {
         this.factory = scoreFactory;
         currentScore = this.factory.loveAll();
     }
@@ -42,7 +42,7 @@ public class GameScoreController {
     @PostMapping("/sequence/{sequence}")
     public ScoreDto scoreSequence(@PathVariable("sequence") String sequenceStr) {
         List<PlayerToScore> sequence = InputParser.parse(sequenceStr);
-        CountScoreForSequence countScoreForSequence = new CountScoreForSequence(currentScore);
+        ComputeSingleGameScoreForSequence countScoreForSequence = new ComputeSingleGameScoreForSequence(currentScore);
         currentScore = countScoreForSequence.executeSequence(sequence);
         return ScoreDto.fromDomain(currentScore);
     }

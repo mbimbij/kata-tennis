@@ -11,8 +11,8 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.DocStringType;
 import io.cucumber.java.ParameterType;
 import lombok.SneakyThrows;
-import org.example.shared.core.PlayerScore;
-import org.example.shared.core.Score;
+import org.example.shared.core.PlayerGameScore;
+import org.example.shared.core.GameScore;
 import org.example.rest.ScoreDto;
 
 import java.util.Collection;
@@ -50,11 +50,11 @@ public class TypeMappers {
     }
 
     @ParameterType(".*")
-    public Score score(String scoreString) {
+    public GameScore score(String scoreString) {
         assertThat(scoreString).matches(".*-.*");
         String[] scoresSplit = scoreString.replace("\"", "").split("-");
-        PlayerScore playerAScore = PlayerScore.fromValue(scoresSplit[0].trim());
-        PlayerScore playerBScore = PlayerScore.fromValue(scoresSplit[1].trim());
-        return Score.fromEnum(playerAScore, playerBScore);
+        PlayerGameScore playerAScore = PlayerGameScore.fromValue(scoresSplit[0].trim());
+        PlayerGameScore playerBScore = PlayerGameScore.fromValue(scoresSplit[1].trim());
+        return GameScore.fromEnum(playerAScore, playerBScore);
     }
 }

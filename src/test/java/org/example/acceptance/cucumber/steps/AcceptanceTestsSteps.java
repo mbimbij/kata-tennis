@@ -10,8 +10,8 @@ import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSender;
 import org.apache.http.HttpStatus;
-import org.example.shared.core.Score;
-import org.example.shared.core.ScoreFactory;
+import org.example.shared.core.GameScore;
+import org.example.shared.core.GameScoreFactory;
 import org.example.rest.GameScoreController;
 import org.example.rest.ScoreDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class AcceptanceTestsSteps {
     @Autowired
     private GameScoreController controller;
     @Autowired
-    private ScoreFactory factory;
+    private GameScoreFactory factory;
     private ScoreDto scoreResponseDto;
 
     @Before
@@ -68,7 +68,7 @@ public class AcceptanceTestsSteps {
     }
 
     @Given("a score of {score}")
-    public void aScoreOf(Score score) {
+    public void aScoreOf(GameScore score) {
         controller.setCurrentScore(score);
     }
 
