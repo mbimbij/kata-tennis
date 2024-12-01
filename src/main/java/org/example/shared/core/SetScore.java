@@ -4,7 +4,7 @@ import lombok.With;
 
 @With
 record SetScore(int playerAScore, int playerBScore) {
-    public SetScore scorePointForPlayerA() {
+    SetScore scorePointForPlayerA() {
         return this.withPlayerAScore(playerAScore + 1);
     }
 }

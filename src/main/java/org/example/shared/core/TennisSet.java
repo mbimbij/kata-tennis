@@ -26,12 +26,26 @@ public class TennisSet {
     }
 
     public boolean isOver() {
-        return setScore.playerAScore() == 6 && setScore.playerBScore() <= 4 || setScore.playerAScore() == 7;
+        return playerAWon() || playerBWon();
+    }
+
+    private boolean playerBWon() {
+        return playerWon(setScore.playerBScore(), setScore.playerAScore());
+    }
+
+    private boolean playerAWon() {
+        return playerWon(setScore.playerAScore(), setScore.playerBScore());
+    }
+
+    private boolean playerWon(int score, int scoreOther) {
+        return score == 6 && scoreOther <= 4 || score == 7;
     }
 
     public Player getWinner() {
-        if(isOver()){
+        if(playerAWon()){
             return Player.A;
+        } else if (playerBWon()) {
+            return Player.B;
         }
         return null;
     }

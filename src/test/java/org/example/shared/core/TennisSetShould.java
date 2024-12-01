@@ -54,6 +54,9 @@ class TennisSetShould {
                 Arguments.of(new SetScore(6, 2), null, true, Player.A),
                 Arguments.of(new SetScore(7, 5), null, true, Player.A),
                 Arguments.of(new SetScore(7, 6), null, true, Player.A),
+                Arguments.of(new SetScore(2, 6), null, true, Player.B),
+                Arguments.of(new SetScore(5, 7), null, true, Player.B),
+                Arguments.of(new SetScore(6, 7), null, true, Player.B),
         };
         return Stream.of(arguments);
     }
