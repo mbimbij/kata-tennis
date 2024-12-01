@@ -84,4 +84,8 @@ public class GameScoreFactory {
     public GameScore gameThirtyPlayerA() {
         return new GameScore(4, 2);
     }
+
+    public GameScore fortyForty() {
+        return new GameScore(3, 3);
+    }
 }

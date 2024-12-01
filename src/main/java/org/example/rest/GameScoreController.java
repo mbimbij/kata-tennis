@@ -5,7 +5,7 @@ import org.example.shared.core.GameScore;
 import org.example.shared.core.GameScoreFactory;
 import org.example.shared.core.usecases.ComputeSingleGameScoreForSequence;
 import org.example.shared.core.usecases.InputParser;
-import org.example.shared.core.usecases.PlayerToScore;
+import org.example.shared.core.Player;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class GameScoreController {
 
     @PostMapping("/sequence/{sequence}")
     public ScoreDto scoreSequence(@PathVariable("sequence") String sequenceStr) {
-        List<PlayerToScore> sequence = InputParser.parse(sequenceStr);
+        List<Player> sequence = InputParser.parse(sequenceStr);
         ComputeSingleGameScoreForSequence countScoreForSequence = new ComputeSingleGameScoreForSequence(currentScore);
         currentScore = countScoreForSequence.executeSequence(sequence);
         return ScoreDto.fromDomain(currentScore);

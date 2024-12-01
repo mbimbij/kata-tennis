@@ -7,6 +7,7 @@ import lombok.With;
 
 import static org.example.shared.core.PlayerGameScore.*;
 
+
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor
@@ -15,6 +16,7 @@ public final class GameScore {
     private final int playerAScore;
     private final int playerBScore;
 
+    // TODO déplacer dans GameScoreFactory
     public static GameScore fromEnum(PlayerGameScore playerAScore, PlayerGameScore playerBScore) {
         int scoreAInt = enumToInt(playerAScore);
         int scoreBInt = enumToInt(playerBScore);

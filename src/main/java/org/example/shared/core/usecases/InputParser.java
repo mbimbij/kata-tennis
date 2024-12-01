@@ -1,12 +1,13 @@
 package org.example.shared.core.usecases;
 
 import org.apache.commons.lang3.StringUtils;
+import org.example.shared.core.Player;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class InputParser {
-    public static List<PlayerToScore> parse(String input) {
+    public static List<Player> parse(String input) {
         if (StringUtils.isBlank(input)) {
             throw new IllegalArgumentException("input shouldn't be blank");
         }
@@ -15,6 +16,6 @@ public class InputParser {
         }
 
         return Arrays.stream(input.split(""))
-                .map(PlayerToScore::valueOf).toList();
+                .map(Player::valueOf).toList();
     }
 }

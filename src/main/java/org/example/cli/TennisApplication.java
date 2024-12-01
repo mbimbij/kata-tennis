@@ -4,7 +4,7 @@ import org.example.shared.core.GameScore;
 import org.example.shared.core.GameScoreFactory;
 import org.example.shared.core.usecases.ComputeSingleGameScoreForSequence;
 import org.example.shared.core.usecases.InputParser;
-import org.example.shared.core.usecases.PlayerToScore;
+import org.example.shared.core.Player;
 import org.example.shared.infra.ConsolePrinter;
 import org.example.shared.infra.ConsoleScoreFormatter;
 
@@ -25,7 +25,7 @@ public class TennisApplication {
         ConsolePrinter printer = new ConsolePrinter();
         ConsoleScoreFormatter scoreFormatter = new ConsoleScoreFormatter();
 
-        List<PlayerToScore> scoreSequence = InputParser.parse(inputString);
+        List<Player> scoreSequence = InputParser.parse(inputString);
         GameScore initialScore = GameScoreFactory.getInstance().loveAll();
 
         ComputeSingleGameScoreForSequence countScore = new ComputeSingleGameScoreForSequence(initialScore);
