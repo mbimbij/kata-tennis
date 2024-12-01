@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class TennisSetShould {
 
@@ -45,6 +46,17 @@ class TennisSetShould {
         assertThat(tennisSet.getWinner()).isEqualTo(expectedWinner);
     }
 
+    @Test
+    void cannot_score_point_if_set_is_over() {
+        // GIVEN
+        TennisSet tennisSet = new TennisSet(6,2);
+
+        // WHEN
+        assertThatThrownBy(tennisSet::scorePointForPlayerA)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage(TennisSet.CANNOT_SCORE_ON_OVER_SET_ERROR_MESSAGE);
+    }
+
     private static Stream<Arguments> define_when_set_is_ended_appropriately() {
         Arguments[] arguments = new Arguments[]{
                 Arguments.of(new SetScore(0, 0), factory.loveAll(), false, null),
@@ -76,6 +88,27 @@ class TennisSetShould {
                         factory.loveAll(),
                         false,
                         null
+                ),
+                Arguments.of(new SetScore(5,5),
+                        factory.fortyLove(),
+                        new SetScore(6,5),
+                        factory.loveAll(),
+                        false,
+                        null
+                ),
+                Arguments.of(new SetScore(5,6),
+                        factory.fortyLove(),
+                        new SetScore(6,6),
+                        factory.loveAll(),
+                        false,
+                        null
+                ),
+                Arguments.of(new SetScore(5,2),
+                        factory.fortyLove(),
+                        new SetScore(6,2),
+                        factory.loveAll(),
+                        true,
+                        Player.A
                 ),
         };
         return Stream.of(arguments);

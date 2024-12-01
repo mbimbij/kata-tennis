@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class TennisSet {
+    public static final String CANNOT_SCORE_ON_OVER_SET_ERROR_MESSAGE = "Set already has a winner. Cannot score a point";
     private SetScore setScore;
     private GameScore currentGameScore;
 
@@ -17,7 +18,15 @@ public class TennisSet {
         this.currentGameScore = gameScore;
     }
 
+    public TennisSet(int playerAScore, int playerBScore) {
+        this.setScore = new SetScore(playerAScore, playerBScore);
+        this.currentGameScore = GameScoreFactory.getInstance().loveAll();
+    }
+
     public void scorePointForPlayerA() {
+        if(isOver()){
+            throw new IllegalStateException(CANNOT_SCORE_ON_OVER_SET_ERROR_MESSAGE);
+        }
         currentGameScore = currentGameScore.scorePointForPlayerA();
         if(currentGameScore.playerAWon()){
             setScore = setScore.scorePointForPlayerA();
