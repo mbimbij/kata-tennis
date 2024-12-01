@@ -29,6 +29,7 @@ class TennisSetShould {
     @MethodSource
     void score_point_for_player(SetScore setScoreInit,
                                 GameScore gameScoreInit,
+                                Player playerToScore,
                                 SetScore expectedSetScore,
                                 GameScore expectedGameScore,
                                 boolean expectedIsSetOver,
@@ -37,7 +38,10 @@ class TennisSetShould {
         TennisSet tennisSet = new TennisSet(setScoreInit, gameScoreInit);
 
         // WHEN
-        tennisSet.scorePointForPlayerA();
+        switch (playerToScore) {
+            case A -> tennisSet.scorePointForPlayerA();
+            case B -> tennisSet.scorePointForPlayerB();
+        }
 
         // THEN
         assertThat(tennisSet.getSetScore()).isEqualTo(expectedSetScore);
@@ -49,7 +53,7 @@ class TennisSetShould {
     @Test
     void cannot_score_point_if_set_is_over() {
         // GIVEN
-        TennisSet tennisSet = new TennisSet(6,2);
+        TennisSet tennisSet = new TennisSet(6, 2);
 
         // WHEN
         assertThatThrownBy(tennisSet::scorePointForPlayerA)
@@ -75,41 +79,17 @@ class TennisSetShould {
 
     private static Stream<Arguments> score_point_for_player() {
         Arguments[] arguments = new Arguments[]{
-                Arguments.of(new SetScore(0, 0),
-                        factory.loveAll(),
-                        new SetScore(0, 0),
-                        factory.fifteenLove(),
-                        false,
-                        null
-                ),
-                Arguments.of(new SetScore(0, 0),
-                        factory.fortyLove(),
-                        new SetScore(1, 0),
-                        factory.loveAll(),
-                        false,
-                        null
-                ),
-                Arguments.of(new SetScore(5,5),
-                        factory.fortyLove(),
-                        new SetScore(6,5),
-                        factory.loveAll(),
-                        false,
-                        null
-                ),
-                Arguments.of(new SetScore(5,6),
-                        factory.fortyLove(),
-                        new SetScore(6,6),
-                        factory.loveAll(),
-                        false,
-                        null
-                ),
-                Arguments.of(new SetScore(5,2),
-                        factory.fortyLove(),
-                        new SetScore(6,2),
-                        factory.loveAll(),
-                        true,
-                        Player.A
-                ),
+                Arguments.of(new SetScore(0, 0), factory.loveAll(), Player.A, new SetScore(0, 0), factory.fifteenLove(), false, null),
+                Arguments.of(new SetScore(0, 0), factory.fortyLove(), Player.A, new SetScore(1, 0), factory.loveAll(), false, null),
+                Arguments.of(new SetScore(5, 5), factory.fortyLove(), Player.A, new SetScore(6, 5), factory.loveAll(), false, null),
+                Arguments.of(new SetScore(5, 6), factory.fortyLove(), Player.A, new SetScore(6, 6), factory.loveAll(), false, null),
+                Arguments.of(new SetScore(5, 2), factory.fortyLove(), Player.A, new SetScore(6, 2), factory.loveAll(), true, Player.A),
+
+                Arguments.of(new SetScore(0, 0), factory.loveAll(), Player.B, new SetScore(0, 0), factory.loveFifteen(), false, null),
+                Arguments.of(new SetScore(0, 0), factory.loveForty(), Player.B, new SetScore(0, 1), factory.loveAll(), false, null),
+                Arguments.of(new SetScore(5, 5), factory.loveForty(), Player.B, new SetScore(5, 6), factory.loveAll(), false, null),
+                Arguments.of(new SetScore(6, 5), factory.loveForty(), Player.B, new SetScore(6, 6), factory.loveAll(), false, null),
+                Arguments.of(new SetScore(2, 5), factory.loveForty(), Player.B, new SetScore(2, 6), factory.loveAll(), true, Player.B),
         };
         return Stream.of(arguments);
     }

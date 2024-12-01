@@ -34,6 +34,17 @@ public class TennisSet {
         }
     }
 
+    public void scorePointForPlayerB() {
+        if(isOver()){
+            throw new IllegalStateException(CANNOT_SCORE_ON_OVER_SET_ERROR_MESSAGE);
+        }
+        currentGameScore = currentGameScore.scorePointForPlayerB();
+        if(currentGameScore.playerBWon()){
+            setScore = setScore.scorePointForPlayerB();
+            currentGameScore = GameScoreFactory.getInstance().loveAll();
+        }
+    }
+
     public boolean isOver() {
         return playerAWon() || playerBWon();
     }
