@@ -1,4 +1,4 @@
-package org.example.cli;
+package org.example.shared.infra;
 
 import org.example.shared.core.Score;
 
