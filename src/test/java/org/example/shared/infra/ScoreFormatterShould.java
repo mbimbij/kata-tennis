@@ -1,5 +1,6 @@
-package org.example;
+package org.example.shared.infra;
 
+import org.example.shared.core.Score;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -12,9 +13,10 @@ class ScoreFormatterShould {
     void format_score_properly(int playerAScore, int playerBScore, String expected) {
         // GIVEN
         Score score = new Score(playerAScore, playerBScore);
+        ConsoleScoreFormatter formatter = new ConsoleScoreFormatter();
 
         // WHEN
-        String actual = ScoreFormatter.format(score);
+        String actual = formatter.format(score);
 
         // THEN
         assertThat(actual).isEqualTo(expected);
