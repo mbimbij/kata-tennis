@@ -1,8 +1,8 @@
-package org.example.shared.core.usecases;
+package org.example.scoring.core.usecases;
 
 import lombok.RequiredArgsConstructor;
-import org.example.shared.core.GameScore;
-import org.example.shared.core.Player;
+import org.example.scoring.core.GameScore;
+import org.example.scoring.core.Player;
 
 import java.util.List;
 import java.util.function.Consumer;

@@ -1,12 +1,12 @@
 package org.example.cli;
 
-import org.example.shared.core.GameScore;
-import org.example.shared.core.GameScoreFactory;
-import org.example.shared.core.usecases.ComputeSingleGameScoreForSequence;
-import org.example.shared.core.usecases.InputParser;
-import org.example.shared.core.Player;
-import org.example.shared.infra.ConsolePrinter;
-import org.example.shared.infra.ConsoleScoreFormatter;
+import org.example.scoring.core.GameScore;
+import org.example.scoring.core.GameScoreFactory;
+import org.example.scoring.core.usecases.ComputeSingleGameScoreForSequence;
+import org.example.scoring.core.usecases.InputParser;
+import org.example.scoring.core.Player;
+import org.example.scoring.infra.ConsolePrinter;
+import org.example.scoring.infra.ConsoleScoreFormatter;
 
 import java.util.List;
 

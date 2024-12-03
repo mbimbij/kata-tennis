@@ -1,6 +1,6 @@
 package org.example.rest;
 
-import org.example.shared.core.GameScoreFactory;
+import org.example.scoring.core.GameScoreFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

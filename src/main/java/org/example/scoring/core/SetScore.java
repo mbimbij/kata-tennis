@@ -1,4 +1,4 @@
-package org.example.shared.core;
+package org.example.scoring.core;
 
 import lombok.With;
 

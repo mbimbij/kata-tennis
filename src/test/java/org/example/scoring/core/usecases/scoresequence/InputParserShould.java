@@ -1,18 +1,18 @@
-package org.example.shared.core.usecases.scoresequence;
+package org.example.scoring.core.usecases.scoresequence;
 
 import org.assertj.core.api.ThrowableAssert;
-import org.example.shared.core.usecases.InputParser;
-import org.example.shared.core.Player;
+import org.example.scoring.core.Player;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.example.scoring.core.usecases.InputParser;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.example.shared.core.Player.A;
-import static org.example.shared.core.Player.B;
+import static org.example.scoring.core.Player.A;
+import static org.example.scoring.core.Player.B;
 
 class InputParserShould {
     @ParameterizedTest()

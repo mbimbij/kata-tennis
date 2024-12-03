@@ -1,11 +1,11 @@
 package org.example.rest;
 
 import lombok.Setter;
-import org.example.shared.core.GameScore;
-import org.example.shared.core.GameScoreFactory;
-import org.example.shared.core.usecases.ComputeSingleGameScoreForSequence;
-import org.example.shared.core.usecases.InputParser;
-import org.example.shared.core.Player;
+import org.example.scoring.core.GameScore;
+import org.example.scoring.core.GameScoreFactory;
+import org.example.scoring.core.usecases.ComputeSingleGameScoreForSequence;
+import org.example.scoring.core.usecases.InputParser;
+import org.example.scoring.core.Player;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

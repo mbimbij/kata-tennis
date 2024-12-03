@@ -1,6 +1,7 @@
-package org.example.shared.infra;
+package org.example.scoring.infra;
 
-import org.example.shared.core.GameScore;
+
+import org.example.scoring.core.GameScore;
 
 public class ConsolePrinter {
     public void print(String formattedScore) {

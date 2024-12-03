@@ -1,6 +1,6 @@
-package org.example.shared.infra;
+package org.example.scoring.infra;
 
-import org.example.shared.core.GameScore;
+import org.example.scoring.core.GameScore;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 

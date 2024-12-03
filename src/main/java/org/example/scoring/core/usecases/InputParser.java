@@ -1,7 +1,7 @@
-package org.example.shared.core.usecases;
+package org.example.scoring.core.usecases;
 
 import org.apache.commons.lang3.StringUtils;
-import org.example.shared.core.Player;
+import org.example.scoring.core.Player;
 
 import java.util.Arrays;
 import java.util.List;
